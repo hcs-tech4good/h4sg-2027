@@ -185,14 +185,13 @@ export async function submitApplication(userId: string) {
 
   const { data: app } = await supabase
     .from("applications")
-    .select("submitted, resume_url, code_of_conduct, data_sharing, h4sg_details, phone, school, major, age")
+    .select("submitted, resume_url, h4sg_details, phone, school, major, age")
     .eq("id", userId)
     .single();
 
   if (!app) throw new Error("Application not found");
   if (app.submitted) throw new Error("Application already submitted");
   if (!app.resume_url) throw new Error("Resume required");
-  if (!app.code_of_conduct || !app.data_sharing) throw new Error("Required agreements not accepted");
 
   const additional = validateH4sgDetails(app.h4sg_details);
   if (additional.error) throw new Error(additional.error);
@@ -209,6 +208,8 @@ export async function submitApplication(userId: string) {
       submitted_at: new Date().toISOString(),
       resume_share: additional.details?.sponsor_sharing === "Yes",
       able_to_attend: additional.details?.full_attendance === "Yes",
+      // validateH4sgDetails requires agreeing to the event Code of Conduct.
+      code_of_conduct: true,
     })
     .eq("id", userId)
     .eq("submitted", false);

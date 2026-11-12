@@ -21,7 +21,7 @@ export const H4SG_FIELDS: H4sgField[] = [
   { key: "over_18", label: "Are you 18 or older?", kind: "select", options: ["Yes", "No"], group: "General information", help: "You must be 18 or older to participate." },
   { key: "full_attendance", label: "Can you attend the full hackathon (March 5–7, 2027)?", kind: "select", options: ["Yes", "No"], group: "General information", help: "Full attendance is expected. Disclose any exceptions in advance; requests are considered case by case." },
   { key: "attendance_explanation", label: "Please explain any attendance exceptions", kind: "textarea", group: "General information", when: { key: "full_attendance", value: "No" } },
-  { key: "dietary_notes", label: "Dietary restrictions or allergies", kind: "textarea", group: "General information", help: "Include any additional needs; write N/A if none. Your existing dietary selections are also retained." },
+  { key: "dietary_notes", label: "Dietary restrictions or allergies", kind: "textarea", group: "General information", help: "Include any additional needs; write N/A if none." },
   { key: "sponsor_sharing", label: "May we share your contact information and resume with sponsors for internship, recruiting, and professional development opportunities?", kind: "select", options: ["Yes", "No", "Other"], group: "General information" },
   { key: "sponsor_sharing_other", label: "Describe your sponsor-sharing preference", kind: "textarea", group: "General information", when: { key: "sponsor_sharing", value: "Other" } },
   { key: "application_mode", label: "Are you applying individually or in a group?", kind: "select", options: ["Group", "Individually"], group: "Team preferences" },
