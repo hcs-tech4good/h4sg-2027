@@ -1,0 +1,14 @@
+[
+  {
+    "name": "I have never programmed before"
+  },
+  {
+    "name": "I have done some programming but have never completed a project"
+  },
+  {
+    "name": "I have done a moderate amount of programming and have completed one or more small projects"
+  },
+  {
+    "name": "I have been programming for over 3 years and have completed multiple large projects."
+  }
+]

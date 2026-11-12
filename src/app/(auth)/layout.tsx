@@ -1,0 +1,4 @@
+import Image from "next/image";
+export default function AuthLayout({ children }: { children: React.ReactNode }) {
+  return <div className="auth-shell"><header className="auth-header"><a href="/" className="portal-brand"><Image unoptimized src="/h4sg-logo.png" alt="" width={34} height={40} /><span>Hack<span className="portal-brand-four">4</span>SocialGood <small>Portal</small></span></a><a href="/">Back to the ocean ↗</a></header><main className="auth-form-area"><div className="auth-form-wrap">{children}<p className="auth-support">Need a hand? <a href="mailto:operations@t4sg.dev">Contact the team</a></p></div></main><svg className="auth-wave" viewBox="0 0 1200 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0 50 Q150 0 300 50 T600 50 T900 50 T1200 50 V100 H0Z" fill="#b9e8e4"/><path d="M0 70 Q150 30 300 70 T600 70 T900 70 T1200 70 V100 H0Z" fill="#a0dbd7" opacity=".5"/></svg></div>;
+}

@@ -1,0 +1,18 @@
+[
+  { "name": "HTML, CSS, JS" },
+  { "name": "TypeScript" },
+  { "name": "JSX/Vue/Svelte" },
+  { "name": "Rust" },
+  { "name": "Zig" },
+  { "name": "C/CPP" },
+  { "name": "OCaml" },
+  { "name": "Python" },
+  { "name": "Scala" },
+  { "name": "Java" },
+  { "name": "Kotlin" },
+  { "name": "Dart" },
+  { "name": "Swift" },
+  { "name": "PHP" },
+  { "name": "Ruby" },
+  { "name": "Other" }
+]

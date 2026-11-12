@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Vegetarian",
+    "code": 0
+  },
+  {
+    "name": "Vegan",
+    "code": 1
+  },
+  {
+    "name": "Gluten-free",
+    "code": 2
+  },
+  {
+    "name": "Nut-free",
+    "code": 3
+  },
+  {
+    "name": "Dairy-free",
+    "code": 4
+  },
+  {
+    "name": "Halal",
+    "code": 5
+  },
+  {
+    "name": "Kosher",
+    "code": 6
+  }
+]

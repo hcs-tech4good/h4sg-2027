@@ -1,0 +1,46 @@
+/* Assembly and final PNG switch visibility on the same frame, never crossfade. */
+.logo-intro[hidden]{display:none}
+.logo-intro-pending .logo-intro[hidden],.logo-intro:not([hidden]){display:grid}
+.logo-intro{position:fixed;inset:0;z-index:100;place-items:center;isolation:isolate;overflow:hidden}
+.logo-intro-backdrop{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 43%,#f5fffb,#e3f8f4 72%);z-index:-1}
+.logo-intro-art{position:relative;width:clamp(165px,23vw,250px);aspect-ratio:1230/1440;will-change:transform;transform-origin:center}
+.logo-intro-tilt,.logo-intro-half,.logo-intro-upright,.logo-intro-final{position:absolute;inset:0}
+.logo-intro-tilt{transform:rotate(0deg)}
+.logo-intro-upright{transform:rotate(23.3deg)}
+.logo-intro img{width:100%;height:100%;display:block;object-fit:contain}
+.logo-intro-half{transform:scaleX(0);transform-origin:50% 50%}
+.logo-intro-left .logo-intro-upright{clip-path:polygon(0 0,25% 0,75% 100%,0 100%)}
+.logo-intro-right .logo-intro-upright{clip-path:polygon(25% 0,100% 0,100% 100%,75% 100%)}
+.logo-intro-slit{position:absolute;left:calc(50% - 10px);top:calc(50% - 1px);width:20px;height:2px;border-radius:2px;background:#0baa87;opacity:.25}
+.logo-intro-branch{position:absolute;width:4.4%;left:47.8%;height:calc(50% - 3px);border-radius:30px;background:linear-gradient(#0cc18d,#0d5667);transform:scaleY(0)}
+.logo-intro-branch.top{top:0;transform-origin:bottom}
+.logo-intro-branch.bottom{bottom:0;transform-origin:top}
+.logo-intro-final{visibility:hidden}
+.logo-intro-skip{position:absolute;bottom:max(28px,env(safe-area-inset-bottom));right:max(28px,env(safe-area-inset-right));padding:10px 2px;background:none;border:0;border-bottom:1px solid #668e8455;color:#456d66;font:500 .8rem var(--body,system-ui);cursor:pointer}
+.logo-intro-skip:focus-visible{outline:2px solid #078a5c;outline-offset:6px}
+.logo-intro-playing .brand-logo{visibility:hidden}
+html.logo-intro-playing{overflow:hidden}
+.is-building .logo-intro-slit{animation:intro-slit 544ms ease both}
+.is-building .logo-intro-branch.top{animation:intro-branch 240ms 90ms cubic-bezier(.2,.7,.2,1) both,intro-hide 1ms 352ms step-end forwards}
+.is-building .logo-intro-branch.bottom{animation:intro-branch 225ms 125ms cubic-bezier(.2,.7,.2,1) both,intro-hide 1ms 352ms step-end forwards}
+.is-building .logo-intro-left{animation:intro-unfold 544ms 352ms cubic-bezier(.18,.7,.2,1) both}
+.is-building .logo-intro-right{animation:intro-unfold 544ms 390ms cubic-bezier(.18,.7,.2,1) both}
+.is-building .logo-intro-tilt{animation:intro-weight 608ms 416ms cubic-bezier(.22,.7,.25,1) both,intro-hide 1ms 1024ms step-end forwards}
+.is-building .logo-intro-final{animation:intro-final 1ms 1024ms step-end forwards}
+@keyframes intro-slit{0%{opacity:.1;transform:scaleX(.3)}25%{opacity:1;transform:scaleX(1)}75%{opacity:1}100%{opacity:0}}
+@keyframes intro-branch{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes intro-hide{from{visibility:visible}to{visibility:hidden}}
+@keyframes intro-unfold{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes intro-weight{0%{transform:rotate(0deg)}76%{transform:rotate(-25deg)}100%{transform:rotate(-23.3deg)}}
+@keyframes intro-final{from{visibility:hidden}to{visibility:visible}}
+@media(prefers-reduced-motion:reduce){.logo-intro{display:none!important}.logo-intro-playing .brand-logo{visibility:visible}}
+
+/* The diagonal front and its bubble wake share a single screen-space path. */
+.logo-intro-revealing .brand-logo{visibility:visible}
+.logo-intro-cover{position:absolute;inset:0;display:grid;place-items:center;isolation:isolate;will-change:clip-path}
+.logo-intro-sweep{position:absolute;inset:0;pointer-events:none;will-change:transform}
+.logo-intro-line{position:absolute;top:-5%;height:110%;width:2px;transform:skewX(-20deg);transform-origin:50% 4.545%;background:linear-gradient(transparent,rgba(255,255,255,.95) 12%,#72d9c7 50%,rgba(255,255,255,.95) 88%,transparent);box-shadow:0 0 12px #8be9d9}
+.logo-intro-line:first-child{width:12px;opacity:.22;filter:blur(2px)}
+.logo-intro-line:nth-child(3){width:1px;opacity:.65}
+.logo-intro-bubble{position:absolute;border-radius:50%;border:1px solid rgba(228,255,255,.8);background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.85),rgba(174,239,230,.12) 22%,rgba(24,161,169,.08) 58%,rgba(111,224,218,.38) 88%,rgba(234,255,255,.7));box-shadow:inset 2px 3px 8px rgba(255,255,255,.6),inset -3px -5px 12px rgba(14,133,150,.15),0 0 16px rgba(137,235,227,.16);will-change:transform,opacity}
+.logo-intro-bubble::after{content:"";position:absolute;left:22%;top:15%;width:23%;height:12%;border-radius:50%;background:rgba(255,255,255,.8);transform:rotate(-35deg);filter:blur(1px)}
