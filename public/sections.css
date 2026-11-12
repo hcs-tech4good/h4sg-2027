@@ -1,4 +1,30 @@
-/* Tracks: a frosted "coming soon" panel above three placeholder track cards. */
+/* Section styles: marquee, about facts, and tracks. */
+
+/* Marquee: eight identical copies so the loop never runs out, even on 4K-wide screens.
+   It slides by half (four copies) per cycle, so the duration is 4x to keep the original pace. */
+.marquee-track { animation-duration: 152s; }
+
+/* About: fuller, higher-contrast copy and fact cells. */
+#about .section-lede { font-size: 1.1rem; line-height: 1.75; color: #163a49; max-width: 50ch; }
+#about .facts {
+  background: rgba(255, 255, 255, .5);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, .7);
+  box-shadow: 0 18px 40px -20px rgba(9, 45, 59, .3);
+  overflow: hidden;
+}
+#about .fact { background: none; padding: 28px 22px; gap: 16px; }
+#about .fact svg { flex: 0 0 30px; width: 30px; height: 30px; }
+#about .fact b { font-size: 1.65rem; font-weight: 700; letter-spacing: -.02em; color: #092d3b; }
+#about .fact span { font-size: .92rem; line-height: 1.5; color: #1f4352; font-weight: 500; margin-top: 6px; }
+@media (max-width: 640px) {
+  #about .section-lede { font-size: 1rem; }
+  #about .fact { padding: 20px 14px; gap: 10px; }
+  #about .fact b { font-size: 1.3rem; }
+  #about .fact span { font-size: .82rem; }
+}
+
 #tracks .tracks-heading h2 { margin-bottom: 32px; }
 
 /* Shared frosted-glass surface. */
