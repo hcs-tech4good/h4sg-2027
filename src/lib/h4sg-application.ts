@@ -25,7 +25,7 @@ export const H4SG_FIELDS: H4sgField[] = [
   { key: "sponsor_sharing", label: "May we share your contact information and resume with sponsors for internship, recruiting, and professional development opportunities?", kind: "select", options: ["Yes", "No", "Other"], group: "General information" },
   { key: "sponsor_sharing_other", label: "Describe your sponsor-sharing preference", kind: "textarea", group: "General information", when: { key: "sponsor_sharing", value: "Other" } },
   { key: "application_mode", label: "Are you applying individually or in a group?", kind: "select", options: ["Group", "Individually"], group: "Team preferences" },
-  { key: "preferred_teammates", label: "Preferred teammates (full names)", kind: "teammates", group: "Team preferences", when: { key: "application_mode", value: "Group" }, help: "List up to three other members. Every member must submit their own application; including you, the team may have at most four members." },
+  { key: "preferred_teammates", label: "Preferred teammates (full names)", kind: "teammates", group: "Team preferences", when: { key: "application_mode", value: "Group" }, help: "List one to three other members. Every member must submit their own application; including you, the team may have at most four members." },
   { key: "individual_plan", label: "If applying individually, do you plan to form a group or participate individually?", kind: "select", options: ["Group", "Individually"], group: "Team preferences", when: { key: "application_mode", value: "Individually" } },
   { key: "coding_ability", label: "How would you rate your coding ability (1–10)?", kind: "select", options: ["1 – No coding experience", "2 – Very limited exposure; have tried basic tutorials or exercises", "3 – Beginner; familiar with basic programming concepts", "4 – Some coursework or small personal/class projects", "5 – Comfortable writing and debugging code for moderately sized projects", "6 – Able to build projects independently using common tools, libraries, and frameworks", "7 – Strong coding experience through substantial coursework, projects, research, or internships", "8 – Advanced; comfortable designing and implementing complex technical projects", "9 – Very advanced; extensive project, research, internship, or professional development experience", "10 – Expert-level; able to architect complex systems and lead technical development"], group: "Experience and skills", help: "Experience is not required. Honest answers help us tailor workshops to participants’ skills." },
   { key: "built_project", label: "Tell us about something you have built or worked on. What did you make, and what was your role?", kind: "textarea", maxWords: 150, group: "Experience and skills", help: "Class projects, personal projects, hackathons, and club initiatives all count." },
@@ -67,8 +67,11 @@ export function validateH4sgDetails(input: unknown): { details?: H4sgDetails; er
   for (const field of H4SG_FIELDS) {
     if (!isH4sgFieldVisible(field, details)) continue;
     const value = details[field.key];
-    // Teammate preferences are optional, just as in the source form.
-    if (field.kind === "teammates") continue;
+    // Group applicants must name at least one preferred teammate.
+    if (field.kind === "teammates") {
+      if (!Array.isArray(value) || !value.some((name) => name.trim())) return { error: `Please answer: ${field.label}` };
+      continue;
+    }
     if (!value || (Array.isArray(value) ? !value.length : !value.trim())) return { error: `Please answer: ${field.label}` };
     if (field.kind === "email" && !z.email().safeParse(value).success) return { error: "Please enter a valid school email." };
     if (field.options?.length) {

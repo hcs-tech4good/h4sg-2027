@@ -2,6 +2,7 @@
 
 import { z } from "zod";
 import { H4SG_FIELDS, validateH4sgDetails } from "@/lib/h4sg-application";
+import { findMissingApplicationField } from "@/lib/application-requirements";
 import { createAdminClient } from "@/lib/supabase-admin";
 import { createClient } from "@/lib/supabase-server";
 import { emailConfigured, sendAnnouncementEmails, sendDecisionUpdateEmails } from "@/lib/email";
@@ -185,19 +186,17 @@ export async function submitApplication(userId: string) {
 
   const { data: app } = await supabase
     .from("applications")
-    .select("submitted, resume_url, h4sg_details, phone, school, major, age")
+    .select("submitted, h4sg_details, age, gender, underrepresented, phone, country, race, address_line1, city, address_country, state, zip, level_of_study, school, major, shirt_size, team_roles, other_role, financial_aid, financial_aid_detail, resume_url")
     .eq("id", userId)
     .single();
 
   if (!app) throw new Error("Application not found");
   if (app.submitted) throw new Error("Application already submitted");
-  if (!app.resume_url) throw new Error("Resume required");
+  const missing = findMissingApplicationField(app);
+  if (missing) throw new Error(missing.message);
 
   const additional = validateH4sgDetails(app.h4sg_details);
   if (additional.error) throw new Error(additional.error);
-  if (!app.phone?.trim() || !app.school?.trim() || !app.major?.trim()) {
-    throw new Error("Phone number, university, and major are required.");
-  }
   if (app.age !== null && app.age < 18) throw new Error("You must be 18 or older to participate.");
 
   const adminClient = createAdminClient();

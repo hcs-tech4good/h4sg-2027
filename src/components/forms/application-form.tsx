@@ -41,10 +41,13 @@ import {
 } from "@/data";
 import { H4sgApplicationFields } from "@/components/h4sg-application-fields";
 import { validateH4sgDetails } from "@/lib/h4sg-application";
+import { findMissingApplicationField, US_COUNTRY } from "@/lib/application-requirements";
 import type { Application } from "@/types/database";
 
 const DEADLINE = new Date(process.env.NEXT_PUBLIC_APP_CLOSES || 0);
-const US_COUNTRY = "United States of America";
+const AUTOSAVE_DELAY_MS = 2000;
+const SAVE_ERROR = "Could not save your draft. Please try again.";
+const SETUP_ERROR = "Database setup is incomplete. Apply migration 019_h4sg_application_details.sql before saving.";
 
 interface ApplicationFormProps {
   userId: string;
@@ -135,7 +138,9 @@ export function ApplicationForm({
   const saveDraft = useCallback(async () => {
     if (isSubmitted) return;
     setSaving(true);
-    const payload = { ...form, id: userId };
+    // Never send `submitted`: a late autosave must not flip a submitted application back to a draft.
+    const payload: Record<string, unknown> = { ...form, id: userId };
+    delete payload.submitted;
 
     // Upsert on the primary key so repeated saves (manual, auto-save, pre-submit)
     // never collide — avoids duplicate-key errors from a stale existing-row flag.
@@ -144,18 +149,24 @@ export function ApplicationForm({
       .upsert(payload, { onConflict: "id" });
 
     setSaving(false);
-    if (!error) setLastSaved(new Date());
-    else setError(error.message.includes("h4sg_details")
-      ? "Database setup is incomplete. Apply migration 019_h4sg_application_details.sql before saving."
-      : "Could not save your draft. Please try again.");
+    if (!error) {
+      setLastSaved(new Date());
+      setError((e) => (e === SAVE_ERROR || e === SETUP_ERROR ? "" : e));
+    } else setError(error.message.includes("h4sg_details")
+      ? SETUP_ERROR
+      : SAVE_ERROR);
     return !error;
   }, [form, userId, isSubmitted, supabase]);
 
+  // Autosave a couple of seconds after the applicant stops changing answers.
+  const firstRender = useRef(true);
+  const submittingRef = useRef(false);
   useEffect(() => {
-    if (isSubmitted) return;
-    const interval = setInterval(saveDraft, 300000);
-    return () => clearInterval(interval);
-  }, [saveDraft, isSubmitted]);
+    if (firstRender.current) { firstRender.current = false; return; }
+    if (isSubmitted || submittingRef.current) return;
+    const timer = setTimeout(() => { if (!submittingRef.current) saveDraft(); }, AUTOSAVE_DELAY_MS);
+    return () => clearTimeout(timer);
+  }, [form, saveDraft, isSubmitted]);
 
   function toggleArray(field: "race" | "dietary_restrictions" | "team_roles" | "programming_languages", value: string, checked: boolean) {
     setForm((f) => {
@@ -198,15 +209,16 @@ export function ApplicationForm({
 
   async function handleSubmit() {
     setError("");
+    const missing = findMissingApplicationField(form);
+    if (missing) {
+      setError(missing.message);
+      setSection(missing.section);
+      return;
+    }
     const additional = validateH4sgDetails(form.h4sg_details);
     if (additional.error) {
       setError(additional.error);
       setSection(4);
-      return;
-    }
-    if (!form.phone?.trim() || !form.school?.trim() || !form.major?.trim()) {
-      setError("Please complete your phone number, university, and major in the Personal and Academic sections.");
-      setSection(form.phone?.trim() ? 1 : 0);
       return;
     }
     if (
@@ -218,20 +230,12 @@ export function ApplicationForm({
       );
       return;
     }
-    if (form.financial_aid && !form.financial_aid_detail?.trim()) {
-      setError("Please describe your financial situation, or uncheck the financial accommodations box.");
-      return;
-    }
-    if (!form.resume_url) {
-      setError("Please upload your resume");
-      setSection(3);
-      return;
-    }
-
+    submittingRef.current = true;
     setSubmitting(true);
     const saved = await saveDraft();
     if (!saved) {
       setError("Failed to save your application. Please try again.");
+      submittingRef.current = false;
       setSubmitting(false);
       return;
     }
@@ -242,6 +246,7 @@ export function ApplicationForm({
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : "Failed to submit. Please try again.";
       setError(message);
+      submittingRef.current = false;
       setSubmitting(false);
     }
   }
@@ -286,7 +291,7 @@ export function ApplicationForm({
       <div id="application-body" className="application-body space-y-5">
       <div className="application-save-reminder" role="note">
         <Save size={18} aria-hidden="true" />
-        <p><strong>Remember to save your progress.</strong> Drafts only save automatically every few minutes, so click <strong>Save draft</strong> at the bottom of the page before you leave or close this tab.</p>
+        <p><strong>Your answers save automatically</strong> a couple of seconds after you stop typing. Check for “Saved” at the bottom before you leave, or click <strong>Save draft</strong> to save right away. All questions marked * are required.</p>
       </div>
       {error && (
         <div role="alert" className="application-error">{error}</div>
@@ -301,7 +306,7 @@ export function ApplicationForm({
           <CardContent className="space-y-4">
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="space-y-2">
-                <Label>Gender</Label>
+                <Label>Gender *</Label>
                 <Select
                   value={form.gender || ""}
                   onValueChange={(v) => setForm((f) => ({ ...f, gender: v || null }))}
@@ -315,7 +320,7 @@ export function ApplicationForm({
                 </Select>
               </div>
               <div className="space-y-2">
-                <Label>Do you identify as part of an underrepresented group in the technology industry?</Label>
+                <Label>Do you identify as part of an underrepresented group in the technology industry? *</Label>
                 <Select
                   value={form.underrepresented || ""}
                   onValueChange={(v) => setForm((f) => ({ ...f, underrepresented: v || null }))}
@@ -329,14 +334,14 @@ export function ApplicationForm({
                 </Select>
               </div>
               <div className="space-y-2">
-                <Label>Phone Number</Label>
+                <Label>Phone Number *</Label>
                 <Input
                   value={form.phone || ""}
                   onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
                 />
               </div>
               <div className="space-y-2">
-                <Label>Country of Residence</Label>
+                <Label>Country of Residence *</Label>
                 <Combobox
                   value={form.country || ""}
                   onChange={(v) => setForm((f) => ({ ...f, country: v }))}
@@ -347,7 +352,7 @@ export function ApplicationForm({
             </div>
 
             <div className="space-y-2">
-              <Label>Race/Ethnicity (check all that apply)</Label>
+              <Label>Race/Ethnicity (check all that apply) *</Label>
               <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                 {RACES.map((r) => (
                   <label key={r} className="flex items-center gap-2 text-sm">
@@ -362,7 +367,7 @@ export function ApplicationForm({
             </div>
 
             <div className="space-y-2">
-              <Label>Shipping Address</Label>
+              <Label>Shipping Address *</Label>
               <Input
                 placeholder="Address line 1"
                 value={form.address_line1 || ""}
@@ -378,14 +383,14 @@ export function ApplicationForm({
             </div>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="space-y-2">
-                <Label>City</Label>
+                <Label>City *</Label>
                 <Input
                   value={form.city || ""}
                   onChange={(e) => setForm((f) => ({ ...f, city: e.target.value }))}
                 />
               </div>
               <div className="space-y-2">
-                <Label>Country</Label>
+                <Label>Country *</Label>
                 <Combobox
                   value={form.address_country || ""}
                   onChange={(v) =>
@@ -402,7 +407,7 @@ export function ApplicationForm({
               </div>
               {form.address_country === US_COUNTRY && (
                 <div className="space-y-2">
-                  <Label>State</Label>
+                  <Label>State *</Label>
                   <Combobox
                     value={form.state || ""}
                     onChange={(v) => setForm((f) => ({ ...f, state: v }))}
@@ -412,7 +417,7 @@ export function ApplicationForm({
                 </div>
               )}
               <div className="space-y-2">
-                <Label>Zip Code</Label>
+                <Label>Zip Code *</Label>
                 <Input
                   value={form.zip || ""}
                   onChange={(e) => setForm((f) => ({ ...f, zip: e.target.value }))}
@@ -431,7 +436,7 @@ export function ApplicationForm({
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label>What is your current education level?</Label>
+              <Label>What is your current education level? *</Label>
               <Select
                 value={form.level_of_study || ""}
                 onValueChange={(v) => setForm((f) => ({ ...f, level_of_study: v || null }))}
@@ -452,7 +457,7 @@ export function ApplicationForm({
               Will you be pursuing an undergraduate degree program at a university on March 5th, 2027?
             </label>
             <div className="space-y-2">
-              <Label>Current School</Label>
+              <Label>Current School *</Label>
               <Combobox
                 value={form.school || ""}
                 onChange={(v) => setForm((f) => ({ ...f, school: v }))}
@@ -462,7 +467,7 @@ export function ApplicationForm({
             </div>
             <div className="grid grid-cols-1 gap-4">
               <div className="space-y-2">
-                <Label>Major / Field of Study</Label>
+                <Label>Major / Field of Study *</Label>
                 <Input list="major-options" aria-label="Major or concentration" value={form.major || ""}
                   onChange={(e) => setForm((f) => ({ ...f, major: e.target.value }))} />
                 <datalist id="major-options">{MAJORS.map((m) => <option key={m} value={m} />)}</datalist>
@@ -487,7 +492,7 @@ export function ApplicationForm({
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label>Shirt Size</Label>
+              <Label>Shirt Size *</Label>
               <Select
                 value={form.shirt_size || ""}
                 onValueChange={(v) => setForm((f) => ({ ...f, shirt_size: v || null }))}
@@ -534,7 +539,7 @@ export function ApplicationForm({
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <Label>What roles could you see yourself playing on a hackathon team? (check all that apply)</Label>
+              <Label>What roles could you see yourself playing on a hackathon team? (check all that apply) *</Label>
               <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                 {ROLES.map((r) => (
                   <label key={r} className="flex items-center gap-2 text-sm">
@@ -591,7 +596,7 @@ export function ApplicationForm({
             </div>
 
             <div className="space-y-2">
-              <Label>Upload your resume (max 10 MB; PDF)</Label>
+              <Label>Upload your resume (max 10 MB; PDF) *</Label>
               {form.resume_name && (
                 <p className="text-sm text-green-700">Uploaded: {form.resume_name}</p>
               )}
