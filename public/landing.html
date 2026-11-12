@@ -319,6 +319,7 @@ footer a { color: #4a3a1c; }
 <link rel="stylesheet" href="/ocean-zones.css">
 <link rel="stylesheet" href="/logo-intro.css">
 <link rel="stylesheet" href="/hero-showcase.css">
+<link rel="stylesheet" href="/tracks.css">
 <link rel="preload" href="/h4sg-logo.png" as="image">
 <script>
 (function(){try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('logo-intro-pending');setTimeout(function(){document.documentElement.classList.remove('logo-intro-pending');},4500);}}catch(e){}})();
@@ -468,7 +469,6 @@ footer a { color: #4a3a1c; }
       <div class="section-copy"><p class="depth" data-depth="10">10&nbsp;m <span>· Sunlight zone</span></p>
         <h2>Build for impact,<br><em>not just for points.</em></h2>
         <p class="section-lede">Hack 4 Social Good is a weekend where students come together to code, build, and turn ideas into implementable projects. Teams take on real social challenges, with mentors on hand and beginner-friendly workshops all weekend.</p>
-        <p class="field-note">A little curiosity. A shared purpose. A sea of possibilities.</p>
       </div>
       <div class="field-assembly"><div class="facts">
         <div class="fact"><svg width="34" height="34" viewBox="0 0 40 40" style="color:#ff7f6a" aria-hidden="true"><use href="#star"/></svg><div><b>3 days</b><span>March 5–7, 2027</span></div></div>
@@ -481,17 +481,39 @@ footer a { color: #4a3a1c; }
 
 
   <section class="zone" id="tracks">
-    <div class="wrap expedition-grid tracks-layout">
-      <div class="tracks-heading"><p class="depth" data-depth="40">40&nbsp;m <span>· Twilight zone</span></p><h2>Find your<br><em>current.</em></h2></div><div class="section-copy">
-        <div class="sealed"><div><span class="eyebrow">The tracks</span><h3>Good ideas go deep.</h3><p>We're finalizing tracks with our nonprofit and community partners. Each track will have its own prize.</p><p class="coming-note">Track announcements coming soon <span aria-hidden="true">↗</span></p></div></div>
-        <div class="track-ghosts" aria-label="Three tracks to be announced"><span>01 <i>To be revealed</i></span><span>02 <i>To be revealed</i></span><span>03 <i>To be revealed</i></span></div>
+    <div class="wrap">
+      <div class="tracks-heading"><p class="depth" data-depth="40">40&nbsp;m <span>· Twilight zone</span></p><h2>Tracks</h2></div>
+      <div class="tracks-panel">
+        <div class="tracks-badge" aria-hidden="true"><svg viewBox="0 0 60 34"><use href="#fish"/></svg></div>
+        <div class="tracks-copy">
+          <span class="tracks-status"><i aria-hidden="true"></i>Announcing soon</span>
+          <h3>More info to come</h3>
+          <p>We're finalizing tracks with our nonprofit and community partners. Each track will have its own prize.</p>
+        </div>
       </div>
+      <ol class="tracks-grid" aria-label="Three tracks to be announced">
+        <li class="track-card">
+          <div class="track-top"><span class="track-num">Track 01</span><span class="track-icon coral" aria-hidden="true"><svg viewBox="0 0 40 40"><use href="#star"/></svg></span></div>
+          <div class="track-body"><span class="track-name">To be revealed</span><span class="track-skel" aria-hidden="true"></span><span class="track-skel short" aria-hidden="true"></span></div>
+          <div class="track-foot"><span>Prize</span><span>TBA</span></div>
+        </li>
+        <li class="track-card">
+          <div class="track-top"><span class="track-num">Track 02</span><span class="track-icon pink" aria-hidden="true"><svg viewBox="0 0 40 36"><use href="#shell"/></svg></span></div>
+          <div class="track-body"><span class="track-name">To be revealed</span><span class="track-skel" aria-hidden="true"></span><span class="track-skel short" aria-hidden="true"></span></div>
+          <div class="track-foot"><span>Prize</span><span>TBA</span></div>
+        </li>
+        <li class="track-card">
+          <div class="track-top"><span class="track-num">Track 03</span><span class="track-icon blue" aria-hidden="true"><svg viewBox="0 0 60 34"><use href="#fish"/></svg></span></div>
+          <div class="track-body"><span class="track-name">To be revealed</span><span class="track-skel" aria-hidden="true"></span><span class="track-skel short" aria-hidden="true"></span></div>
+          <div class="track-foot"><span>Prize</span><span>TBA</span></div>
+        </li>
+      </ol>
     </div>
   </section>
 
   <section class="zone" id="sponsors">
     <div class="wrap sponsor-layout">
-      <div class="sponsor-heading"><p class="depth" data-depth="100">100&nbsp;m <span>· Open water</span></p><h2>Making waves,<br><em>together.</em></h2><p class="section-lede">Our sponsors help bring a weekend of building for good to life.</p></div>
+      <div class="sponsor-heading"><p class="depth" data-depth="100">100&nbsp;m <span>· Open water</span></p><h2>Sponsors</h2><p class="section-lede">Our sponsors help bring a weekend of building for good to life.</p></div>
       
       <div class="sponsor-ledger"><div class="sponsor-card">
         <div class="k">Sponsored by<b>Impiricus</b></div>
@@ -517,7 +539,7 @@ footer a { color: #4a3a1c; }
 
   <section class="zone" id="register">
     <div class="wrap reef-layout">
-      <div class="reef-heading"><p class="depth" data-depth="300">300&nbsp;m <span>· The reef</span></p><h2>Big ideas.<br><em>Real-world ripples.</em></h2><p class="section-lede">Registration is open for undergraduates from any school.<br>Come build something that matters.</p><a class="btn" href="/signup">Dive in & apply <span aria-hidden="true">↗</span></a></div>
+      <div class="reef-heading"><p class="depth" data-depth="300">300&nbsp;m <span>· Abyssal reef</span></p><h2>Ready to<br><em>dive in?</em></h2><p class="section-lede">Registration is open for undergraduates from any school.<br>Come build something that matters.</p><a class="btn" href="/signup">Dive in & apply <span aria-hidden="true">↗</span></a></div>
       
       <div class="contact"><div class="label">See you beneath the surface.</div><div class="email-row"><span class="email" id="email">operations@t4sg.dev</span><button class="copy" id="copy" type="button">Copy</button></div></div>
     </div>
@@ -687,21 +709,23 @@ footer a { color: #4a3a1c; }
     var bell = new THREE.Mesh(new THREE.SphereGeometry(1, 18, 10, 0, Math.PI * 2, 0, Math.PI / 2),
       new THREE.MeshStandardMaterial({ color: color, transparent: true, opacity: 0.72, roughness: 0.3, emissive: color, emissiveIntensity: 0.3, side: THREE.DoubleSide }));
     g.add(bell);
-    var tents = [], P = 16;
+    var tents = [], lineMats = [], P = 16;
     for (var i = 0; i < 8; i++) {
       var a = i / 8 * Math.PI * 2, geo = new THREE.BufferGeometry();
       geo.setAttribute("position", new THREE.BufferAttribute(new Float32Array(P * 3), 3));
-      g.add(new THREE.Line(geo, new THREE.LineBasicMaterial({ color: color, transparent: true, opacity: 0.85 })));
+      var lm = new THREE.LineBasicMaterial({ color: color, transparent: true, opacity: 0.85 }); lineMats.push(lm);
+      g.add(new THREE.Line(geo, lm));
       tents.push({ geo: geo, ax: Math.cos(a) * 0.7, az: Math.sin(a) * 0.7, ph: Math.random() * 6, len: rand(0.22, 0.32) });
     }
-    g.userData = { bell: bell, tents: tents, P: P };
+    g.userData = { bell: bell, tents: tents, lineMats: lineMats, P: P };
     return g;
   }
+  var faqList = document.querySelector("#faq .faq"), jellyV = new THREE.Vector3();
   var jellies = [], jellyColors = ["#f7a8d8", "#c9a8f7", "#ffb3c7", "#a8d8f7"];
   for (i = 0; i < (small ? 5 : 9); i++) {
     var j = makeJelly(jellyColors[i % 4]), js = rand(0.8, 1.6); j.scale.setScalar(js);
     j.position.set(i === 0 ? 11 : rand(-30, 30), i === 0 ? 3 : rand(CAM_BOTTOM - 6, 0), i === 0 ? -4 : rand(-30, -2));
-    scene.add(j); jellies.push({ o: j, ph: Math.random() * 6, rise: rand(0.25, 0.5) });
+    scene.add(j); jellies.push({ o: j, ph: Math.random() * 6, rise: rand(0.25, 0.5), fade: 1 });
   }
 
   // ---------- Bubbles ----------
@@ -833,8 +857,21 @@ footer a { color: #4a3a1c; }
     turtle.position.x += 1.4 * dt; if (turtle.position.x > 50) turtle.position.x = -50;
     turtle.position.y = -24 + Math.sin(t * 0.5) * 1.5; turtle.rotation.z = Math.sin(t * 0.5) * 0.08;
     turtle.userData.flips.forEach(function (f) { f.rotation.x = f.userData.side * Math.sin(t * 2.2 + (f.userData.front ? 0 : 1.2)) * 0.5; });
+    // Fade out any jelly drifting behind the FAQ questions so they stay readable.
+    var faqBox = faqList && faqList.getBoundingClientRect(), vw = window.innerWidth, vh = window.innerHeight;
+    var faqOn = faqBox && faqBox.bottom > 0 && faqBox.top < vh, halfFov = Math.tan(camera.fov * Math.PI / 360);
     jellies.forEach(function (j) {
-      var u = j.o.userData, pulse = Math.sin(t * 2 + j.ph);
+      var u = j.o.userData, pulse = Math.sin(t * 2 + j.ph), clear = 1;
+      if (faqOn) {
+        jellyV.copy(j.o.position).project(camera);
+        var sx = (jellyV.x + 1) / 2 * vw, sy = (1 - jellyV.y) / 2 * vh;
+        var R = j.o.scale.x * vh / (2 * halfFov * (camera.position.z - j.o.position.z)) * 1.3;
+        if (sx + R > faqBox.left && sx - R < faqBox.right && sy + R * 5 > faqBox.top && sy - R < faqBox.bottom) clear = 0;
+      }
+      j.fade += (clear - j.fade) * Math.min(1, dt * 4);
+      j.o.visible = j.fade > 0.02;
+      u.bell.material.opacity = 0.72 * j.fade;
+      u.lineMats.forEach(function (m) { m.opacity = 0.85 * j.fade; });
       u.bell.scale.set(1 + pulse * 0.08, 1 - pulse * 0.12, 1 + pulse * 0.08);
       j.o.position.y += (j.rise + Math.max(0, pulse) * 0.6) * dt;
       if (j.o.position.y > 10) j.o.position.y = CAM_BOTTOM - 10;

@@ -5,6 +5,7 @@
   if(!canvas)return;
   var c=canvas.getContext('2d');if(!c)return;
   var preference=matchMedia('(prefers-reduced-motion: reduce)'),reduce=preference.matches;
+  var introEl=document.querySelector('#faq .faq-intro'),faqEl=document.querySelector('#faq .faq'),jellySlots=[];
   var w=0,h=0,jellyTop=0,jellyGap=0,currentAnchors=[],scroll=window.scrollY,dpr=1,time=0,last=0,frame=0;
   var TAU=Math.PI*2;
   function ellipse(x,y,rx,ry,fill){c.beginPath();c.ellipse(x,y,rx,ry,0,0,TAU);c.fillStyle=fill;c.fill();}
@@ -112,11 +113,22 @@
   function draw(){
     c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,w,h);
     currents();
-    var xs=w<700?[.055,.94,.12]:[.04,.95,.12,.87,.47];
-    xs.forEach(function(x,i){
-      var y=jellyTop+i*jellyGap-scroll;
+    // Jellies stay in the side gutters or the FAQ intro column, never over the questions.
+    var intro=introEl&&introEl.getBoundingClientRect();
+    jellySlots.forEach(function(slot,i){
+      if(!slot)return;
+      var y=jellyTop+i*jellyGap-scroll,r=23+i%3*6;
       if(y < -140 || y > h+140)return;
-      jelly(w*x+Math.sin(time*.3+i)*7,y,w<700?18+i%2*5:23+i%3*6,i);
+      var alpha=1;
+      if(slot.intro&&intro){
+        // Fade out while passing behind the sticky FAQ heading.
+        var clear=Math.max(intro.top-(y+r*3.2),(y-r*1.4)-intro.bottom);
+        alpha=Math.max(0,Math.min(1,clear/60));
+        if(!alpha)return;
+      }
+      c.globalAlpha=alpha;
+      jelly(slot.x+Math.sin(time*.3+i)*7,y,r,i);
+      c.globalAlpha=1;
     });
     rush();waterRush();
   }
@@ -132,6 +144,14 @@
     });
     jellyTop=document.querySelector('#faq').getBoundingClientRect().top+window.scrollY+h*.12;
     jellyGap=Math.max(140,h*.22);
+    jellySlots=[];
+    if(introEl&&faqEl){
+      var ir=introEl.getBoundingClientRect(),fr=faqEl.getBoundingClientRect();
+      var left=ir.left>=90?{x:ir.left/2}:null,right=w-fr.right>=90?{x:(w+fr.right)/2}:null;
+      var twoCol=fr.left>=ir.right+20;
+      var col=function(f){return twoCol?{x:ir.left+ir.width*f,intro:true}:null;};
+      jellySlots=[left,right,col(.3),right,col(.75)];
+    }
     draw();
   }
   window.addEventListener('resize',resize);

@@ -1,0 +1,145 @@
+/* Tracks: a frosted "coming soon" panel above three placeholder track cards. */
+#tracks .tracks-heading h2 { margin-bottom: 32px; }
+
+/* Shared frosted-glass surface. */
+.tracks-panel,
+.track-card {
+  background: linear-gradient(160deg, rgba(255, 255, 255, .62), rgba(255, 255, 255, .38));
+  -webkit-backdrop-filter: blur(10px) saturate(1.2);
+          backdrop-filter: blur(10px) saturate(1.2);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .7) inset, 0 18px 40px -18px rgba(9, 45, 59, .28);
+}
+
+.tracks-panel {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: clamp(24px, 4vw, 44px);
+  padding: clamp(28px, 4vw, 48px);
+  border-radius: 28px;
+  border: 1.5px dashed rgba(7, 93, 69, .32);
+}
+
+/* Fish badge with sonar rings. */
+.tracks-badge {
+  position: relative;
+  display: grid; place-items: center;
+  width: 104px; height: 104px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 6px rgba(0, 203, 140, .14), 0 0 0 1.5px #00b37f inset, 0 10px 24px -8px rgba(9, 45, 59, .3);
+  color: #00b37f;
+}
+.tracks-badge svg { width: 52px; height: 30px; }
+.tracks-badge::before,
+.tracks-badge::after {
+  content: ""; position: absolute; inset: -6px; border-radius: 50%;
+  border: 1.5px solid rgba(0, 179, 127, .45);
+  animation: ping 3s ease-out infinite;
+}
+.tracks-badge::after { animation-delay: 1.5s; }
+
+.tracks-status {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 5px 12px 5px 10px;
+  border-radius: 999px;
+  background: rgba(7, 93, 69, .1);
+  font: 600 .66rem/1 var(--mono);
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--sea-accent);
+}
+.tracks-status i {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #00b37f;
+  animation: pingdot 2s ease-out infinite;
+}
+.tracks-copy h3 {
+  margin: 14px 0 10px;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.7rem, 3.2vw, 2.5rem);
+  letter-spacing: -.035em;
+  line-height: 1.05;
+  color: var(--sea-ink);
+}
+.tracks-copy p {
+  margin: 0;
+  max-width: 58ch;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--sea-muted);
+}
+
+/* Track cards. */
+.tracks-grid {
+  list-style: none;
+  margin: 18px 0 0; padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.track-card {
+  display: flex; flex-direction: column; gap: 22px;
+  padding: 22px 22px 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, .7);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.track-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .7) inset, 0 24px 44px -18px rgba(9, 45, 59, .38);
+}
+.track-top { display: flex; justify-content: space-between; align-items: center; }
+.track-num {
+  font: 600 .72rem/1 var(--mono);
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--sea-muted);
+}
+.track-icon {
+  display: grid; place-items: center;
+  width: 38px; height: 38px;
+  border-radius: 12px;
+}
+.track-icon svg { width: 22px; height: 22px; }
+.track-icon.coral { background: rgba(255, 127, 106, .14); color: #f0705c; }
+.track-icon.pink  { background: rgba(236, 120, 190, .14); color: #e07bbd; }
+.track-icon.blue  { background: rgba(58, 159, 214, .14); color: #3a9fd6; }
+
+.track-body { display: flex; flex-direction: column; gap: 10px; }
+.track-name {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  letter-spacing: -.02em;
+  color: var(--sea-ink);
+  opacity: .55;
+}
+.track-skel {
+  height: 8px; border-radius: 6px;
+  background: linear-gradient(90deg, rgba(9, 45, 59, .07), rgba(9, 45, 59, .15), rgba(9, 45, 59, .07)) 0 0 / 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
+.track-skel.short { width: 58%; }
+
+.track-foot {
+  display: flex; justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid rgba(9, 45, 59, .1);
+  font: 400 .68rem/1 var(--mono);
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--sea-muted);
+}
+.track-foot span + span { color: var(--sea-accent); font-weight: 600; }
+
+@media (max-width: 760px) {
+  .tracks-panel { grid-template-columns: 1fr; justify-items: start; }
+  .tracks-badge { width: 80px; height: 80px; }
+  .tracks-badge svg { width: 40px; height: 23px; }
+  .tracks-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tracks-badge::before, .tracks-badge::after, .tracks-status i, .track-skel { animation: none; }
+  .track-card { transition: none; }
+}
