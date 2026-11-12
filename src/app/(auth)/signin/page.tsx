@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase-browser";
 import { Turnstile, captchaEnabled } from "@/components/turnstile";
+import { AuthBuddy } from "@/components/auth-buddy";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
@@ -44,11 +45,8 @@ export default function SignInPage() {
 
   return (
     <div className="space-y-6">
+      <AuthBuddy />
       <h1 className="text-2xl font-bold">Sign In</h1>
-      <div className="w-full rounded-md bg-yellow-100 p-3 text-sm">
-        All accounts from previous years have been archived. Even if you applied to
-        Hack 4 Social Good before, you must create a new account to apply this year.
-      </div>
       <div className="w-full rounded-md border border-gray-200 bg-white p-4 shadow md:p-6">
         <form onSubmit={handleSignIn} className="space-y-4">
           {error && (

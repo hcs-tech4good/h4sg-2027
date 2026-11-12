@@ -6,6 +6,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase-browser";
 import { generateHackerId } from "@/lib/utils";
 import { Turnstile, captchaEnabled } from "@/components/turnstile";
+import { AuthBuddy } from "@/components/auth-buddy";
 import {
   validateInviteToken,
   claimStaffRole,
@@ -124,6 +125,7 @@ function SignUpForm() {
 
   return (
     <div className="space-y-6">
+      <AuthBuddy />
       <h1 className="text-2xl font-bold">{token ? "Staff Sign Up" : "Sign Up"}</h1>
       <div className="w-full rounded-md border border-gray-200 bg-white p-4 shadow md:p-6">
         <form onSubmit={handleSignUp} className="space-y-4">
