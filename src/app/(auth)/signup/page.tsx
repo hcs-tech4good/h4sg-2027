@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase-browser";
 import { generateHackerId } from "@/lib/utils";
 import { Turnstile, captchaEnabled } from "@/components/turnstile";
 import { AuthBuddy } from "@/components/auth-buddy";
+import { DUPLICATE_ACCOUNT_MESSAGE, friendlyAuthError, normalizeEmail } from "@/lib/auth-errors";
 import {
   validateInviteToken,
   claimStaffRole,
@@ -30,6 +31,12 @@ function SignUpForm() {
   async function handleSignUp(e: React.FormEvent) {
     e.preventDefault();
     setError("");
+    const first = firstName.trim(), last = lastName.trim(), cleanEmail = normalizeEmail(email);
+
+    if (!first || !last) {
+      setError("Please enter your first and last name.");
+      return;
+    }
 
     if (password !== confirmPassword) {
       setError("Passwords do not match");
@@ -61,16 +68,19 @@ function SignUpForm() {
     }
 
     const { data, error: signUpError } = await supabase.auth.signUp({
-      email,
+      email: cleanEmail,
       password,
       options: {
-        data: { first_name: firstName, last_name: lastName },
+        data: { first_name: first, last_name: last },
         ...(captchaToken ? { captchaToken } : {}),
       },
     });
 
-    if (signUpError) {
-      setError(signUpError.message);
+    // With email confirmation on, Supabase hides duplicates: it returns no error and a
+    // placeholder user with no identities. Treat that as "account already exists".
+    const duplicate = !signUpError && data.user && data.user.identities?.length === 0;
+    if (signUpError || duplicate) {
+      setError(duplicate ? DUPLICATE_ACCOUNT_MESSAGE : friendlyAuthError(signUpError));
       setLoading(false);
       // Turnstile tokens are single-use; reset so the user can retry.
       window.turnstile?.reset();
@@ -86,7 +96,7 @@ function SignUpForm() {
       // (app) layout guarantees a profile is created from user metadata on the
       // next request. We never block the user on this.
       try {
-        await createProfile(data.user.id, firstName, lastName, hhid);
+        await createProfile(data.user.id, first, last, hhid);
         if (token && staffRole) {
           await claimStaffRole(data.user.id, token);
         }
@@ -110,7 +120,7 @@ function SignUpForm() {
       <div className="space-y-6">
         <h1 className="text-2xl font-bold">Check Your Email</h1>
         <div className="w-full rounded-md border border-gray-200 bg-white p-4 shadow md:p-6 space-y-3">
-          <p>We&apos;ve sent a verification link to <strong>{email}</strong>.</p>
+          <p>We&apos;ve sent a verification link to <strong>{normalizeEmail(email)}</strong>.</p>
           <p className="text-gray-500 text-sm">Click the link in your email to verify your account, then sign in.</p>
           <Link
             href="/signin"
@@ -130,7 +140,7 @@ function SignUpForm() {
       <div className="w-full rounded-md border border-gray-200 bg-white p-4 shadow md:p-6">
         <form onSubmit={handleSignUp} className="space-y-4">
           {error && (
-            <div className="rounded-md bg-red-200 p-3 text-sm">{error}</div>
+            <div role="alert" className="rounded-md bg-red-200 p-3 text-sm">{error}</div>
           )}
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1">

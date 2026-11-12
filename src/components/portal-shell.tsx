@@ -14,7 +14,7 @@ export function PortalShell({ profile, email, showAnnouncements, verified = true
         {children}
       </main>
       <PortalSeabed />
-      <footer className="portal-footer"><span>© {new Date().getFullYear()} Harvard Computer Society</span><a href="/">Back to the main site ↗</a><a href="mailto:operations@t4sg.dev">Contact the team</a></footer>
+      <footer className="portal-footer"><span>© {new Date().getFullYear()} <a href="https://hcs.harvard.edu/" target="_blank" rel="noopener noreferrer">Harvard Computer Society</a></span><a href="/">Back to the main site ↗</a><a href="mailto:operations@t4sg.dev">Contact the team</a></footer>
     </div>
   </div>;
 }

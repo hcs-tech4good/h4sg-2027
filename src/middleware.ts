@@ -46,7 +46,9 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  if (user && isAuthRoute) {
+  // Signed-in users skip the auth pages, except /update-password: a password-reset link
+  // signs the user in, and they must stay on that page to choose a new password.
+  if (user && isAuthRoute && !pathname.startsWith("/update-password")) {
     const url = request.nextUrl.clone();
     url.pathname = "/dashboard";
     return NextResponse.redirect(url);

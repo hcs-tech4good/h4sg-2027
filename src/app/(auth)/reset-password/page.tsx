@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase-browser";
 import { Turnstile, captchaEnabled } from "@/components/turnstile";
+import { friendlyAuthError, normalizeEmail } from "@/lib/auth-errors";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -35,13 +36,13 @@ export default function ResetPasswordPage() {
 
     setLoading(true);
 
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    const { error } = await supabase.auth.resetPasswordForEmail(normalizeEmail(email), {
       redirectTo: `${window.location.origin}/update-password`,
       captchaToken: captchaToken || undefined,
     });
 
     if (error) {
-      setError(error.message);
+      setError(friendlyAuthError(error));
       setLoading(false);
       window.turnstile?.reset();
       setCaptchaToken(null);
@@ -58,7 +59,7 @@ export default function ResetPasswordPage() {
         <CardHeader>
           <CardTitle>Check Your Email</CardTitle>
           <CardDescription>
-            We&apos;ve sent a password reset link to {email}
+            If an account exists for {normalizeEmail(email)}, we&apos;ve sent it a password reset link. It can take a few minutes; check your spam folder too.
           </CardDescription>
         </CardHeader>
         <CardFooter>

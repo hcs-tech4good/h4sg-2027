@@ -47,8 +47,12 @@ export function AppNav({ profile, showAnnouncements }: AppNavProps) {
   }, [mobileOpen]);
 
   async function handleSignOut() {
-    const { error } = await createClient().auth.signOut();
-    if (!error) window.location.href = "/signin";
+    const supabase = createClient();
+    const { error } = await supabase.auth.signOut();
+    // If the server can't be reached or the session is already gone, still clear this
+    // browser's session so the user is never stuck "signed in".
+    if (error) await supabase.auth.signOut({ scope: "local" });
+    window.location.href = "/signin";
   }
 
   return <>

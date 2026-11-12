@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 import { createClient } from "@/lib/supabase-browser";
+import { EXPIRED_RESET_MESSAGE, friendlyAuthError } from "@/lib/auth-errors";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -20,7 +22,17 @@ export default function UpdatePasswordPage() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [badLink, setBadLink] = useState(false);
   const supabase = createClient();
+
+  // A reset link that is expired, already used, or opened without one leaves no session;
+  // say so up front instead of failing after the user types a new password.
+  useEffect(() => {
+    const query = new URLSearchParams(window.location.search);
+    const hash = new URLSearchParams(window.location.hash.slice(1));
+    const linkError = ["error", "error_code"].some((key) => query.has(key) || hash.has(key));
+    createClient().auth.getSession().then(({ data }) => { if (linkError || !data.session) setBadLink(true); });
+  }, []);
 
   async function handleUpdate(e: React.FormEvent) {
     e.preventDefault();
@@ -41,7 +53,9 @@ export default function UpdatePasswordPage() {
     const { error } = await supabase.auth.updateUser({ password });
 
     if (error) {
-      setError(error.message);
+      const expired = error.code === "session_not_found" || /session missing/i.test(error.message);
+      if (expired) setBadLink(true);
+      else setError(friendlyAuthError(error));
       setLoading(false);
       return;
     }
@@ -73,8 +87,14 @@ export default function UpdatePasswordPage() {
       </CardHeader>
       <form onSubmit={handleUpdate}>
         <CardContent className="space-y-4">
+          {badLink && (
+            <div role="alert" className="rounded-md bg-red-50 p-3 text-sm text-red-700">
+              {EXPIRED_RESET_MESSAGE}{" "}
+              <Link href="/reset-password" className="font-medium underline">Request a new link</Link>
+            </div>
+          )}
           {error && (
-            <div className="rounded-md bg-red-50 p-3 text-sm text-red-700">
+            <div role="alert" className="rounded-md bg-red-50 p-3 text-sm text-red-700">
               {error}
             </div>
           )}
@@ -100,7 +120,7 @@ export default function UpdatePasswordPage() {
           </div>
         </CardContent>
         <CardFooter>
-          <Button type="submit" className="w-full" disabled={loading}>
+          <Button type="submit" className="w-full" disabled={loading || badLink}>
             {loading ? "Updating..." : "Update Password"}
           </Button>
         </CardFooter>

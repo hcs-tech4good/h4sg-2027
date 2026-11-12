@@ -5,6 +5,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase-browser";
 import { Turnstile, captchaEnabled } from "@/components/turnstile";
 import { AuthBuddy } from "@/components/auth-buddy";
+import { friendlyAuthError, normalizeEmail } from "@/lib/auth-errors";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
@@ -12,11 +13,38 @@ export default function SignInPage() {
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [unverified, setUnverified] = useState(false);
+  const [notice, setNotice] = useState("");
   const supabase = createClient();
+
+  function resetCaptcha() {
+    // Turnstile tokens are single-use; reset so the user can retry.
+    window.turnstile?.reset();
+    setCaptchaToken(null);
+  }
+
+  async function resendVerification() {
+    setError("");
+    setNotice("");
+    if (captchaEnabled && !captchaToken) {
+      setError("Please complete the CAPTCHA, then click resend.");
+      return;
+    }
+    const { error } = await supabase.auth.resend({
+      type: "signup",
+      email: normalizeEmail(email),
+      options: captchaToken ? { captchaToken } : undefined,
+    });
+    resetCaptcha();
+    if (error) setError(friendlyAuthError(error));
+    else setNotice(`We sent a new verification link to ${normalizeEmail(email)}.`);
+  }
 
   async function handleSignIn(e: React.FormEvent) {
     e.preventDefault();
     setError("");
+    setNotice("");
+    setUnverified(false);
 
     if (captchaEnabled && !captchaToken) {
       setError("Please complete the CAPTCHA.");
@@ -26,16 +54,16 @@ export default function SignInPage() {
     setLoading(true);
 
     const { error } = await supabase.auth.signInWithPassword({
-      email,
+      email: normalizeEmail(email),
       password,
       options: captchaToken ? { captchaToken } : undefined,
     });
 
     if (error) {
-      setError(error.message);
+      setError(friendlyAuthError(error));
+      setUnverified(error.code === "email_not_confirmed");
       setLoading(false);
-      window.turnstile?.reset();
-      setCaptchaToken(null);
+      resetCaptcha();
       return;
     }
 
@@ -50,8 +78,16 @@ export default function SignInPage() {
       <div className="w-full rounded-md border border-gray-200 bg-white p-4 shadow md:p-6">
         <form onSubmit={handleSignIn} className="space-y-4">
           {error && (
-            <div className="rounded-md bg-red-200 p-3 text-sm">{error}</div>
+            <div role="alert" className="rounded-md bg-red-200 p-3 text-sm">
+              {error}
+              {unverified && (
+                <button type="button" onClick={resendVerification} className="mt-2 block font-medium underline">
+                  Resend verification email
+                </button>
+              )}
+            </div>
           )}
+          {notice && <div role="status" className="rounded-md bg-teal-50 p-3 text-sm text-teal-900">{notice}</div>}
           <div className="space-y-1">
             <label htmlFor="email" className="text-sm font-medium">
               Email
