@@ -128,9 +128,9 @@
   border-radius: 12px;
 }
 .track-icon svg { width: 22px; height: 22px; }
-.track-icon.coral { background: rgba(255, 127, 106, .14); color: #f0705c; }
-.track-icon.pink  { background: rgba(236, 120, 190, .14); color: #e07bbd; }
-.track-icon.blue  { background: rgba(58, 159, 214, .14); color: #3a9fd6; }
+.track-icon.coral { background: rgba(176, 96, 63, .12); color: #9c5034; }
+.track-icon.pink  { background: rgba(185, 130, 102, .14); color: #9e6a52; }
+.track-icon.blue  { background: rgba(45, 79, 96, .1); color: #2d4f60; }
 
 .track-body { display: flex; flex-direction: column; gap: 10px; }
 .track-name {
