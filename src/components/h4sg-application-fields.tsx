@@ -16,7 +16,7 @@ export function H4sgApplicationFields({ value, onChange }: {
       <p>All academic backgrounds and experience levels are welcome. No prior hackathon experience is required; workshops and mentors will help you learn.</p>
       <p>Apply individually and list up to three preferred teammates. Preferences are considered where possible; incomplete teams may be matched. Teams generally have two to four members, depending on matching availability. You can meet teammates through Discord after acceptance or at the event’s team-formation table. Larger teams do not receive a judging advantage.</p>
       <p>Full attendance is expected. Explain any exceptions below for case-by-case consideration. Questions? <a className="underline" href="mailto:operations@t4sg.dev">operations@t4sg.dev</a>.</p>
-      <p>Your phone, university, major, and resume are collected in the existing sections. Complete those too. All questions below are required when shown, except teammate names.</p>
+      <p>Your phone, university, major, and resume are collected in the earlier sections. Complete those too. All questions below are required when shown; group applicants must name at least one teammate.</p>
     </div>
     {groups.map((group, groupIndex) => <fieldset key={group} className="space-y-5 rounded-lg border p-4 sm:p-6">
       <legend className="px-2 text-lg font-semibold"><span className="marine-card-title"><MarineIcon kind={(["fish", "turtle", "shell", "jellyfish", "coral", "starfish"] as MarineKind[])[groupIndex]} />{group}</span></legend>
@@ -27,7 +27,7 @@ export function H4sgApplicationFields({ value, onChange }: {
         const text = typeof answer === "string" ? answer : "";
         const selected = Array.isArray(answer) ? answer : [];
         return <div key={field.key} className="space-y-2">
-          <label htmlFor={id} className="block text-sm font-medium">{field.label}{field.kind !== "teammates" && " *"}</label>
+          <label htmlFor={id} className="block text-sm font-medium">{field.label} *</label>
           {field.help && <p id={helpId} className="text-sm text-gray-600">{field.help}</p>}
           {field.key === "event_code_of_conduct" && <a href="https://github.com/MLH/mlh-policies/blob/main/code-of-conduct.md" target="_blank" rel="noopener noreferrer" className="block text-sm text-teal-700 underline">Read the Code of Conduct</a>}
           {field.kind === "multi" ? <div id={id} role="group" aria-label={field.label} aria-describedby={field.help ? helpId : undefined} className="grid gap-2 sm:grid-cols-2">
@@ -35,7 +35,7 @@ export function H4sgApplicationFields({ value, onChange }: {
               <input type="checkbox" className="h-4 w-4 accent-teal-700" checked={selected.includes(option)} onChange={(e) => onChange(field.key, e.target.checked ? [...selected, option] : selected.filter((x) => x !== option))} />{option}
             </label>)}
           </div> : field.kind === "teammates" ? <div id={id} className="space-y-2">
-            {[0, 1, 2].map((index) => <Input key={index} aria-label={`Preferred teammate ${index + 1} full name`} placeholder={`Teammate ${index + 1} full name (optional)`} value={selected[index] || ""} maxLength={200} onChange={(e) => {
+            {[0, 1, 2].map((index) => <Input key={index} aria-label={`Preferred teammate ${index + 1} full name`} placeholder={`Teammate ${index + 1} full name${index ? " (optional)" : ""}`} value={selected[index] || ""} maxLength={200} onChange={(e) => {
               const names = [...selected]; names[index] = e.target.value; onChange(field.key, names);
             }} />)}
           </div> : field.kind === "select" ? <select id={id} value={text} aria-describedby={field.help ? helpId : undefined} className="w-full rounded-md border bg-white px-3 py-2 text-sm" onChange={(e) => onChange(field.key, e.target.value)}>

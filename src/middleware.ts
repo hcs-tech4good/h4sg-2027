@@ -3,7 +3,8 @@ import { NextResponse, type NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
   // The marketing homepage is public and works without a Supabase session.
-  if (["/", "/landing.html", "/ocean-zones.css", "/ocean-foreground.js", "/logo-intro.css", "/logo-intro.js"].includes(request.nextUrl.pathname)) {
+  // Every stylesheet/script landing.html loads must be listed here, or logged-out visitors get redirected.
+  if (["/", "/landing.html", "/ocean-zones.css", "/ocean-foreground.js", "/logo-intro.css", "/logo-intro.js", "/hero-showcase.css", "/sections.css"].includes(request.nextUrl.pathname)) {
     return NextResponse.next();
   }
 
@@ -45,7 +46,9 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  if (user && isAuthRoute) {
+  // Signed-in users skip the auth pages, except /update-password: a password-reset link
+  // signs the user in, and they must stay on that page to choose a new password.
+  if (user && isAuthRoute && !pathname.startsWith("/update-password")) {
     const url = request.nextUrl.clone();
     url.pathname = "/dashboard";
     return NextResponse.redirect(url);

@@ -4,5 +4,6 @@
   { "name": "Back-end" },
   { "name": "Project manager" },
   { "name": "Domain expert" },
+  { "name": "ML Engineer" },
   { "name": "Other" }
 ]
