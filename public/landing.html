@@ -8,7 +8,7 @@
 <meta name="description" content="Hack 4 Social Good, a Harvard Computer Society hackathon. March 5–7, 2027 in Cambridge, MA.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Outfit:wght@600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
 /* Layout: a bright, shallow-water dive. Light like t4sg.dev; the page tints from white-aqua at the
    surface to lagoon blue at the reef. Each section is a depth zone; sea life drifts between them. */
@@ -316,13 +316,15 @@ footer a { color: #4a3a1c; }
   html { scroll-behavior: auto; }
 }
 </style>
-<link rel="stylesheet" href="/ocean-zones.css">
-<link rel="stylesheet" href="/logo-intro.css">
-<link rel="stylesheet" href="/hero-showcase.css">
-<link rel="stylesheet" href="/sections.css">
+<link rel="stylesheet" href="/ocean-zones.css?v=1795474119">
+<link rel="stylesheet" href="/logo-intro.css?v=1795474119">
+<link rel="stylesheet" href="/hero-showcase.css?v=1795474119">
+<link rel="stylesheet" href="/sections.css?v=1795474119">
+<link rel="stylesheet" href="/landing-refine.css?v=1795474119">
+<link rel="stylesheet" href="/deep-sea.css?v=1795474119">
 <link rel="preload" href="/h4sg-logo.png" as="image">
 <script>
-(function(){try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('logo-intro-pending');setTimeout(function(){document.documentElement.classList.remove('logo-intro-pending');},4500);}}catch(e){}})();
+(function(){try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getItem('h4sg-intro')){sessionStorage.setItem('h4sg-intro','1');document.documentElement.classList.add('logo-intro-pending');setTimeout(function(){document.documentElement.classList.remove('logo-intro-pending');},4500);}}catch(e){}})();
 </script>
 </head>
 <body>
@@ -344,40 +346,41 @@ footer a { color: #4a3a1c; }
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
+    <!-- Flat sea-life family: palette fills, cream highlights, no ink outlines. -->
     <symbol id="fish" viewBox="0 0 60 34">
-      <path d="M8 17 L0 6 L2 17 L0 28 Z" fill="currentColor" opacity=".85"/>
-      <ellipse cx="32" cy="17" rx="26" ry="14" fill="currentColor"/>
-      <path d="M26 4 Q 32 -2 40 5" fill="currentColor" opacity=".85"/>
-      <path d="M22 6 Q 20 17 22 28" stroke="#fff" stroke-width="2" fill="none" opacity=".55"/>
-      <path d="M30 4 Q 28 17 30 30" stroke="#fff" stroke-width="2" fill="none" opacity=".35"/>
-      <circle cx="48" cy="13" r="3.2" fill="#fff"/><circle cx="49" cy="13" r="1.7" fill="var(--ink)"/>
+      <path d="M56 17C52 8 42 4.5 32 4.8 22 5.2 15 10 10.5 14.6L3 7.5C4.3 12 4.4 22 2.8 26.6L10.6 19.6C15 24.2 22.2 28.8 32.2 29.2 42 29.5 52 26 56 17Z" fill="currentColor"/>
+      <path d="M24 7.4C27 3 33 2.6 38 5.2 33 5.4 28 6 24 7.4Z" fill="currentColor"/>
+      <path d="M30 9.5C36 8 44 9 49 13" stroke="#f7ead0" stroke-opacity=".55" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <circle cx="47.5" cy="15" r="2.2" fill="#0b1a38"/><circle cx="48.2" cy="14.3" r=".7" fill="#f7ead0"/>
     </symbol>
     <symbol id="puffer" viewBox="0 0 60 50">
-      <g stroke="#e0a92b" stroke-width="2.5" stroke-linecap="round">
-        <path d="M30 3 V-2"/><path d="M14 9 L10 5"/><path d="M46 9 L50 5"/><path d="M8 25 H2"/><path d="M14 41 L10 45"/><path d="M30 47 V52"/><path d="M44 42 L48 46"/>
-      </g>
-      <circle cx="30" cy="25" r="20" fill="#ffc94d"/>
-      <path d="M50 25 L58 18 L58 32 Z" fill="#f2b13a"/>
-      <ellipse cx="28" cy="32" rx="13" ry="8" fill="#fff3cf"/>
-      <circle cx="20" cy="20" r="3.4" fill="#fff"/><circle cx="19" cy="20" r="1.8" fill="var(--ink)"/>
-      <circle cx="12" cy="27" r="1.6" fill="var(--ink)"/>
+      <g fill="#ffcf6e"><path d="M29 4 31 0 33 4ZM16 9 13 5.5 18.5 7ZM42 8 46 5 44.5 10ZM9 24 4.5 25 9 27ZM13 38 9.5 41.5 15 40ZM29 45.5 31 50 33 45.5ZM43 41 47 44 45 39Z"/></g>
+      <path d="M50 25 58 18.5C59 23 59 28 58 32L50 26.5Z" fill="#f39a6b"/>
+      <circle cx="30" cy="25.5" r="20" fill="#ffcf6e"/>
+      <path d="M13 31C18 39 30 42 40 38.5 44 37 46.5 34.5 47.5 31.5 38 35 24 35 13 31Z" fill="#f7ead0"/>
+      <path d="M18 14C22 10 28 9 33 10" stroke="#f7ead0" stroke-opacity=".7" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <circle cx="19" cy="21" r="2.6" fill="#0b1a38"/><circle cx="19.8" cy="20.2" r=".8" fill="#f7ead0"/>
     </symbol>
     <symbol id="jelly" viewBox="0 0 60 90">
-      <path d="M4 32 C4 10, 56 10, 56 32 Q 50 36 44 32 Q 37 37 30 32 Q 23 37 16 32 Q 10 36 4 32 Z" fill="#f7a8d8" opacity=".9"/>
-      <path d="M12 22 C14 14, 24 10, 30 10" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" opacity=".7"/>
-      <g class="tent" stroke="#f08cc9" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".85">
-        <path d="M14 34 Q 10 50 16 64 T 14 86"/><path d="M25 35 Q 30 52 24 66 T 27 84"/><path d="M36 35 Q 31 52 37 66 T 34 82"/><path d="M47 34 Q 51 50 45 64 T 48 80"/>
-      </g>
+      <g stroke="#f0a3b8" stroke-width="2.4" fill="none" stroke-linecap="round" opacity=".8"><path class="tent" d="M15 34C12 46 18 54 14 64S16 80 13 88M25 35C28 48 22 58 26 68S23 80 26 86M35 35C32 48 38 58 34 68S37 80 34 86M45 34C48 46 42 54 46 64S44 80 47 88"/></g>
+      <path d="M4.5 32.5C3.5 15.8 15 7 30 7S56.5 15.8 55.5 32.5C50 36 42 35 30 34S10 36 4.5 32.5Z" fill="#f0a3b8"/>
+      <path d="M13 19C16 13 22 10 28 10" stroke="#f7ead0" stroke-opacity=".7" stroke-width="2.4" fill="none" stroke-linecap="round"/>
     </symbol>
     <symbol id="star" viewBox="0 0 40 40">
-      <path d="M20 2 L25 15 L38 15 L27.5 23.5 L32 37 L20 28.5 L8 37 L12.5 23.5 L2 15 L15 15 Z" fill="currentColor" stroke-linejoin="round"/>
-      <circle cx="20" cy="20" r="2" fill="#fff" opacity=".6"/><circle cx="20" cy="10" r="1.2" fill="#fff" opacity=".6"/><circle cx="28" cy="18" r="1.2" fill="#fff" opacity=".6"/><circle cx="12" cy="18" r="1.2" fill="#fff" opacity=".6"/>
+      <path d="M20 2.6C21.6 2.6 22.6 9.6 24.8 13.4 28.6 14.2 37.4 13.6 37.8 15.6 38.2 17.4 31 21.4 28 24.4 29 28.6 32.6 35.8 31 37 29.4 38.2 23.6 32.4 20 30.4 16.4 32.4 10.6 38.2 9 37 7.4 35.8 11 28.6 12 24.4 9 21.4 1.8 17.4 2.2 15.6 2.6 13.6 11.4 14.2 15.2 13.4 17.4 9.6 18.4 2.6 20 2.6Z" fill="currentColor"/>
+      <g fill="#f7ead0" opacity=".55"><circle cx="20" cy="10" r="1.2"/><circle cx="20" cy="19" r="1.6"/><circle cx="28" cy="17" r="1.1"/><circle cx="12" cy="17" r="1.1"/><circle cx="25" cy="26" r="1.1"/><circle cx="15" cy="26" r="1.1"/></g>
     </symbol>
     <symbol id="shell" viewBox="0 0 40 36">
-      <path d="M20 2 C 6 2, 1 18, 4 28 L 36 28 C 39 18, 34 2, 20 2 Z" fill="currentColor"/>
-      <g stroke="#fff" stroke-width="1.6" opacity=".6" fill="none"><path d="M20 4 V28"/><path d="M13 5 L10 28"/><path d="M27 5 L30 28"/><path d="M8 10 L5 27"/><path d="M32 10 L35 27"/></g>
-      <rect x="14" y="27" width="12" height="7" rx="2" fill="currentColor"/>
+      <path d="M13.4 27.6 11.4 33.4H28.6L26.6 27.6Z" fill="currentColor" opacity=".8"/>
+      <path d="M20 2.6C10.2 2.6 3 10.8 3.2 19.6 3.2 22.4 4 25 5.2 27.4 10.4 28.6 15 29 20 29S29.6 28.6 34.8 27.4C36 25 36.8 22.4 36.8 19.6 37 10.8 29.8 2.6 20 2.6Z" fill="currentColor"/>
+      <g stroke="#f7ead0" stroke-opacity=".55" stroke-width="1.6" fill="none" stroke-linecap="round"><path d="M20 6V27M14.4 7 12.4 27M25.6 7 27.6 27M9.8 10 7.6 26M30.2 10 32.4 26"/></g>
     </symbol>
+    <filter id="ripple" x="-5%" y="-20%" width="110%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.011 0.085" numOctaves="1" seed="4" result="n">
+        <animate attributeName="baseFrequency" dur="14s" values="0.011 0.085;0.015 0.105;0.011 0.085" repeatCount="indefinite" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1"/>
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
     <linearGradient id="h4sg-grad" gradientUnits="userSpaceOnUse" x1="560" y1="180" x2="1060" y2="1460">
       <stop offset="0" stop-color="#0cc488"/><stop offset=".45" stop-color="#0b8f86"/><stop offset="1" stop-color="#0d3f55"/>
     </linearGradient>
@@ -389,8 +392,9 @@ footer a { color: #4a3a1c; }
 </svg>
 
 <canvas id="ocean" aria-hidden="true"></canvas>
-<canvas id="ocean-foreground" aria-hidden="true"></canvas>
-<div class="gauge" aria-hidden="true"><span class="gauge-light"></span><span class="gauge-k">Depth</span><span class="gauge-track"><i id="gauge-fill"></i></span><b id="gauge-val">0 m</b></div>
+<canvas id="abyss-eye" aria-hidden="true"></canvas>
+<div id="dive-veil" aria-hidden="true"></div>
+<div class="gauge" aria-hidden="true"><span class="gauge-light"></span><span class="gauge-track"><i id="gauge-fill"></i></span><b id="gauge-val">0 m</b><span class="gauge-zone" id="gauge-zone">Surface</span></div>
 
 <header class="nav">
   <div class="wrap">
@@ -402,79 +406,49 @@ footer a { color: #4a3a1c; }
       <a href="#faq">FAQ</a>
       <a class="portal-link" href="/dashboard">Portal</a>
       <a class="btn small" href="/signup">Apply</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu"><span class="nav-toggle-label">Menu</span><span class="nav-toggle-icon" aria-hidden="true"><i></i><i></i></span></button>
     </nav>
+  </div>
+  <div class="nav-menu" id="nav-menu" inert>
+    <a href="#about">About</a>
+    <a href="#tracks">Tracks</a>
+    <a href="#sponsors">Sponsors</a>
+    <a href="#faq">FAQ</a>
   </div>
 </header>
 
 <main>
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <div class="presents">
-          <img class="presents-logo" src="/h4sg-logo.png" alt="H4SG logo">
-          <div class="presents-text">
-            <p class="depth" data-depth="0">0&nbsp;m <span>· Surface</span></p>
-            <span class="presents-k">Harvard Computer Society presents</span>
-          </div>
-        </div>
-        <h1><span class="hero-title-line"><span class="hero-hack">Hack</span> <span class="four">4<svg class="hero-sparkle" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C12.9 7.6 16.4 11.1 24 12 16.4 12.9 12.9 16.4 12 24 11.1 16.4 7.6 12.9 0 12 7.6 11.1 11.1 7.6 12 0Z"/></svg></span></span><span class="hero-title-line"><span class="hero-social">Social</span> <em class="hero-good">Good</em></span></h1>
-        <div class="sponsored"><span class="sponsored-k">Brought to you by</span><a href="https://impiricus.com/" target="_blank" rel="noopener"><img src="data:image/webp;base64,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" alt="Impiricus"></a></div>
-        <div class="meta">
-          <div><b>Dates</b>March 5–7, 2027</div>
-          <div><b>Location</b>Cambridge, MA</div>
-        </div>
-        <p class="lede">A weekend for undergraduates to dive into real social challenges, including problems brought forward by nonprofit and community partners. Free for accepted hackers.</p>
+  <section class="hero sea-hero">
+    <div class="wrap hero-center hero-surface">
+      <span class="depth-mark" data-depth="0" data-zone="Surface" aria-hidden="true"></span>
+      <div class="sponsored hero-sponsor"><span class="sponsored-k">Brought to you by</span><a href="https://impiricus.com/" target="_blank" rel="noopener"><img src="/assets/impiricus-logo.png" alt="Impiricus"></a></div>
+      <img class="hero-logo" src="/h4sg-logo.png" alt="" width="64" height="75">
+      <p class="hero-credit">Harvard Computer Society &times; Harvard Tech for Social Good present</p>
+      <h1 class="sea-title"><span>Hack <em>4</em></span><span>Social Good</span></h1>
+      <div class="tide-timer">
+        <div class="countdown" id="countdown" role="timer" aria-live="off" aria-label="Time until the hackathon">
+        <div><span class="n" id="cd-d">--</span><span class="u">days</span></div>
+        <div><span class="n" id="cd-h">--</span><span class="u">hours</span></div>
+        <div><span class="n" id="cd-m">--</span><span class="u">min</span></div>
+        <div><span class="n" id="cd-s">--</span><span class="u">sec</span></div>
+      </div>
+      </div>
+      <p class="hero-dates">March 5–7, 2027 <i></i> Cambridge, MA</p>
+      <div class="hero-actions">
         <a class="btn" href="/signup">Apply now <span aria-hidden="true">→</span></a>
       </div>
-      <div class="porthole-wrap">
-        <div class="porthole" aria-label="Countdown to Hack 4 Social Good">
-          <span class="bolt" style="top:50%;left:3px;transform:translateY(-50%)"></span>
-          <span class="bolt" style="top:50%;right:3px;transform:translateY(-50%)"></span>
-          <span class="bolt" style="left:50%;top:3px;transform:translateX(-50%)"></span>
-          <span class="bolt" style="left:50%;bottom:3px;transform:translateX(-50%)"></span>
-          <div class="porthole-inner">
-            <svg class="porthole-fish" style="top:18%;color:#ff7f6a" viewBox="0 0 60 34" aria-hidden="true"><use href="#fish"/></svg>
-            <svg class="porthole-fish" style="bottom:16%;color:#ffc94d;animation-delay:-3.5s;width:34px" viewBox="0 0 60 34" aria-hidden="true"><use href="#fish"/></svg>
-            <div style="position:relative;z-index:1">
-              <div class="cd-label">Time until we dive</div>
-              <div class="countdown" id="countdown" role="timer" aria-live="off">
-                <div><span class="n" id="cd-d">--</span><span class="u">Days</span></div>
-                <div><span class="n" id="cd-h">--</span><span class="u">Hours</span></div>
-                <div><span class="n" id="cd-m">--</span><span class="u">Minutes</span></div>
-                <div><span class="n" id="cd-s">--</span><span class="u">Seconds</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <a class="dive-cue" href="#about" aria-label="Scroll down to dive in"><span>Scroll to dive</span><i aria-hidden="true"></i></a>
     </div>
   </section>
 
-  <svg class="wave" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M0 40 L0 22 Q 75 2 150 22 T 300 22 T 450 22 T 600 22 T 750 22 T 900 22 T 1050 22 T 1200 22 L1200 40 Z" fill="var(--ink)"/>
-  </svg>
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track">
-      <span>March 5–7, 2027<i>✦</i>Cambridge, MA<i>✦</i>Open to all undergrads<i>✦</i>Teams of up to 4<i>✦</i>Free for accepted hackers<i>✦</i>Real nonprofit challenges<i>✦</i></span>
-      <span>March 5–7, 2027<i>✦</i>Cambridge, MA<i>✦</i>Open to all undergrads<i>✦</i>Teams of up to 4<i>✦</i>Free for accepted hackers<i>✦</i>Real nonprofit challenges<i>✦</i></span>
-      <span>March 5–7, 2027<i>✦</i>Cambridge, MA<i>✦</i>Open to all undergrads<i>✦</i>Teams of up to 4<i>✦</i>Free for accepted hackers<i>✦</i>Real nonprofit challenges<i>✦</i></span>
-      <span>March 5–7, 2027<i>✦</i>Cambridge, MA<i>✦</i>Open to all undergrads<i>✦</i>Teams of up to 4<i>✦</i>Free for accepted hackers<i>✦</i>Real nonprofit challenges<i>✦</i></span>
-      <span>March 5–7, 2027<i>✦</i>Cambridge, MA<i>✦</i>Open to all undergrads<i>✦</i>Teams of up to 4<i>✦</i>Free for accepted hackers<i>✦</i>Real nonprofit challenges<i>✦</i></span>
-      <span>March 5–7, 2027<i>✦</i>Cambridge, MA<i>✦</i>Open to all undergrads<i>✦</i>Teams of up to 4<i>✦</i>Free for accepted hackers<i>✦</i>Real nonprofit challenges<i>✦</i></span>
-      <span>March 5–7, 2027<i>✦</i>Cambridge, MA<i>✦</i>Open to all undergrads<i>✦</i>Teams of up to 4<i>✦</i>Free for accepted hackers<i>✦</i>Real nonprofit challenges<i>✦</i></span>
-      <span>March 5–7, 2027<i>✦</i>Cambridge, MA<i>✦</i>Open to all undergrads<i>✦</i>Teams of up to 4<i>✦</i>Free for accepted hackers<i>✦</i>Real nonprofit challenges<i>✦</i></span>
-    </div>
-  </div>
-  <svg class="wave" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true" style="transform:scaleY(-1)">
-    <path d="M0 40 L0 22 Q 75 2 150 22 T 300 22 T 450 22 T 600 22 T 750 22 T 900 22 T 1050 22 T 1200 22 L1200 40 Z" fill="var(--ink)"/>
-  </svg>
 
 
   <section class="zone" id="about">
     <div class="wrap expedition-grid about-grid">
-      <div class="section-copy"><p class="depth" data-depth="10">10&nbsp;m <span>· Sunlight zone</span></p>
+      <div class="section-copy"><span class="depth-mark" data-depth="10" data-zone="Sunlight zone" aria-hidden="true"></span>
         <h2>Build for impact,<br><em>not just for points.</em></h2>
         <p class="section-lede">Hack 4 Social Good is a weekend where students come together to code, build, and turn ideas into implementable projects. Teams take on real social challenges, with mentors on hand and beginner-friendly workshops all weekend.</p>
+        <p class="section-lede about-more">48 hours for undergraduates to dive into real social challenges, including problems brought forward by nonprofit and community partners. Free for accepted hackers.</p>
       </div>
       <div class="field-assembly"><div class="facts">
         <div class="fact"><svg width="34" height="34" viewBox="0 0 40 40" style="color:#ff7f6a" aria-hidden="true"><use href="#star"/></svg><div><b>3 days</b><span>March 5–7, 2027</span></div></div>
@@ -488,50 +462,66 @@ footer a { color: #4a3a1c; }
 
   <section class="zone" id="tracks">
     <div class="wrap">
-      <div class="tracks-heading"><p class="depth" data-depth="40">40&nbsp;m <span>· Twilight zone</span></p><h2>Tracks</h2></div>
-      <div class="tracks-panel">
-        <div class="tracks-badge" aria-hidden="true"><svg width="52" height="30" viewBox="0 0 60 34"><use href="#fish"/></svg></div>
+      <div class="tracks-heading"><span class="depth-mark" data-depth="40" data-zone="Twilight zone" aria-hidden="true"></span><h2>Tracks</h2></div>
+      <div class="tracks-sonar">
         <div class="tracks-copy">
-          <span class="tracks-status"><i aria-hidden="true"></i>Announcing soon</span>
           <h3>More info to come</h3>
           <p>We're finalizing tracks with our nonprofit and community partners. Each track will have its own prize.</p>
         </div>
+        <div class="helm" data-helm>
+          <div class="helm-stage">
+            <svg class="helm-wheel" viewBox="-230 -230 460 460" tabindex="0" role="group" aria-label="Ship's wheel. Drag to spin, or use the left and right arrow keys to choose a track.">
+              <defs>
+                <linearGradient id="helm-wood" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#bff3f0" stop-opacity=".34"/><stop offset=".55" stop-color="#5fb3c8" stop-opacity=".16"/><stop offset="1" stop-color="#1c5a80" stop-opacity=".22"/></linearGradient>
+                <linearGradient id="helm-brass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e9fffb" stop-opacity=".9"/><stop offset="1" stop-color="#8ff0c8" stop-opacity=".55"/></linearGradient>
+                <radialGradient id="helm-hub"><stop offset="0" stop-color="#2b6f86" stop-opacity=".55"/><stop offset="1" stop-color="#0d2c44" stop-opacity=".75"/></radialGradient>
+              </defs>
+              <g class="helm-spin"></g>
+            </svg>
+            <span class="helm-pointer" aria-hidden="true"></span>
+          </div>
+          <div class="helm-panel" aria-live="polite">
+            <p class="helm-kicker">Track <span data-f="num">1</span> of <span data-f="count">3</span></p>
+            <h3 class="helm-title" data-f="title">To be revealed</h3>
+            <p class="helm-sub" data-f="sub">Track partner announced soon</p>
+            <p class="helm-desc" data-f="desc">We're finalizing this track with our nonprofit and community partners.</p>
+            <dl class="helm-prizes">
+              <div><dt>1st place</dt><dd data-f="p0">TBA</dd></div>
+              <div><dt>2nd place</dt><dd data-f="p1">TBA</dd></div>
+              <div><dt>3rd place</dt><dd data-f="p2">TBA</dd></div>
+            </dl>
+            <div class="helm-nav">
+              <button type="button" class="helm-btn" data-dir="-1" aria-label="Previous track">&larr;</button>
+              <button type="button" class="helm-btn" data-dir="1" aria-label="Next track">&rarr;</button>
+              <span class="helm-hint">or grab the wheel and spin it</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <ol class="tracks-grid" aria-label="Three tracks to be announced">
-        <li class="track-card">
-          <div class="track-top"><span class="track-num">Track 01</span><span class="track-icon coral" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 40 40"><use href="#star"/></svg></span></div>
-          <div class="track-body"><span class="track-name">To be revealed</span><span class="track-skel" aria-hidden="true"></span><span class="track-skel short" aria-hidden="true"></span></div>
-          <div class="track-foot"><span>Prize</span><span>TBA</span></div>
-        </li>
-        <li class="track-card">
-          <div class="track-top"><span class="track-num">Track 02</span><span class="track-icon pink" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 40 36"><use href="#shell"/></svg></span></div>
-          <div class="track-body"><span class="track-name">To be revealed</span><span class="track-skel" aria-hidden="true"></span><span class="track-skel short" aria-hidden="true"></span></div>
-          <div class="track-foot"><span>Prize</span><span>TBA</span></div>
-        </li>
-        <li class="track-card">
-          <div class="track-top"><span class="track-num">Track 03</span><span class="track-icon blue" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 60 34"><use href="#fish"/></svg></span></div>
-          <div class="track-body"><span class="track-name">To be revealed</span><span class="track-skel" aria-hidden="true"></span><span class="track-skel short" aria-hidden="true"></span></div>
-          <div class="track-foot"><span>Prize</span><span>TBA</span></div>
-        </li>
-      </ol>
     </div>
   </section>
 
   <section class="zone" id="sponsors">
     <div class="wrap sponsor-layout">
-      <div class="sponsor-heading"><p class="depth" data-depth="100">100&nbsp;m <span>· Open water</span></p><h2>Sponsors</h2><p class="section-lede">Our sponsors help bring a weekend of building for good to life.</p></div>
+      <div class="sponsor-heading"><span class="depth-mark" data-depth="100" data-zone="Open water" aria-hidden="true"></span><h2>Sponsors</h2><p class="section-lede">Our sponsors help bring a weekend of building for good to life.</p></div>
       
-      <div class="sponsor-ledger"><div class="sponsor-card">
-        <div class="k">Sponsored by<b>Impiricus</b></div>
-        <a href="https://impiricus.com/" target="_blank" rel="noopener"><img src="data:image/webp;base64,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" alt="Impiricus logo"></a>
+      <div class="sponsor-ledger"><div class="sponsor-cards">
+        <div class="sponsor-card">
+          <div class="k">Sponsored by<b>Impiricus</b></div>
+          <a href="https://impiricus.com/" target="_blank" rel="noopener"><img src="/assets/impiricus-logo.png" alt="Impiricus logo"></a>
+        </div>
+        <div class="sponsor-card">
+          <div class="k">Sponsored by<b>Stripe</b></div>
+          <a href="https://stripe.com/" target="_blank" rel="noopener"><img class="logo-stripe" src="/assets/stripe-logo.svg" alt="Stripe logo"></a>
+        </div>
       </div><div class="sponsor-bottom"><p class="sponsor-more"><span class="dot" aria-hidden="true"></span>More sponsors coming soon.</p><p class="sponsor-cta">Interested in sponsoring?<br><a class="inline-email" href="mailto:operations@t4sg.dev">operations@t4sg.dev ↗</a></p></div></div>
     </div>
   </section>
 
   <section class="zone" id="faq">
     <div class="wrap expedition-grid faq-layout">
-      <div class="faq-intro"><p class="depth" data-depth="200">200&nbsp;m <span>· Below the surface</span></p><h2>Curiosity<br><em>runs deep.</em></h2><p class="faq-contact">Still have questions?<br><a href="mailto:operations@t4sg.dev">Talk to our crew ↗</a></p></div>
-      <div class="faq"><span class="eyebrow">Your field guide / FAQs</span><details class="q"><summary>What is a hackathon?<span aria-hidden="true">+</span></summary><p>A weekend where students come together to code, build, and turn ideas into implementable projects.</p></details>
+      <div class="faq-intro"><span class="depth-mark" data-depth="200" data-zone="Below the surface" aria-hidden="true"></span><h2>Curiosity<br><em>runs deep.</em></h2><p class="faq-contact">Still have questions?<br><a href="mailto:operations@t4sg.dev">Talk to our crew ↗</a></p></div>
+      <div class="faq"><details class="q"><summary>What is a hackathon?<span aria-hidden="true">+</span></summary><p>A weekend where students come together to code, build, and turn ideas into implementable projects.</p></details>
 <details class="q"><summary>What is unique about Hack 4 Social Good?<span aria-hidden="true">+</span></summary><p>Hack 4 Social Good focuses on impact: teams work on real social challenges, including problems brought forward by nonprofit and community partners.</p></details>
 <details class="q"><summary>Who can participate?<span aria-hidden="true">+</span></summary><p>Hack 4 Social Good is open to undergraduate students from any school, major, and experience level.</p></details>
 <details class="q"><summary>What can I win?<span aria-hidden="true">+</span></summary><p>We offer one prize per track. You can also win prizes through mini-events and raffles throughout the weekend. You'll get free swag just by submitting a project!</p></details>
@@ -545,19 +535,20 @@ footer a { color: #4a3a1c; }
 
   <section class="zone" id="register">
     <div class="wrap reef-layout">
-      <div class="reef-heading"><p class="depth" data-depth="300">300&nbsp;m <span>· Abyssal reef</span></p><h2>Ready to<br><em>dive in?</em></h2><p class="section-lede">Registration is open for undergraduates from any school.<br>Come build something that matters.</p><a class="btn" href="/signup">Dive in & apply <span aria-hidden="true">↗</span></a></div>
+      <div class="reef-heading"><span class="depth-mark" data-depth="300" data-zone="Abyssal reef" aria-hidden="true"></span><h2>Ready to<br><em>dive in?</em></h2><p class="section-lede">Registration is open for undergraduates from any school.<br>Come build something that matters.</p><a class="btn" href="/signup">Dive in & apply <span aria-hidden="true">↗</span></a></div>
       
       <div class="contact"><div class="label">See you beneath the surface.</div><div class="email-row"><span class="email" id="email">operations@t4sg.dev</span><button class="copy" id="copy" type="button">Copy</button></div></div>
     </div>
   </section>
 
-  <div class="floor-gap" aria-hidden="true"></div>
+  <div class="floor-gap sea-floor" aria-hidden="true"></div>
 </main>
 
 <footer>
   <div class="wrap">
     <span><img class="foot-logo" src="/h4sg-logo.png" alt="H4SG logo"><a href="https://hcs.harvard.edu/" target="_blank" rel="noopener">© Harvard Computer Society</a></span>
     <span><a class="portal-link" href="/dashboard">Portal</a> · <a href="https://t4sg.dev/">t4sg.dev</a> · <a href="mailto:operations@t4sg.dev">operations@t4sg.dev</a></span>
+    <small class="foot-credit">Whale: <a href="https://sketchfab.com/3d-models/sculpted-whale-510a36612c624a09afdd32ad4539dc8c" target="_blank" rel="noopener">“Sculpted Whale” by Allie2k</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>, simplified for the web</small>
   </div>
 </footer>
 
@@ -567,6 +558,7 @@ footer a { color: #4a3a1c; }
   var target = new Date("2027-03-05T00:00:00-05:00").getTime();
   var els = { d: document.getElementById("cd-d"), h: document.getElementById("cd-h"), m: document.getElementById("cd-m"), s: document.getElementById("cd-s") };
   var pad = function (n) { return String(n).padStart(2, "0"); };
+  function set(el, v) { if (el.textContent !== v) el.textContent = v; }
   function tick() {
     var diff = target - Date.now();
     if (diff <= 0) {
@@ -574,13 +566,36 @@ footer a { color: #4a3a1c; }
       return;
     }
     var s = Math.floor(diff / 1000);
-    els.d.textContent = Math.floor(s / 86400);
-    els.h.textContent = pad(Math.floor(s % 86400 / 3600));
-    els.m.textContent = pad(Math.floor(s % 3600 / 60));
-    els.s.textContent = pad(s % 60);
+    set(els.d, String(Math.floor(s / 86400)));
+    set(els.h, pad(Math.floor(s % 86400 / 3600)));
+    set(els.m, pad(Math.floor(s % 3600 / 60)));
+    set(els.s, pad(s % 60));
+    document.dispatchEvent(new CustomEvent("cd-tick", { detail: { d: Math.floor(s / 86400), h: pad(Math.floor(s % 86400 / 3600)), m: pad(Math.floor(s % 3600 / 60)), s: pad(s % 60), sec: s % 60 } }));
     setTimeout(tick, 1000 - (Date.now() % 1000));
   }
   tick();
+
+  // Section entrances (rare, once per zone). Content is only hidden once this script runs.
+  if ("IntersectionObserver" in window) {
+    document.documentElement.classList.add("js-reveal");
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    document.querySelectorAll("section.zone").forEach(function (z) { io.observe(z); });
+  }
+
+  // Mobile menu
+  var toggle = document.querySelector(".nav-toggle"), menu = document.getElementById("nav-menu");
+  function setMenu(open) {
+    toggle.setAttribute("aria-expanded", String(open));
+    menu.classList.toggle("is-open", open);
+    if (open) menu.removeAttribute("inert"); else menu.setAttribute("inert", "");
+  }
+  toggle.addEventListener("click", function () { setMenu(toggle.getAttribute("aria-expanded") !== "true"); });
+  menu.addEventListener("click", function (e) { if (e.target.closest("a")) setMenu(false); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && menu.classList.contains("is-open")) { setMenu(false); toggle.focus(); } });
+  document.addEventListener("click", function (e) { if (menu.classList.contains("is-open") && !e.target.closest(".nav")) setMenu(false); });
+  matchMedia("(min-width: 761px)").addEventListener("change", function (m) { if (m.matches) setMenu(false); });
 
   // Copy email
   var copyBtn = document.getElementById("copy");
@@ -590,324 +605,586 @@ footer a { color: #4a3a1c; }
       var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
       copyBtn.textContent = "Selected";
     }
-    try { navigator.clipboard.writeText("operations@t4sg.dev").then(function () { copyBtn.textContent = "Copied"; }, selectIt); }
+    try { navigator.clipboard.writeText("operations@t4sg.dev").then(function () { copyBtn.textContent = "Copied"; copyBtn.classList.add("is-done"); }, selectIt); }
     catch (e) { selectIt(); }
-    setTimeout(function () { copyBtn.textContent = "Copy"; }, 2000);
+    setTimeout(function () { copyBtn.textContent = "Copy"; copyBtn.classList.remove("is-done"); }, 2000);
   });
 
 })();
 </script>
 <script crossorigin="anonymous" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
 <script>
-/* 3D ocean: the camera sinks from the surface to the seafloor as the page scrolls. */
+/* 3D ocean: the camera sinks from the sunlit surface into the deep as the page scrolls.
+   Everything here swims or drifts in the background: schools of fish (several species),
+   light shafts, the rippling surface seen from below, plankton and bubbles. */
 (function () {
   var canvas = document.getElementById("ocean");
   if (!window.THREE || !canvas) return;
   var renderer;
-  try { renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true }); }
+  try { renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, powerPreference: "high-performance" }); }
   catch (e) { canvas.remove(); return; }
   document.documentElement.classList.add("has3d");
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
 
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var small = window.innerWidth < 700;
+  var POP = small ? 0.45 : 1;
+  var rand = function (a, b) { return a + Math.random() * (b - a); };
+  var CAM_BOTTOM = -62, SURFACE_Y = 15;
+
   var scene = new THREE.Scene();
-  // Water color by depth (0 = surface, 1 = 300 m): sunlit aqua -> teal -> twilight blue -> deep navy
-  var stops = [[0, "#e3f8f4"], [0.15, "#9ad8de"], [0.4, "#3a8fa8"], [0.68, "#0f4a66"], [1, "#061c2e"]].map(function (x) { return [x[0], new THREE.Color(x[1])]; });
+  // Water colour by depth (0 = surface, 1 = deep): sunlit aqua -> teal -> twilight blue -> abyss
+  var stops = [[0, "#2a86ad"], [0.15, "#1b6690"], [0.4, "#0f4469"], [0.68, "#082848"], [1, "#020b1a"]].map(function (x) { return [x[0], new THREE.Color(x[1])]; });
   function waterAt(t, out) {
     for (var i = 1; i < stops.length; i++) if (t <= stops[i][0]) {
       var a = stops[i - 1], b = stops[i]; return out.copy(a[1]).lerp(b[1], (t - a[0]) / (b[0] - a[0]));
     }
     return out.copy(stops[stops.length - 1][1]);
   }
-  var topCol = stops[0][1];
-  scene.background = topCol.clone();
-  scene.fog = new THREE.Fog(topCol.clone(), 20, 95);
-  var camera = new THREE.PerspectiveCamera(55, 1, 0.1, 220);
+  scene.background = stops[0][1].clone();
+  scene.fog = new THREE.FogExp2(stops[0][1].clone(), 0.014);
+  var camera = new THREE.PerspectiveCamera(55, 1, 0.1, 900);
   camera.position.set(0, 0, 22);
-  var hemi = new THREE.HemisphereLight(0xffffff, 0xd9c38f, 0.95); scene.add(hemi);
-  var glow = new THREE.PointLight(0x7fe9ff, 0, 60); scene.add(glow);
-  var sun = new THREE.DirectionalLight(0xffffff, 0.8); sun.position.set(10, 40, 20); scene.add(sun);
+  var hemi = new THREE.HemisphereLight(0xd8f6ff, 0x06233a, 0.95); scene.add(hemi);
+  var sun = new THREE.DirectionalLight(0xfff3da, 1.15); sun.position.set(6, 40, 12); scene.add(sun);
+  var U = { uTime: { value: 0 } };
+  var uSheen = { value: 1 };
 
-  var M = function (c, extra) { return new THREE.MeshStandardMaterial(Object.assign({ color: c, flatShading: true, roughness: 0.6, metalness: 0 }, extra || {})); };
-  var rand = function (a, b) { return a + Math.random() * (b - a); };
-  var FLOOR = -74, CAM_BOTTOM = -62;
-  var white = M("#ffffff"), black = M("#0d2f3d");
+  // ---------- Surface seen from below: a bright Snell's window full of moving caustics ----------
+  var surfMat = new THREE.ShaderMaterial({
+    uniforms: { uTime: U.uTime, uFade: { value: 1 } },
+    transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, fog: false, side: THREE.DoubleSide,
+    vertexShader: "varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }",
+    fragmentShader: [
+      "uniform float uTime; uniform float uFade; varying vec2 vUv;",
+      "float caustic(vec2 uv, float t){",
+      "  vec2 p = mod(uv * 6.28318, 6.28318) - 250.0; vec2 i = p; float c = 1.0; float inten = 0.005;",
+      "  for (int n = 0; n < 4; n++) { float tt = t * (1.0 - (3.5 / float(n + 1)));",
+      "    i = p + vec2(cos(tt - i.x) + sin(tt + i.y), sin(tt - i.y) + cos(tt + i.x));",
+      "    c += 1.0 / length(vec2(p.x / (sin(i.x + tt) / inten), p.y / (cos(i.y + tt) / inten))); }",
+      "  c /= 4.0; c = 1.17 - pow(c, 1.4); return pow(abs(c), 8.0); }",
+      "void main(){",
+      "  vec2 q = vUv - 0.5; float d = length(q * vec2(1.0, 1.0));",
+      "  float win = smoothstep(0.5, 0.02, d);",
+      "  float c = caustic(vUv * 7.0, uTime * 0.35) + 0.6 * caustic(vUv * 13.0 + 0.3, uTime * 0.5);",
+      "  vec3 col = mix(vec3(0.55, 0.88, 0.98), vec3(1.0), clamp(c, 0.0, 1.0));",
+      "  float a = (0.18 + 0.82 * clamp(c, 0.0, 1.0)) * win * win * uFade;",
+      "  a += smoothstep(0.22, 0.0, d) * 0.35 * uFade;",
+      "  gl_FragColor = vec4(col, a * 0.62); }"
+    ].join("\n")
+  });
+  var surface = new THREE.Mesh(new THREE.PlaneGeometry(260, 260), surfMat);
+  surface.rotation.x = Math.PI / 2; surface.position.set(0, SURFACE_Y, -40); scene.add(surface);
 
-  function eyes(g, x, y, z, r) {
-    [-1, 1].forEach(function (s) {
-      var e = new THREE.Mesh(new THREE.SphereGeometry(r, 8, 6), white); e.position.set(x, y, z * s); g.add(e);
-      var p = new THREE.Mesh(new THREE.SphereGeometry(r * 0.55, 6, 5), black); p.position.set(x + r * 0.45, y, z * s + r * 0.4 * s); g.add(p);
+  // ---------- Above the water (the first screen): an anime sunset over a calm sea ----------
+  // After Studio Ghibli's "When Marnie Was There" and "Spirited Away" sunsets: a low gold sun, a sky running
+  // gold -> pink -> lavender -> dusk blue, big clouds with lavender shadows and glowing rims, and pastel water
+  // carrying a long, dashed path of sunlight.
+  var SKY_GLSL = [
+    "uniform float uTime;",
+    "uniform vec3 SUN;",
+    "float h2(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }",
+    "float n2(vec2 p){ vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f); return mix(mix(h2(i), h2(i + vec2(1, 0)), f.x), mix(h2(i + vec2(0, 1)), h2(i + vec2(1, 1)), f.x), f.y); }",
+    "float fb(vec2 p){ float s = 0.0, a = 0.5; for (int i = 0; i < 5; i++) { s += a * n2(p); p = p * 2.03 + 1.7; a *= 0.5; } return s; }",
+    // The sun as light, not a sticker: a soft core (slightly squashed by the thick air at the horizon) inside two wide blooms.
+    "vec3 sunGlow(vec3 d){",
+    "  vec3 n = normalize(d), S = normalize(SUN);",
+    "  float ax = atan(n.x, -n.z) - atan(S.x, -S.z);",
+    "  float ay = (asin(clamp(n.y, -1.0, 1.0)) - asin(S.y)) * 1.25;",
+    "  float r = length(vec2(ax, ay));",
+    "  return vec3(smoothstep(0.034, 0.012, r), exp(-r * r / 0.0036), exp(-r * r / 0.034)); }",
+    "vec3 skyBase(vec3 d, float sd){",
+    "  float y = max(d.y, 0.0);",
+    "  vec3 gold = vec3(1.0, 0.74, 0.42), pink = vec3(0.96, 0.6, 0.62), lav = vec3(0.6, 0.52, 0.76), dusk = vec3(0.24, 0.3, 0.58);",
+    "  vec3 c = mix(gold, pink, smoothstep(0.0, 0.07, y)); c = mix(c, lav, smoothstep(0.05, 0.22, y)); c = mix(c, dusk, smoothstep(0.18, 0.7, y));",
+    "  c = mix(c, vec3(1.0, 0.8, 0.48), pow(sd, 6.0) * 0.6 * (1.0 - smoothstep(0.0, 0.3, y)));",
+    "  return c; }",
+    "vec3 sky(vec3 d){",
+    "  vec3 S = normalize(SUN); float sd = max(dot(normalize(d), S), 0.0);",
+    "  vec3 c = skyBase(d, sd);",
+    "  if (d.y > 0.0) {",
+    "    vec2 cp = d.xz / (d.y + 0.16) * 0.55 + vec2(uTime * 0.003, 0.0);",
+    "    float band = smoothstep(0.01, 0.05, d.y) * (1.0 - smoothstep(0.16, 0.34, d.y));",
+    "    float n = fb(cp * vec2(0.8, 1.6)) + 0.08 * (1.0 - smoothstep(0.0, 0.2, d.y));",
+    "    float cl = smoothstep(0.56, 0.6, n) * band;",                                  // crisp, painted cloud edges
+    "    float lift = fb(cp * vec2(0.8, 1.6) - vec2(0.0, 0.08));",                      // brighter where the cloud's underside faces the sun
+    "    float lit = clamp((n - lift) * 9.0 + 0.45, 0.0, 1.0);",
+    "    vec3 shade = mix(vec3(0.42, 0.36, 0.58), vec3(0.55, 0.44, 0.62), smoothstep(0.1, 0.3, d.y));",
+    "    vec3 glow = mix(vec3(1.0, 0.66, 0.6), vec3(1.0, 0.88, 0.62), pow(sd, 4.0));",
+    "    vec3 cc = mix(shade, glow, lit * (0.55 + 0.45 * pow(sd, 1.5)));",
+    "    float rim = smoothstep(0.56, 0.585, n) - smoothstep(0.585, 0.63, n);",               // a bright rim of light on every edge
+    "    cc = mix(cc, vec3(1.0, 0.85, 0.66), rim * (0.4 + 0.6 * pow(sd, 2.0)));",
+    "    c = mix(c, cc, cl);",
+    "  }",
+    "  vec3 sg = sunGlow(d);",
+    "  c = mix(c, vec3(1.0, 0.82, 0.58), sg.z * 0.4);",
+    "  c = mix(c, vec3(1.0, 0.9, 0.7), sg.y * 0.7);",
+    "  c = mix(c, vec3(1.0, 0.97, 0.88), sg.x);",                                      // soft-edged disc, no outline
+    "  return c; }"
+  ].join("\n");
+  var uSun = { value: new THREE.Vector3(small ? 0.2 : 0.42, 0.005, -0.9) };
+  var skyMat = new THREE.ShaderMaterial({
+    uniforms: { uTime: U.uTime, SUN: uSun }, side: THREE.BackSide, depthWrite: false, fog: false,
+    vertexShader: "varying vec3 vD; void main(){ vD = position; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }",
+    fragmentShader: SKY_GLSL + "\nvarying vec3 vD; void main(){ gl_FragColor = vec4(sky(normalize(vD)), 1.0); }"
+  });
+  var skyDome = new THREE.Mesh(new THREE.SphereGeometry(600, 48, 24), skyMat); skyDome.visible = false; scene.add(skyDome);
+  var seaTopMat = new THREE.ShaderMaterial({
+    uniforms: { uTime: U.uTime, SUN: uSun }, fog: false,
+    vertexShader: [
+      "uniform float uTime; varying vec3 vW;",
+      "void main(){ vec4 w = modelMatrix * vec4(position, 1.0);",
+      "  w.y += sin(w.x * 0.12 + uTime * 0.5) * 0.14 + sin(w.z * 0.17 - uTime * 0.6 + w.x * 0.04) * 0.12;",
+      "  vW = w.xyz; gl_Position = projectionMatrix * viewMatrix * w; }"
+    ].join("\n"),
+    fragmentShader: SKY_GLSL + "\n" + [
+      "varying vec3 vW;",
+      "void main(){",
+      "  float t = uTime;",
+      "  vec3 toP = vW - cameraPosition; float dist = length(toP); vec3 d = toP / dist;",
+      // gentle, mostly horizontal ripples (anime water is drawn with long flat strokes)
+      "  float r1 = fb(vec2(vW.x * 0.06, vW.z * 0.5) + vec2(t * 0.05, t * 0.12));",
+      "  float r2 = fb(vec2(vW.x * 0.03, vW.z * 0.22) - vec2(t * 0.03, t * 0.07));",
+      "  float calm = smoothstep(25.0, 200.0, dist);",
+      "  vec3 N = normalize(vec3((r2 - 0.5) * 0.12, 1.0, (r1 - 0.5) * 0.55 + (r2 - 0.5) * 0.3) * vec3(1.0 - calm, 1.0, 1.0 - calm));",
+      "  vec3 R = reflect(d, N); R.y = abs(R.y) + 0.01;",
+      "  float fres = 0.25 + 0.75 * pow(1.0 - max(dot(N, -d), 0.0), 3.0);",
+      "  vec3 S = normalize(SUN); float sdR = max(dot(normalize(R), S), 0.0);",
+      "  vec3 refl = skyBase(R, sdR);",                                                        // smooth sky in the water, no cloud noise
+      "  vec3 body = mix(vec3(0.24, 0.27, 0.5), vec3(0.42, 0.4, 0.62), smoothstep(0.3, 0.7, r2));",
+      "  vec3 col = mix(body, refl, fres);",
+      // the sun path: horizontal dashes of light fanning out under the sun
+      "  float az = atan(d.x, -d.z) - atan(S.x, -S.z);",
+      "  float w = 0.026 + 0.05 * (1.0 - calm);",
+      "  float path = exp(-az * az / (w * w));",
+      "  float dash = smoothstep(0.52, 0.66, n2(vec2(vW.x * 0.35, vW.z * 2.4) + vec2(t * 0.4, t * 0.9)));",
+      "  col = mix(col, mix(vec3(1.0, 0.76, 0.6), vec3(1.0, 0.82, 0.5), exp(-az * az * 6.0)), smoothstep(90.0, 560.0, dist) * 0.6);",          // haze toward the bright horizon
+      "  float far = smoothstep(120.0, 520.0, dist);",
+      "  col = mix(col, vec3(1.0, 0.74, 0.4), path * mix(0.62 + 0.38 * dash, 1.0, far) * 0.9);",
+      "  col = mix(col, vec3(1.0, 0.95, 0.8), path * dash * (1.0 - far) * 0.5 + exp(-az * az / (w * w * 0.2)) * far * 0.6);",
+      "  float lines = smoothstep(0.62, 0.7, r1) * (1.0 - calm) * 0.25;",                      // pale ripple strokes nearer the viewer
+      "  col = mix(col, vec3(0.86, 0.78, 0.9), lines);",
+      "  vec3 wg = sunGlow(d);",
+      "  col = mix(col, vec3(1.0, 0.84, 0.6), wg.z * 0.45);",
+      "  col = mix(col, vec3(1.0, 0.93, 0.78), wg.y * 0.75);",
+      "  gl_FragColor = vec4(col, 1.0); }"
+    ].join("\n")
+  });
+  var seaTop = new THREE.Mesh(new THREE.PlaneGeometry(1200, 1200, small ? 80 : 140, small ? 80 : 140), seaTopMat);
+  seaTop.rotation.x = -Math.PI / 2; seaTop.position.set(0, SURFACE_Y, -400); seaTop.visible = false; scene.add(seaTop);
+
+  // ---------- Light shafts: streaky, slowly breathing, fading as they fall ----------
+  var rayMats = [], rays = [];
+  var rayFrag = [
+    "uniform float uTime; uniform float uSeed; uniform float uOp; varying vec2 vUv;",
+    "void main(){",
+    "  float edge = sin(vUv.x * 3.14159);",
+    "  float s = 0.55 + 0.25 * sin(vUv.x * 21.0 + uTime * 0.5 + uSeed) + 0.2 * sin(vUv.x * 57.0 - uTime * 0.8 + uSeed * 2.0);",
+    "  float fall = pow(vUv.y, 2.4);",
+    "  gl_FragColor = vec4(0.88, 0.98, 1.0, edge * edge * s * fall * uOp); }"
+  ].join("\n");
+  for (var i = 0; i < (small ? 7 : 12); i++) {
+    var m = new THREE.ShaderMaterial({
+      uniforms: { uTime: U.uTime, uSeed: { value: Math.random() * 20 }, uOp: { value: rand(0.12, 0.3) } },
+      transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, fog: false, side: THREE.DoubleSide,
+      vertexShader: "varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }",
+      fragmentShader: rayFrag
     });
+    var w = rand(3, 9), ray = new THREE.Mesh(new THREE.PlaneGeometry(w, 110, 1, 1).translate(0, -55, 0), m);
+    ray.position.set(rand(-40, 40), SURFACE_Y, rand(-45, -8)); ray.rotation.z = rand(-0.32, -0.12);
+    scene.add(ray); rays.push({ o: ray, m: m, base: m.uniforms.uOp.value, ph: Math.random() * 6, rz: ray.rotation.z });
   }
 
   // ---------- Fish ----------
-  function makeFish(color, s) {
-    var g = new THREE.Group(), mat = M(color);
-    var body = new THREE.Mesh(new THREE.SphereGeometry(1, 10, 8), mat); body.scale.set(1.6, 1, 0.6); g.add(body);
-    var tailPivot = new THREE.Group(); tailPivot.position.x = -1.35; g.add(tailPivot);
-    var tail = new THREE.Mesh(new THREE.ConeGeometry(0.85, 1.2, 4), mat); tail.rotation.z = -Math.PI / 2; tail.scale.z = 0.25; tail.position.x = -0.45; tailPivot.add(tail);
-    var fin = new THREE.Mesh(new THREE.ConeGeometry(0.45, 0.9, 3), mat); fin.position.set(-0.1, 0.95, 0); fin.rotation.z = 0.5; fin.scale.z = 0.3; g.add(fin);
-    var stripe = new THREE.Mesh(new THREE.TorusGeometry(0.92, 0.09, 4, 14), white); stripe.rotation.y = Math.PI / 2; stripe.scale.set(1, 1, 0.62); stripe.position.x = 0.35; g.add(stripe);
-    eyes(g, 1.1, 0.25, 0.42, 0.2);
-    g.scale.setScalar(s); g.userData.tail = tailPivot;
-    return g;
-  }
-  var swimmers = [];
-  var fishColors = ["#ff7f6a", "#ffc94d", "#3a9fd6", "#0cda90", "#ff9fc8", "#7a6ff0", "#ff9a3c"];
-  var schools = small ? 8 : 13;
-  for (var i = 0; i < schools; i++) {
-    var color = fishColors[i % fishColors.length], dir = Math.random() < 0.5 ? 1 : -1, speed = rand(2, 4.5);
-    var cy = i === 0 ? 3 : i === 1 ? -5 : rand(CAM_BOTTOM - 8, 2), cz = i < 2 ? rand(-6, -3) : rand(-34, -8), cx = i < 2 ? rand(16, 30) : rand(-36, 36);
-    var n = 3 + Math.floor(Math.random() * (small ? 3 : 5)), s = rand(0.45, 0.8);
-    for (var k = 0; k < n; k++) {
-      var f = makeFish(color, s * rand(0.85, 1.15));
-      f.position.set(cx + rand(-4, 4), cy + rand(-2, 2), cz + rand(-3, 3));
-      f.rotation.y = dir > 0 ? 0 : Math.PI; scene.add(f);
-      swimmers.push({ o: f, dir: dir, speed: speed * rand(0.92, 1.08), ph: Math.random() * 6, baseY: f.position.y, wag: rand(8, 12) });
+  // One shared body: nose at +x, tail at -x, a forked tail and a dorsal fin.
+  function fishGeometry(h, w, tail, o) {
+    o = o || {}; var fin = o.fin || 1;
+    var S = 16, R = 10, pos = [], idx = [], half = [];
+    function hh(t) { return h * (Math.sin(Math.PI * Math.pow(t, 0.72)) * 0.9 + 0.07); }
+    for (var s = 0; s <= S; s++) {
+      var t = s / S, x = 0.5 - t, H = hh(t), W = H * (w / h) * (1 - 0.35 * t);
+      for (var r = 0; r < R; r++) {
+        var a = r / R * Math.PI * 2;
+        pos.push(x, Math.cos(a) * H * 0.5 - (t < 0.25 ? (0.25 - t) * h * 0.25 : 0), Math.sin(a) * W * 0.5);
+      }
     }
-  }
-
-  // ---------- Pufferfish ----------
-  function makePuffer() {
-    var g = new THREE.Group(), body = new THREE.Mesh(new THREE.IcosahedronGeometry(1, 1), M("#ffc94d")); g.add(body);
-    var spikeM = M("#e0a92b"), ico = new THREE.IcosahedronGeometry(1, 1), pos = ico.attributes.position, seen = {};
-    for (var i = 0; i < pos.count; i++) {
-      var v = new THREE.Vector3().fromBufferAttribute(pos, i), key = v.x.toFixed(2) + v.y.toFixed(2) + v.z.toFixed(2);
-      if (seen[key] || v.x > 0.75) continue; seen[key] = 1;
-      var sp = new THREE.Mesh(new THREE.ConeGeometry(0.08, 0.38, 4), spikeM);
-      sp.position.copy(v.clone().multiplyScalar(1.08)); sp.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), v.clone().normalize()); g.add(sp);
+    for (s = 0; s < S; s++) for (var r2 = 0; r2 < R; r2++) {
+      var a0 = s * R + r2, a1 = s * R + (r2 + 1) % R, b0 = a0 + R, b1 = a1 + R;
+      idx.push(a0, b0, a1, a1, b0, b1);
     }
-    var belly = new THREE.Mesh(new THREE.SphereGeometry(0.9, 10, 8), M("#fff3cf")); belly.position.y = -0.25; belly.scale.set(1, 0.7, 0.9); g.add(belly);
-    var tail = new THREE.Mesh(new THREE.ConeGeometry(0.5, 0.7, 4), M("#f2b13a")); tail.rotation.z = -Math.PI / 2; tail.scale.z = 0.3; tail.position.x = -1.2; g.add(tail);
-    eyes(g, 0.75, 0.3, 0.45, 0.24);
-    return g;
-  }
-  var puffers = [];
-  for (i = 0; i < 3; i++) {
-    var p = makePuffer(); p.position.set(rand(-25, 25), [-14, -34, -52][i], rand(-14, -4)); var d = i % 2 ? 1 : -1; p.rotation.y = d > 0 ? 0 : Math.PI;
-    scene.add(p); puffers.push({ o: p, dir: d, ph: Math.random() * 6, baseY: p.position.y });
-  }
-
-  // ---------- Sea turtle ----------
-  function makeTurtle() {
-    var g = new THREE.Group();
-    var shell = new THREE.Mesh(new THREE.SphereGeometry(1, 10, 6, 0, Math.PI * 2, 0, Math.PI / 2), M("#5f8f4e")); shell.scale.set(1.8, 0.85, 1.4); g.add(shell);
-    var plates = new THREE.Mesh(new THREE.SphereGeometry(1.01, 6, 3, 0, Math.PI * 2, 0, Math.PI / 2), M("#4b7a3d", { wireframe: true })); plates.scale.copy(shell.scale); g.add(plates);
-    var belly = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 0.18, 14), M("#e7d7a3")); belly.scale.set(1.8, 1, 1.4); g.add(belly);
-    var skin = M("#8bb36e");
-    var head = new THREE.Mesh(new THREE.SphereGeometry(0.5, 8, 6), skin); head.position.set(2.15, 0.15, 0); head.scale.set(1.2, 0.9, 0.9); g.add(head);
-    eyes(g, 2.45, 0.32, 0.3, 0.12);
-    var flips = [];
-    [[1, 1, 1.5], [1, -1, 1.5], [-1, 1, 0.9], [-1, -1, 0.9]].forEach(function (c) {
-      var pv = new THREE.Group(); pv.position.set(c[0] * 0.9, 0, c[1] * 1.1); g.add(pv);
-      var fl = new THREE.Mesh(new THREE.BoxGeometry(c[2] * 0.7, 0.12, c[2]), skin); fl.position.set(-c[0] * 0.2, 0, c[1] * c[2] * 0.5); fl.rotation.y = c[0] * c[1] * -0.5; pv.add(fl);
-      pv.userData.side = c[1]; pv.userData.front = c[0] > 0; flips.push(pv);
-    });
-    g.userData.flips = flips; g.scale.setScalar(1.3);
-    return g;
-  }
-  var turtle = makeTurtle(); turtle.position.set(-30, -24, -10); scene.add(turtle);
-
-  // ---------- Jellyfish ----------
-  function makeJelly(color) {
-    var g = new THREE.Group();
-    var bell = new THREE.Mesh(new THREE.SphereGeometry(1, 18, 10, 0, Math.PI * 2, 0, Math.PI / 2),
-      new THREE.MeshStandardMaterial({ color: color, transparent: true, opacity: 0.72, roughness: 0.3, emissive: color, emissiveIntensity: 0.3, side: THREE.DoubleSide }));
-    g.add(bell);
-    var tents = [], lineMats = [], P = 16;
-    for (var i = 0; i < 8; i++) {
-      var a = i / 8 * Math.PI * 2, geo = new THREE.BufferGeometry();
-      geo.setAttribute("position", new THREE.BufferAttribute(new Float32Array(P * 3), 3));
-      var lm = new THREE.LineBasicMaterial({ color: color, transparent: true, opacity: 0.85 }); lineMats.push(lm);
-      g.add(new THREE.Line(geo, lm));
-      tents.push({ geo: geo, ax: Math.cos(a) * 0.7, az: Math.sin(a) * 0.7, ph: Math.random() * 6, len: rand(0.22, 0.32) });
-    }
-    g.userData = { bell: bell, tents: tents, lineMats: lineMats, P: P };
-    return g;
-  }
-  var faqList = document.querySelector("#faq .faq"), jellyV = new THREE.Vector3();
-  var jellies = [], jellyColors = ["#f7a8d8", "#c9a8f7", "#ffb3c7", "#a8d8f7"];
-  for (i = 0; i < (small ? 5 : 9); i++) {
-    var j = makeJelly(jellyColors[i % 4]), js = rand(0.8, 1.6); j.scale.setScalar(js);
-    j.position.set(i === 0 ? 11 : rand(-30, 30), i === 0 ? 3 : rand(CAM_BOTTOM - 6, 0), i === 0 ? -4 : rand(-30, -2));
-    scene.add(j); jellies.push({ o: j, ph: Math.random() * 6, rise: rand(0.25, 0.5), fade: 1 });
-  }
-
-  // ---------- Bubbles ----------
-  var bc = document.createElement("canvas"); bc.width = bc.height = 64; var bx = bc.getContext("2d");
-  var gr = bx.createRadialGradient(32, 32, 10, 32, 32, 30); gr.addColorStop(0, "rgba(255,255,255,0.15)"); gr.addColorStop(0.8, "rgba(255,255,255,0.55)"); gr.addColorStop(1, "rgba(255,255,255,0)");
-  bx.fillStyle = gr; bx.beginPath(); bx.arc(32, 32, 30, 0, 7); bx.fill();
-  bx.strokeStyle = "rgba(58,159,214,0.8)"; bx.lineWidth = 2.5; bx.beginPath(); bx.arc(32, 32, 26, 0, 7); bx.stroke();
-  bx.fillStyle = "#fff"; bx.beginPath(); bx.arc(23, 23, 6, 0, 7); bx.fill();
-  var BN = small ? 160 : 300, bpos = new Float32Array(BN * 3), bsp = [];
-  for (i = 0; i < BN; i++) { bpos[i * 3] = rand(-45, 45); bpos[i * 3 + 1] = rand(FLOOR, 12); bpos[i * 3 + 2] = rand(-40, 12); bsp.push(rand(1, 3)); }
-  var bgeo = new THREE.BufferGeometry(); bgeo.setAttribute("position", new THREE.BufferAttribute(bpos, 3));
-  var bubbles = new THREE.Points(bgeo, new THREE.PointsMaterial({ size: 0.55, map: new THREE.CanvasTexture(bc), transparent: true, depthWrite: false }));
-  scene.add(bubbles);
-
-  // ---------- Light rays ----------
-  // Anchor the top of each long beam above every camera position.
-  var rc = document.createElement("canvas"); rc.width = 8; rc.height = 128; var rx = rc.getContext("2d");
-  var rg = rx.createLinearGradient(0, 0, 0, 128); rg.addColorStop(0, "rgba(255,255,255,0.9)"); rg.addColorStop(1, "rgba(255,255,255,0)");
-  rx.fillStyle = rg; rx.fillRect(0, 0, 8, 128);
-  var rayTex = new THREE.CanvasTexture(rc), rays = [];
-  for (i = 0; i < 9; i++) {
-    var ray = new THREE.Mesh(new THREE.PlaneGeometry(rand(2, 5), 160).translate(0, -80, 0), new THREE.MeshBasicMaterial({ map: rayTex, transparent: true, opacity: rand(0.25, 0.45), depthWrite: false, fog: false, side: THREE.DoubleSide }));
-    ray.position.set(rand(-35, 35), 85, rand(-40, -15)); ray.rotation.z = rand(-0.35, -0.15);
-    scene.add(ray); rays.push({ o: ray, ph: Math.random() * 6, base: ray.rotation.z });
-  }
-
-  // ---------- Seafloor ----------
-  var fg = new THREE.PlaneGeometry(240, 130, 70, 40); fg.rotateX(-Math.PI / 2);
-  var fp = fg.attributes.position;
-  for (i = 0; i < fp.count; i++) { var X = fp.getX(i), Z = fp.getZ(i); fp.setY(i, Math.sin(X * 0.15) * 1.1 + Math.cos(Z * 0.2) * 0.9 + rand(0, 0.35)); }
-  fg.computeVertexNormals();
-  var floor = new THREE.Mesh(fg, M("#ecd39f")); floor.position.set(0, FLOOR, -30); scene.add(floor);
-
-  function branch(parent, len, rad, depth, mat) {
-    var geo = new THREE.CylinderGeometry(rad * 0.7, rad, len, 6); geo.translate(0, len / 2, 0);
-    var m = new THREE.Mesh(geo, mat); parent.add(m);
-    if (depth > 0) {
-      var kids = 2 + (Math.random() < 0.5 ? 1 : 0);
-      for (var i = 0; i < kids; i++) {
-        var pv = new THREE.Group(); pv.position.y = len; pv.rotation.set(rand(-0.7, 0.7), rand(0, 6.28), rand(-0.7, 0.7)); m.add(pv);
-        branch(pv, len * 0.75, rad * 0.7, depth - 1, mat);
+    var base = pos.length / 3;
+    // forked tail fin
+    var py = h * 0.04, tx = -0.5 - tail;
+    pos.push(-0.47, py, 0, tx, h * 0.55, 0, -0.5 - tail * 0.55, 0, 0, tx, -h * 0.55, 0, -0.47, -py, 0);
+    idx.push(base, base + 1, base + 2, base, base + 2, base + 4, base + 4, base + 2, base + 3);
+    var top = hh(0.4) * 0.5, d0;
+    if (o.spikes) {
+      // venomous spines along the back (lionfish)
+      for (var k = 0; k < o.spikes; k++) {
+        var sx = 0.2 - k * 0.055, sTop = hh(0.3 + k * 0.05) * 0.5; d0 = pos.length / 3;
+        pos.push(sx + 0.02, sTop * 0.9, 0, sx - 0.04, sTop + h * (0.55 + 0.35 * Math.sin(k * 1.7 + 1)) * fin, 0, sx - 0.03, sTop * 0.9, 0);
+        idx.push(d0, d0 + 1, d0 + 2);
       }
     } else {
-      var tip = new THREE.Mesh(new THREE.SphereGeometry(rad * 1.1, 6, 5), mat); tip.position.y = len; m.add(tip);
+      // dorsal fin (swept back and tall on batfish)
+      d0 = pos.length / 3;
+      pos.push(0.14, top * 0.95, 0, -0.08 - 0.12 * (fin - 1), top + h * 0.32 * fin, 0, -0.28 - 0.06 * (fin - 1), hh(0.78) * 0.5, 0);
+      idx.push(d0, d0 + 1, d0 + 2);
     }
-  }
-  var coralColors = ["#ff7f6a", "#f7a8d8", "#a98be6", "#ff9a3c", "#ff6b8b"];
-  for (i = 0; i < (small ? 10 : 16); i++) {
-    var c = new THREE.Group(); branch(c, rand(1.6, 2.6), rand(0.25, 0.4), 3, M(coralColors[i % coralColors.length]));
-    c.position.set(rand(-40, 40), FLOOR + 0.6, rand(-40, 6)); c.scale.setScalar(rand(0.9, 1.6)); scene.add(c);
-  }
-  for (i = 0; i < 8; i++) {
-    var brain = new THREE.Mesh(new THREE.IcosahedronGeometry(1, 1), M(i % 2 ? "#ffc94d" : "#9be0c4")); brain.scale.set(rand(1.4, 2.4), rand(0.8, 1.3), rand(1.4, 2.2));
-    brain.position.set(rand(-40, 40), FLOOR + 0.5, rand(-36, 6)); scene.add(brain);
-    var rock = new THREE.Mesh(new THREE.DodecahedronGeometry(rand(1, 2.4), 0), M("#9fb7bd")); rock.position.set(rand(-45, 45), FLOOR + 0.4, rand(-40, 6)); rock.rotation.set(rand(0, 3), rand(0, 3), 0); scene.add(rock);
-  }
-  var kelps = [], kelpMat = M("#21a37a"), kelpMat2 = M("#178a66");
-  for (i = 0; i < (small ? 12 : 22); i++) {
-    var root = new THREE.Group(), parent = root, segs = [], h = 7 + Math.floor(Math.random() * 10), mat = i % 2 ? kelpMat : kelpMat2;
-    for (var q = 0; q < h; q++) {
-      var seg = new THREE.Group(); seg.position.y = q === 0 ? 0 : 1.1; parent.add(seg);
-      var stem = new THREE.Mesh(new THREE.BoxGeometry(0.28, 1.2, 0.12), mat); stem.position.y = 0.55; seg.add(stem);
-      if (q % 2) { var leaf = new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.35, 0.06), mat); leaf.position.set(q % 4 === 1 ? 0.5 : -0.5, 0.6, 0); leaf.rotation.z = q % 4 === 1 ? 0.5 : -0.5; seg.add(leaf); }
-      segs.push(seg); parent = seg;
+    // anal fin
+    var p0 = pos.length / 3, bot = -hh(0.6) * 0.5;
+    pos.push(0.02, bot * 0.95, 0, -0.16 - 0.12 * (fin - 1), bot - h * 0.18 * fin, 0, -0.3 - 0.05 * (fin - 1), -hh(0.8) * 0.5, 0);
+    idx.push(p0, p0 + 1, p0 + 2);
+    if (o.fan) {
+      // big fan-shaped pectoral fins, one each side
+      [-1, 1].forEach(function (sd) {
+        var c0 = pos.length / 3, rz = hh(0.25) * (w / h) * 0.5 * sd;
+        pos.push(0.2, -h * 0.08, rz);
+        for (var q = 0; q <= 7; q++) {
+          var an = -0.35 + q * 0.24, L = o.fan * (0.85 + 0.15 * Math.sin(q * 2.1));
+          pos.push(0.2 - Math.cos(an) * L, -h * 0.08 - Math.sin(an) * L * 0.55, rz + sd * L * 0.45);
+          if (q) idx.push(c0, c0 + q, c0 + q + 1);
+        }
+      });
     }
-    var sideX = i % 2 ? rand(14, 42) : rand(-42, -14);
-    root.position.set(sideX, FLOOR + 0.5, rand(-38, 4)); scene.add(root); kelps.push({ segs: segs, ph: Math.random() * 6 });
+    var g = new THREE.BufferGeometry();
+    g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+    g.setIndex(idx); g.computeVertexNormals();
+    return g;
   }
-  var starShape = new THREE.Shape();
-  for (i = 0; i < 10; i++) { var a = i / 10 * Math.PI * 2 + Math.PI / 2, r = i % 2 ? 0.45 : 1.1; var px = Math.cos(a) * r, py = Math.sin(a) * r; i ? starShape.lineTo(px, py) : starShape.moveTo(px, py); }
-  var starGeo = new THREE.ExtrudeGeometry(starShape, { depth: 0.2, bevelEnabled: true, bevelThickness: 0.12, bevelSize: 0.1, bevelSegments: 1 });
-  for (i = 0; i < 9; i++) {
-    var st = new THREE.Mesh(starGeo, M(["#ff7f6a", "#ffb27a", "#ff6b8b"][i % 3])); st.rotation.x = -Math.PI / 2; st.rotation.z = rand(0, 6);
-    st.position.set(rand(-30, 30), FLOOR + 1.0, rand(-20, 8)); st.scale.setScalar(rand(0.7, 1.2)); scene.add(st);
+
+  // Species: body shape + colouring. belly/stripe/eye are painted in the shader.
+  var SPECIES = {
+    sardine: { h: 0.2, w: 0.12, tail: 0.24, back: "#5f8fb4", belly: "#eef6fa", stripe: "#9cc7e6", stripeAmt: 0.55, scale: 0.55, amp: 0.05, metal: 0.8 },
+    jack:    { h: 0.32, w: 0.14, tail: 0.3, back: "#6f8c9e", belly: "#e3ecf0", stripe: "#c7d6de", stripeAmt: 0.2, scale: 1.5, amp: 0.05, metal: 0.75 },
+    snapper: { h: 0.3, w: 0.13, tail: 0.3, back: "#55809f", belly: "#f4f0e4", stripe: "#ffcf3a", stripeAmt: 1.0, scale: 1.05, amp: 0.06, metal: 0.25 },
+    tang:    { h: 0.56, w: 0.11, tail: 0.22, back: "#2c66cf", belly: "#3d7fe6", stripe: "#0f2a5c", stripeAmt: 0.65, scale: 0.85, amp: 0.07, metal: 0.15 },
+    yellow:  { h: 0.62, w: 0.1, tail: 0.2, back: "#ffcf3d", belly: "#fff1b8", stripe: "#1a1a22", stripeAmt: 0.0, scale: 0.75, amp: 0.07, metal: 0.1 },
+    lion:    { h: 0.3, w: 0.14, tail: 0.2, back: "#9a3a22", belly: "#c98a6a", stripe: "#000000", stripeAmt: 0.0, scale: 1.25, amp: 0.025, metal: 0.05,
+               vsFreq: 38, vsCol: "#e6c9ad", vsAmt: 0.65, spikes: 10, fin: 1, fan: 0.55 },
+    bat:     { h: 0.95, w: 0.1, tail: 0.18, back: "#77736a", belly: "#a9a397", stripe: "#000000", stripeAmt: 0.0, scale: 1.05, amp: 0.035, metal: 0.06,
+               barX: [0.33, 0.04], barW: 0.08, barCol: "#1d1d24", barAmt: 0.9, fin: 1.9 },
+    lantern: { h: 0.22, w: 0.12, tail: 0.22, back: "#1a2a40", belly: "#4c6380", stripe: "#7ff3ff", stripeAmt: 0.0, scale: 0.6, amp: 0.05, metal: 0.4 }
+  };
+
+  var fishMats = [];
+  function fishMaterial(sp) {
+    var mat = new THREE.MeshStandardMaterial({ roughness: 0.42, metalness: 0.1, side: THREE.DoubleSide });
+    mat.onBeforeCompile = function (sh) {
+      sh.uniforms.uTime = U.uTime;
+      sh.uniforms.uAmp = { value: sp.amp };
+      sh.uniforms.uSheen = uSheen;
+      sh.uniforms.uMetal = { value: sp.metal };
+      sh.uniforms.uBelly = { value: new THREE.Color(sp.belly) };
+      sh.uniforms.uStripe = { value: new THREE.Color(sp.stripe) };
+      sh.uniforms.uStripeAmt = { value: sp.stripeAmt };
+      sh.uniforms.uHalfH = { value: sp.h * 0.5 };
+      sh.uniforms.uEye = { value: new THREE.Vector3(0.36, sp.h * 0.06, Math.min(sp.h, 0.45) * 0.09) };
+      sh.uniforms.uVS = { value: new THREE.Vector2(sp.vsFreq || 0, sp.vsAmt || 0) };
+      sh.uniforms.uVSCol = { value: new THREE.Color(sp.vsCol || "#ffffff") };
+      sh.uniforms.uBar = { value: new THREE.Vector4((sp.barX || [9, 9])[0], (sp.barX || [9, 9])[1], sp.barW || 0.05, sp.barAmt || 0) };
+      sh.uniforms.uBarCol = { value: new THREE.Color(sp.barCol || "#000000") };
+      sh.vertexShader = sh.vertexShader
+        .replace("#include <common>", "#include <common>\nuniform float uTime; uniform float uAmp; attribute float aPhase; varying vec3 vLocal;")
+        .replace("#include <begin_vertex>", [
+          "vec3 transformed = vec3(position); vLocal = position;",
+          "float tw = smoothstep(0.32, -0.8, position.x);",
+          "transformed.z += sin(uTime * (8.0 + aPhase * 4.0) + aPhase * 6.2831 + position.x * 5.5) * uAmp * (0.1 + tw * 1.2);"
+        ].join("\n"));
+      sh.fragmentShader = sh.fragmentShader
+        .replace("#include <common>", "#include <common>\nuniform vec3 uBelly; uniform vec3 uStripe; uniform float uStripeAmt; uniform float uHalfH; uniform vec3 uEye; uniform float uSheen; uniform float uMetal; uniform vec2 uVS; uniform vec3 uVSCol; uniform vec4 uBar; uniform vec3 uBarCol; varying vec3 vLocal;")
+        .replace("#include <color_fragment>", [
+          "#include <color_fragment>",
+          "float yN = vLocal.y / uHalfH;",
+          "diffuseColor.rgb = mix(uBelly, diffuseColor.rgb, smoothstep(-0.5, 0.3, yN));",              // countershading: pale belly, dark back
+          "float band = 1.0 - smoothstep(0.0, 0.16, abs(yN - 0.02));",
+          "diffuseColor.rgb = mix(diffuseColor.rgb, uStripe, uStripeAmt * band * step(-0.62, vLocal.x) * step(vLocal.x, 0.3));",
+          "float vs = smoothstep(0.35, 0.65, 0.5 + 0.5 * sin(vLocal.x * uVS.x + vLocal.y * 9.0 + sin(vLocal.y * 30.0) * 0.6));",
+          "diffuseColor.rgb = mix(diffuseColor.rgb, uVSCol, vs * uVS.y);",
+          "float bars = (1.0 - smoothstep(uBar.z * 0.55, uBar.z, abs(vLocal.x - uBar.x))) + (1.0 - smoothstep(uBar.z * 0.55, uBar.z, abs(vLocal.x - uBar.y)));",
+          "diffuseColor.rgb = mix(diffuseColor.rgb, uBarCol, clamp(bars, 0.0, 1.0) * uBar.w);",
+          "float scales = 0.5 + 0.5 * sin(vLocal.x * 90.0) * sin(vLocal.y * 90.0 + vLocal.z * 60.0);",
+          "diffuseColor.rgb *= 0.93 + 0.07 * scales;",                                                // fine scale texture
+          "diffuseColor.rgb *= 0.86 + 0.14 * smoothstep(-0.6, 0.0, vLocal.x);",                      // darker tail
+          "float e = length(vec2(vLocal.x - uEye.x, vLocal.y - uEye.y));",
+          "diffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.9, 0.92, 0.9), smoothstep(uEye.z * 1.7, uEye.z * 1.35, e));",
+          "diffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.02, 0.03, 0.05), smoothstep(uEye.z, uEye.z * 0.72, e));",
+          "float gill = abs(vLocal.x - 0.24) < 0.012 && abs(yN) < 0.6 ? 1.0 : 0.0;",
+          "diffuseColor.rgb *= 1.0 - gill * 0.25;"
+        ].join("\n"))
+        .replace("#include <emissivemap_fragment>", [
+          "#include <emissivemap_fragment>",
+          "vec3 skyDir = normalize((viewMatrix * vec4(0.0, 1.0, 0.0, 0.0)).xyz);",
+          "float up = max(dot(normal, skyDir), 0.0);",
+          "float side = pow(1.0 - abs(dot(normal, vec3(0.0, 0.0, 1.0))), 3.0);",
+          "totalEmissiveRadiance += vec3(0.75, 0.9, 1.0) * uSheen * uMetal * (pow(up, 5.0) * 0.55 + side * 0.18);"
+        ].join("\n"));
+    };
+    return mat;
   }
+
+  // A school: a centre that wanders, drifting across the scene; each fish keeps an offset inside it.
+  var schools = [], tmpV = new THREE.Vector3(), tmpV2 = new THREE.Vector3(), tmpQ = new THREE.Quaternion(), tmpM = new THREE.Matrix4(), tmpS = new THREE.Vector3(), VEL = new THREE.Vector3(), POS = new THREE.Vector3(), X = new THREE.Vector3(1, 0, 0), tmpC = new THREE.Color();
+  function addSchool(kind, n, opt) {
+    var sp = SPECIES[kind]; n = Math.max(4, Math.round(n * POP));
+    var mesh = new THREE.InstancedMesh(fishGeometry(sp.h, sp.w, sp.tail, sp), fishMaterial(sp), n);
+    mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+    var phase = new Float32Array(n);
+    var fish = [];
+    for (var k = 0; k < n; k++) {
+      phase[k] = Math.random();
+      var r = opt.spread * Math.cbrt(Math.random()), th = Math.random() * 6.283, ph = Math.acos(rand(-1, 1));
+      fish.push({ o: new THREE.Vector3(r * Math.sin(ph) * Math.cos(th), r * Math.cos(ph) * opt.flat, r * Math.sin(ph) * Math.sin(th)), s: sp.scale * rand(0.85, 1.15), d: new THREE.Vector3() });
+      tmpC.set(sp.back).offsetHSL(rand(-0.01, 0.01), rand(-0.05, 0.05), rand(-0.05, 0.05));
+      mesh.setColorAt(k, tmpC);
+    }
+    mesh.geometry.setAttribute("aPhase", new THREE.InstancedBufferAttribute(phase, 1));
+    mesh.frustumCulled = false;
+    scene.add(mesh);
+    schools.push({ mesh: mesh, fish: fish, n: n, c: new THREE.Vector3(opt.x, opt.y, opt.z), base: new THREE.Vector3(opt.x, opt.y, opt.z), prev: new THREE.Vector3(opt.x, opt.y, opt.z),
+      dir: opt.dir, speed: opt.speed, swirl: opt.swirl || 0, wob: rand(0.15, 0.35), ph: Math.random() * 6, amp: opt.amp || 3 });
+  }
+  var side = function () { return Math.random() < 0.5 ? 1 : -1; };
+  // Sunlit shallows: reef fish in small groups
+  addSchool("tang", 9, { x: 14, y: 1, z: -12, spread: 3, flat: 0.95, dir: -1, speed: 1.6 });
+  addSchool("yellow", 7, { x: -18, y: -4, z: -16, spread: 2.6, flat: 0.95, dir: 1, speed: 1.3 });
+  addSchool("snapper", 26, { x: -6, y: -9, z: -22, spread: 6, flat: 0.95, dir: 1, speed: 2.4 });
+  addSchool("tang", 7, { x: -26, y: -14, z: -10, spread: 2.6, flat: 0.95, dir: 1, speed: 1.5 });
+  // Reef designs: lionfish hover, batfish drift in small groups
+  addSchool("lion", 3, { x: 20, y: -11, z: -7, spread: 2.4, flat: 0.95, dir: -1, speed: 0.45, amp: 1.2 });
+  addSchool("bat", 5, { x: -30, y: -19, z: -12, spread: 3.2, flat: 0.95, dir: 1, speed: 0.9, amp: 2 });
+  addSchool("lion", 3, { x: -16, y: -33, z: -8, spread: 2.4, flat: 0.95, dir: 1, speed: 0.4, amp: 1.2 });
+  addSchool("bat", 4, { x: 26, y: -45, z: -14, spread: 3, flat: 0.95, dir: -1, speed: 0.8, amp: 2 });
+  // Open water: huge sardine bait balls and jacks
+  addSchool("sardine", 240, { x: 18, y: -22, z: -28, spread: 9, flat: 0.95, dir: -1, speed: 1.2, swirl: 0.6, amp: 4 });
+  addSchool("jack", 36, { x: -20, y: -30, z: -20, spread: 7, flat: 0.95, dir: 1, speed: 3.2 });
+  addSchool("sardine", 190, { x: -14, y: -40, z: -34, spread: 8, flat: 0.95, dir: 1, speed: 1.0, swirl: -0.5, amp: 4 });
+  addSchool("snapper", 26, { x: 22, y: -36, z: -14, spread: 5, flat: 0.95, dir: -1, speed: 2.2 });
+  // Twilight and deep: jacks in silhouette, lanternfish
+  addSchool("jack", 28, { x: 10, y: -50, z: -26, spread: 7, flat: 0.95, dir: -1, speed: 2.6 });
+  addSchool("lantern", 40, { x: -12, y: -58, z: -18, spread: 9, flat: 0.95, dir: 1, speed: 0.9 });
+  addSchool("sardine", 120, { x: 24, y: -62, z: -40, spread: 9, flat: 0.95, dir: -1, speed: 0.8, swirl: 0.4 });
+
+  // ---------- Humpback whale: "Sculpted Whale" by Allie2k (CC BY 4.0), reduced to ~16k triangles ----------
+  // The model is re-oriented on load so the snout points +x, the back faces +y and it is one unit long,
+  // then a vertex shader adds slow fluke strokes and gliding flippers.
+  var whale = new THREE.Group();
+  whale.rotation.order = "YXZ";
+  whale.scale.setScalar(34); whale.position.set(-40, -24, -30); whale.visible = false; scene.add(whale);
+  function whaleMaterial(src) {
+    var m = new THREE.MeshStandardMaterial({ map: src.map, normalMap: src.normalMap, roughness: 0.5, metalness: 0.0, color: "#c9d4dc" });
+    if (m.map) m.map.encoding = THREE.LinearEncoding;          // match the rest of the scene's colour handling
+    m.normalScale.set(1, -1);
+    m.onBeforeCompile = function (sh) {
+      sh.uniforms.uTime = U.uTime; sh.uniforms.uSheen = uSheen;
+      sh.vertexShader = sh.vertexShader.replace("#include <common>", "#include <common>\nuniform float uTime;")
+        .replace("#include <begin_vertex>", [
+          "vec3 transformed = vec3(position);",
+          "float tw = smoothstep(0.05, -0.5, position.x);",
+          "transformed.y += sin(uTime * 0.7 - position.x * 3.5) * 0.05 * tw * tw;",                // slow fluke strokes
+          "float fl = smoothstep(0.1, 0.2, abs(position.z)) * smoothstep(0.02, -0.04, position.y);",
+          "transformed.y += sin(uTime * 0.45) * 0.3 * fl * (abs(position.z) - 0.1);"               // flippers glide
+        ].join("\n"));
+      sh.fragmentShader = sh.fragmentShader.replace("#include <common>", "#include <common>\nuniform float uSheen;")
+        .replace("#include <emissivemap_fragment>", [
+          "#include <emissivemap_fragment>",
+          "vec3 skyW = normalize((viewMatrix * vec4(0.0, 1.0, 0.0, 0.0)).xyz);",
+          "float lit = clamp(dot(normal, skyW) * 0.8 + 0.35, 0.0, 1.0);",
+          "totalEmissiveRadiance += diffuseColor.rgb * vec3(0.35, 0.55, 0.7) * pow(lit, 2.0) * 0.35 * uSheen;"   // light from the surface
+        ].join("\n"));
+    };
+    return m;
+  }
+  if (THREE.GLTFLoader) new THREE.GLTFLoader().load("/assets/whale.glb", function (gltf) {
+    var src = null; gltf.scene.traverse(function (o) { if (o.isMesh && !src) src = o; });
+    if (!src) return;
+    var g = src.geometry; g.computeBoundingBox();
+    var bb = g.boundingBox, p = g.attributes.position, cy = (bb.min.y + bb.max.y) / 2, cz = (bb.min.z + bb.max.z) / 2;
+    // Flipper tips (widest points) sit nearer the head and on the belly side: use them to find both.
+    var ti = 0, tx = 0; for (var k = 0; k < p.count; k++) { var ax = Math.abs(p.getX(k)); if (ax > tx) { tx = ax; ti = k; } }
+    var h = p.getY(ti) > cy ? 1 : -1, u = p.getZ(ti) < cz ? 1 : -1, s = h * u;
+    var M = new THREE.Matrix4().set(0, h, 0, 0,  0, 0, u, 0,  s, 0, 0, 0,  0, 0, 0, 1);
+    g.applyMatrix4(M); g.computeBoundingBox(); var b2 = g.boundingBox;
+    var len = b2.max.x - b2.min.x;
+    g.translate(-(b2.min.x + b2.max.x) / 2, -(b2.min.y + b2.max.y) / 2, -(b2.min.z + b2.max.z) / 2);
+    g.scale(1 / len, 1 / len, 1 / len);
+    g.computeVertexNormals();
+    var mesh = new THREE.Mesh(g, whaleMaterial(src.material));
+    whale.add(mesh); whale.visible = true;
+  });
+
+  // ---------- Plankton and marine snow: motes near the surface, glowing plankton in the deep ----------
+  var PN = Math.round(2600 * POP), ppos = new Float32Array(PN * 3), pseed = new Float32Array(PN);
+  for (i = 0; i < PN; i++) { ppos[i * 3] = rand(-55, 55); ppos[i * 3 + 1] = rand(CAM_BOTTOM - 14, 12); ppos[i * 3 + 2] = rand(-55, 16); pseed[i] = Math.random(); }
+  var pgeo = new THREE.BufferGeometry();
+  pgeo.setAttribute("position", new THREE.BufferAttribute(ppos, 3)); pgeo.setAttribute("aSeed", new THREE.BufferAttribute(pseed, 1));
+  var plankMat = new THREE.ShaderMaterial({
+    uniforms: { uTime: U.uTime, uDeep: { value: 0 }, uPx: { value: renderer.getPixelRatio() } },
+    transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+    vertexShader: [
+      "uniform float uTime; uniform float uPx; attribute float aSeed; varying float vSeed; varying float vY; varying float vNear;",
+      "void main(){ vec3 p = position;",
+      "  p.x += sin(uTime * 0.15 + aSeed * 40.0) * 1.2; p.y += sin(uTime * 0.11 + aSeed * 20.0) * 0.8 - mod(uTime * 0.12 * (0.4 + aSeed), 3.0);",
+      "  vec4 mv = modelViewMatrix * vec4(p, 1.0); vY = p.y; vSeed = aSeed; vNear = clamp(1.0 - (-mv.z - 4.0) / 50.0, 0.0, 1.0);",
+      "  gl_PointSize = (0.6 + aSeed * 1.8) * uPx * (60.0 / -mv.z); gl_Position = projectionMatrix * mv; }"
+    ].join("\n"),
+    fragmentShader: [
+      "uniform float uTime; uniform float uDeep; varying float vSeed; varying float vY; varying float vNear;",
+      "void main(){ float d = length(gl_PointCoord - 0.5); if (d > 0.5) discard;",
+      "  float soft = smoothstep(0.5, 0.0, d);",
+      "  float deep = clamp(-vY / 55.0, 0.0, 1.0);",
+      "  float glowOn = step(0.62, vSeed) * deep;",                                                    // a share of the deep motes are bioluminescent
+      "  float tw = 0.55 + 0.45 * sin(uTime * (1.5 + vSeed * 3.0) + vSeed * 30.0);",
+      "  vec3 mote = vec3(0.85, 0.95, 1.0); vec3 glow = mix(vec3(0.45, 1.0, 0.95), vec3(0.6, 0.75, 1.0), fract(vSeed * 7.0));",
+      "  vec3 col = mix(mote, glow, glowOn);",
+      "  float a = soft * (0.16 + 0.22 * vNear) * (1.0 - glowOn) + soft * glowOn * tw * (0.35 + 0.65 * uDeep);",
+      "  gl_FragColor = vec4(col, a); }"
+    ].join("\n")
+  });
+  var plankton = new THREE.Points(pgeo, plankMat); plankton.frustumCulled = false; scene.add(plankton);
+
+  // ---------- Bubbles: a few streams rising toward the light ----------
+  var bc = document.createElement("canvas"); bc.width = bc.height = 64; var bx = bc.getContext("2d");
+  var gr = bx.createRadialGradient(32, 32, 12, 32, 32, 30); gr.addColorStop(0, "rgba(255,255,255,0.05)"); gr.addColorStop(0.85, "rgba(255,255,255,0.5)"); gr.addColorStop(1, "rgba(255,255,255,0)");
+  bx.fillStyle = gr; bx.beginPath(); bx.arc(32, 32, 30, 0, 7); bx.fill();
+  bx.fillStyle = "rgba(255,255,255,.9)"; bx.beginPath(); bx.ellipse(23, 22, 6, 4, -0.6, 0, 7); bx.fill();
+  var BN = small ? 90 : 180, bpos = new Float32Array(BN * 3), bsp = [], bcol = [];
+  for (i = 0; i < BN; i++) {
+    var col = i % 6, sx = [-34, -12, 8, 26, 40, -44][col];
+    bpos[i * 3] = sx + rand(-1.5, 1.5); bpos[i * 3 + 1] = rand(CAM_BOTTOM - 10, 12); bpos[i * 3 + 2] = rand(-30, -6); bsp.push(rand(1.4, 3.2)); bcol.push(sx);
+  }
+  var bgeo = new THREE.BufferGeometry(); bgeo.setAttribute("position", new THREE.BufferAttribute(bpos, 3));
+  var bubbles = new THREE.Points(bgeo, new THREE.PointsMaterial({ size: 0.42, map: new THREE.CanvasTexture(bc), transparent: true, depthWrite: false }));
+  scene.add(bubbles);
 
   // ---------- Camera, input, loop ----------
   var targetY = 0, camY = 0, mx = 0, my = 0, cmx = 0, cmy = 0;
-  var oceanScrollRange = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+  var range = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+  var diveT = 0, dive = 0, veil = document.getElementById("dive-veil"), wasDived = null;
+  // The first ~0.85 screens of scrolling carry the camera from above the waves down through the surface.
   function onScroll() {
-    var max = oceanScrollRange;
-    targetY = (max > 0 ? Math.min(1, window.scrollY / max) : 0) * CAM_BOTTOM;
+    targetY = Math.min(1, window.scrollY / range) * CAM_BOTTOM;
+    if (window.scrollY > 24 && !diveT) {   // the first scroll starts one smooth plunge, and carries the page down to About with it
+      diveT = 1;
+      var ab = document.getElementById("about");
+      if (ab && !reduce && window.scrollY < window.innerHeight * 0.6) {
+        var nav = document.querySelector(".nav"), off = nav ? nav.offsetHeight : 0;
+        window.scrollTo({ top: ab.getBoundingClientRect().top + window.scrollY - off - 6, behavior: "smooth" });
+      }
+    }
+    // the opening copy fades as you go under, so the surface scene and the ocean never compete
+    document.documentElement.style.setProperty("--hero-fade", Math.max(0, 1 - window.scrollY / (window.innerHeight * 0.55)).toFixed(3));
     if (reduce) render(0);
   }
   function resize() {
     var w = canvas.clientWidth, h = canvas.clientHeight;
-    oceanScrollRange = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-    renderer.setSize(w, h, false); camera.aspect = w / h;
-    camera.fov = w < 700 ? 70 : 55; camera.updateProjectionMatrix();
+    range = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    renderer.setSize(w, h, false); camera.aspect = w / h; camera.fov = w < 700 ? 70 : 55; camera.updateProjectionMatrix();
     if (reduce) render(0);
   }
+  if (window.scrollY > 24) { diveT = 1; dive = 1; }
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", resize);
-  window.addEventListener("pointermove", function (e) { mx = e.clientX / window.innerWidth * 2 - 1; my = e.clientY / window.innerHeight * 2 - 1; }, { passive: true });
+  var px = -9999, py = -9999, hasPointer = false, proj = new THREE.Vector3();
+  window.addEventListener("pointermove", function (e) {
+    mx = e.clientX / window.innerWidth * 2 - 1; my = e.clientY / window.innerHeight * 2 - 1;
+    px = e.clientX; py = e.clientY; hasPointer = e.pointerType === "mouse";
+  }, { passive: true });
 
-  var tmp = new THREE.Color(), seaT = 0;
-  function render(t) {
-    camY = reduce ? targetY : camY + (targetY - camY) * 0.08;
-    cmx += (mx - cmx) * 0.04; cmy += (my - cmy) * 0.04;
+  var water = new THREE.Color(), seaT = 0;
+  function render(t, dt) {
+    dt = dt || 1 / 60;
+    var kCam = 1 - Math.exp(-5 * dt), kPtr = 1 - Math.exp(-2.4 * dt);
+    camY = reduce ? targetY : camY + (targetY - camY) * kCam;
+    cmx += (mx - cmx) * kPtr; cmy += (my - cmy) * kPtr;
     var depthT = camY / CAM_BOTTOM;
-    seaT += ((window.__seaDepth != null ? window.__seaDepth : depthT) - seaT) * (reduce ? 1 : 0.08);
-    camera.position.set(cmx * 2.5, camY - cmy * 1.2, 22);
-    camera.lookAt(cmx * 1.2, camY - 1 - depthT * 4, 0);
-    waterAt(seaT, tmp); scene.background.copy(tmp); scene.fog.color.copy(tmp);
-    scene.fog.near = 20 - seaT * 10; scene.fog.far = 95 - seaT * 40;   // murkier in the deep
-    hemi.intensity = 0.95 - seaT * 0.5; sun.intensity = 0.8 - seaT * 0.6;
-    glow.intensity = seaT * 1.2; glow.position.set(camera.position.x, camera.position.y, 8);
-    rays.forEach(function (r) { r.o.visible = seaT < 0.6; r.o.material.opacity = (r.cur || 0.35) * Math.max(0, 1 - seaT / 0.6); });
-    jellies.forEach(function (j) { j.o.userData.bell.material.emissiveIntensity = 0.3 + seaT * 0.9; });
+    seaT += ((window.__seaDepth != null ? window.__seaDepth : depthT) - seaT) * (reduce ? 1 : kCam);
+    dive = reduce ? diveT : Math.min(diveT, dive + dt / 1.6);   // 1.6 s, eased below
+    var de = dive * dive * (3 - 2 * dive), upY = SURFACE_Y + 4.2;   // gently bobbing on the swell
+    var cy = upY + (camY - upY) * de;
+    camera.position.set(cmx * 2.5, cy - cmy * 1.2 * de, 22);
+    var lookUp = cy + (innerWidth < 700 ? 7.4 : 3.8), lookDown = camY + 1.5 - depthT * 5;
+    camera.lookAt(cmx * 1.2, lookUp + (lookDown - lookUp) * de, 0);
+    var above = camera.position.y > SURFACE_Y + 0.05;
+    skyDome.visible = above; seaTop.visible = above; surface.visible = !above; skyDome.position.copy(camera.position);
+    if (veil) veil.style.opacity = Math.max(0, 1 - Math.abs(camera.position.y - SURFACE_Y) / 1.8).toFixed(3);
+    var dived = dive > 0.55; if (dived !== wasDived) { wasDived = dived; document.documentElement.classList.toggle("is-dived", dived); }
+    waterAt(seaT, water); scene.background.copy(water); scene.fog.color.copy(water); window.__seaWater = water;
+    scene.fog.density = above ? 0 : 0.012 + seaT * 0.022;
+    hemi.intensity = 0.95 - seaT * 0.6; sun.intensity = 1.15 - seaT * 0.95;
+    surfMat.uniforms.uFade.value = Math.max(0, 1 - seaT * 3.2);
+    rays.forEach(function (r) { var f = Math.max(0, 1 - seaT / 0.55); r.o.visible = f > 0.01; r.m.uniforms.uOp.value = r.base * f * (0.75 + 0.25 * Math.sin(t * 0.5 + r.ph)); });
+    plankMat.uniforms.uDeep.value = seaT;
     renderer.render(scene, camera);
   }
 
-  var last = performance.now(), clock = 0;
+  var last = performance.now(), clock = 0, vw = window.innerWidth, vh = window.innerHeight;
+  window.addEventListener("resize", function () { vw = window.innerWidth; vh = window.innerHeight; });
   function animate(now) {
     var dt = Math.min(0.05, (now - last) / 1000); last = now; clock += dt; var t = clock;
-    swimmers.forEach(function (s) {
-      var o = s.o; o.position.x += s.dir * s.speed * dt;
-      if (o.position.x > 48) o.position.x = -48; if (o.position.x < -48) o.position.x = 48;
-      o.position.y = s.baseY + Math.sin(t * 1.3 + s.ph) * 0.5;
-      o.userData.tail.rotation.y = Math.sin(t * s.wag + s.ph) * 0.5;
-      o.rotation.z = Math.cos(t * 1.3 + s.ph) * 0.08;
-    });
-    puffers.forEach(function (p) {
-      p.o.position.x += p.dir * 0.9 * dt; if (p.o.position.x > 40) p.o.position.x = -40; if (p.o.position.x < -40) p.o.position.x = 40;
-      p.o.position.y = p.baseY + Math.sin(t * 0.8 + p.ph) * 0.8;
-      var puff = 1 + Math.max(0, Math.sin(t * 0.5 + p.ph)) * 0.35; p.o.scale.setScalar(puff);
-      p.o.rotation.y = (p.dir > 0 ? 0 : Math.PI) + Math.sin(t * 0.7 + p.ph) * 0.3;
-    });
-    turtle.position.x += 1.4 * dt; if (turtle.position.x > 50) turtle.position.x = -50;
-    turtle.position.y = -24 + Math.sin(t * 0.5) * 1.5; turtle.rotation.z = Math.sin(t * 0.5) * 0.08;
-    turtle.userData.flips.forEach(function (f) { f.rotation.x = f.userData.side * Math.sin(t * 2.2 + (f.userData.front ? 0 : 1.2)) * 0.5; });
-    // Fade out any jelly drifting behind the FAQ questions so they stay readable.
-    var faqBox = faqList && faqList.getBoundingClientRect(), vw = window.innerWidth, vh = window.innerHeight;
-    var faqOn = faqBox && faqBox.bottom > 0 && faqBox.top < vh, halfFov = Math.tan(camera.fov * Math.PI / 360);
-    jellies.forEach(function (j) {
-      var u = j.o.userData, pulse = Math.sin(t * 2 + j.ph), clear = 1;
-      if (faqOn) {
-        jellyV.copy(j.o.position).project(camera);
-        var sx = (jellyV.x + 1) / 2 * vw, sy = (1 - jellyV.y) / 2 * vh;
-        var R = j.o.scale.x * vh / (2 * halfFov * (camera.position.z - j.o.position.z)) * 1.3;
-        if (sx + R > faqBox.left && sx - R < faqBox.right && sy + R * 5 > faqBox.top && sy - R < faqBox.bottom) clear = 0;
-      }
-      j.fade += (clear - j.fade) * Math.min(1, dt * 4);
-      j.o.visible = j.fade > 0.02;
-      u.bell.material.opacity = 0.72 * j.fade;
-      u.lineMats.forEach(function (m) { m.opacity = 0.85 * j.fade; });
-      u.bell.scale.set(1 + pulse * 0.08, 1 - pulse * 0.12, 1 + pulse * 0.08);
-      j.o.position.y += (j.rise + Math.max(0, pulse) * 0.6) * dt;
-      if (j.o.position.y > 10) j.o.position.y = CAM_BOTTOM - 10;
-      u.tents.forEach(function (tn) {
-        var arr = tn.geo.attributes.position.array;
-        for (var k = 0; k < u.P; k++) {
-          var sway = Math.sin(t * 2.2 + tn.ph + k * 0.45) * 0.06 * k;
-          arr[k * 3] = tn.ax * (1 - k * 0.02) + sway; arr[k * 3 + 1] = -k * tn.len; arr[k * 3 + 2] = tn.az * (1 - k * 0.02) + sway * 0.5;
+    U.uTime.value = t;
+    var decay = Math.exp(-1.8 * dt);
+    schools.forEach(function (S) {
+      S.prev.copy(S.c);
+      S.base.x += S.dir * S.speed * dt;
+      if (S.base.x > 70) S.base.x = -70; if (S.base.x < -70) S.base.x = 70;
+      S.c.set(S.base.x + Math.sin(t * S.wob + S.ph) * S.amp, S.base.y + Math.sin(t * S.wob * 1.7 + S.ph) * S.amp * 0.5, S.base.z + Math.sin(t * S.wob * 0.8 + S.ph * 2.0) * S.amp * 0.6);
+      var vel = VEL.copy(S.c).sub(S.prev);
+      if (vel.lengthSq() < 1e-8) vel.set(S.dir, 0, 0);
+      vel.normalize();
+      var wrapped = Math.abs(S.c.x - S.prev.x) > 10;
+      for (var k = 0; k < S.n; k++) {
+        var F = S.fish[k], o = F.o, x = o.x, z = o.z, y = o.y, heading = vel;
+        if (S.swirl) {
+          // bait ball: fish orbit the centre, inner ones faster
+          var rr = Math.sqrt(x * x + z * z) + 0.5, ang = t * S.swirl * (2.4 / rr), ca = Math.cos(ang), sa = Math.sin(ang);
+          var ox = x * ca - z * sa, oz = x * sa + z * ca; x = ox; z = oz;
+          tmpV.set(-z, 0, x).normalize().multiplyScalar(Math.sign(S.swirl)).addScaledVector(vel, 0.35).normalize(); heading = tmpV;
         }
-        tn.geo.attributes.position.needsUpdate = true;
-      });
+        y += Math.sin(t * 1.3 + k) * 0.15;
+        var wx = S.c.x + x + F.d.x, wy = S.c.y + y + F.d.y, wz = S.c.z + z + F.d.z;
+        // scatter from the cursor
+        if (hasPointer && !wrapped) {
+          proj.set(wx, wy, wz).project(camera);
+          if (proj.z < 1) {
+            var sx = (proj.x + 1) * 0.5 * vw, sy = (1 - proj.y) * 0.5 * vh, ddx = sx - px, ddy = sy - py, dd = ddx * ddx + ddy * ddy;
+            if (dd < 19600 && dd > 0.01) { dd = Math.sqrt(dd); var push = (1 - dd / 140) * 14 * dt; F.d.x += ddx / dd * push; F.d.y -= ddy / dd * push; }
+          }
+        }
+        F.d.multiplyScalar(decay);
+        tmpQ.setFromUnitVectors(X, heading);
+        tmpS.setScalar(F.s * 1.3);
+        tmpM.compose(POS.set(wx, wy, wz), tmpQ, tmpS);
+        S.mesh.setMatrixAt(k, tmpM);
+      }
+      S.mesh.instanceMatrix.needsUpdate = true;
     });
+    whale.position.x += 2.6 * dt; if (whale.position.x > 110) whale.position.x = -110;
+    // rising gently toward the light, rolled a little so its pale belly and flippers face the viewer below
+    whale.position.y = -24 + Math.sin(t * 0.16) * 2.5;
+    whale.rotation.y = -0.18 + Math.sin(t * 0.1) * 0.08; whale.rotation.x = -0.42 + Math.sin(t * 0.13) * 0.05; whale.rotation.z = 0.1 + Math.cos(t * 0.16) * 0.05;
     var bp = bgeo.attributes.position.array;
-    for (var b = 0; b < BN; b++) { bp[b * 3 + 1] += bsp[b] * dt; bp[b * 3] += Math.sin(t * 2 + b) * 0.01; if (bp[b * 3 + 1] > 12) bp[b * 3 + 1] = FLOOR; }
+    for (var b = 0; b < BN; b++) {
+      bp[b * 3 + 1] += bsp[b] * dt; bp[b * 3] = bcol[b] + Math.sin(t * 2 + b) * 0.4;
+      if (bp[b * 3 + 1] > 12) bp[b * 3 + 1] = CAM_BOTTOM - 10;
+    }
     bgeo.attributes.position.needsUpdate = true;
-    rays.forEach(function (r) { r.o.rotation.z = r.base + Math.sin(t * 0.4 + r.ph) * 0.05; r.cur = 0.3 + Math.sin(t * 0.6 + r.ph) * 0.12; });
-    kelps.forEach(function (k) { k.segs.forEach(function (s, idx) { s.rotation.z = Math.sin(t * 1.1 + k.ph + idx * 0.35) * 0.07; s.rotation.x = Math.cos(t * 0.9 + k.ph + idx * 0.3) * 0.04; }); });
-    render(t);
-    requestAnimationFrame(animate);
+    render(t, dt);
+    if (!reduce) requestAnimationFrame(animate);
   }
   resize(); onScroll();
-  if (reduce) render(0); else requestAnimationFrame(animate);
+  if (reduce) { U.uTime.value = 3; animate(performance.now()); } else requestAnimationFrame(animate);
 })();
-
+</script>
+<script>
 /* Depth gauge: interpolates between the depth labels on each section. */
 (function () {
   var out = document.getElementById("gauge-val"), fill = document.getElementById("gauge-fill");
   if (!out) return;
   var marks = [].slice.call(document.querySelectorAll("[data-depth]"));
-  var maxD = 300;
+  var maxD = 300, wasDeep = null, lastZone = null, zoneEl = document.getElementById("gauge-zone");
+  function zoneOf(depth) { for (var j = marks.length - 1; j >= 0; j--) if (+marks[j].getAttribute("data-depth") <= depth) return marks[j].getAttribute("data-zone"); return marks[0].getAttribute("data-zone"); }
   function update() {
     var probe = window.innerHeight * 0.45, prev = { y: -Infinity, d: 0 }, d = 0, found = false;
     for (var i = 0; i < marks.length; i++) {
@@ -922,19 +1199,439 @@ footer a { color: #4a3a1c; }
     var nearEnd = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
     if (nearEnd) d = maxD;
     out.textContent = Math.round(d).toLocaleString() + " m";
-    fill.style.height = (d / maxD * 100) + "%";
+    var zoneName = nearEnd ? marks[marks.length - 1].getAttribute("data-zone") : (prev.y === -Infinity ? marks[0].getAttribute("data-zone") : zoneOf(prev.d));
+    if (zoneName !== lastZone) {
+      lastZone = zoneName; zoneEl.textContent = zoneName;
+      zoneEl.classList.remove("is-changing"); void zoneEl.offsetWidth; zoneEl.classList.add("is-changing");
+    }
+    fill.style.transform = "scaleY(" + (d / maxD).toFixed(4) + ")";
     window.__seaDepth = d / maxD;
     var deep = d > 140, rs = document.documentElement.style;
-    rs.setProperty("--sea-ink", deep ? "#f2fbfa" : "#0d2f3d");
-    rs.setProperty("--sea-muted", deep ? "#c4e4ea" : "#24485a");
-    rs.setProperty("--sea-accent", deep ? "#3cf0b0" : "#078a5c");
+    if (deep === wasDeep) return; wasDeep = deep;
+    rs.setProperty("--sea-ink", "#f6efe2");
+    rs.setProperty("--sea-muted", deep ? "#b8d6dd" : "#c6e2e6");
+    rs.setProperty("--sea-accent", "#5cf0b4");
   }
   window.addEventListener("scroll", update, { passive: true });
   window.addEventListener("resize", update);
   update();
 })();
 </script>
-<script src="/ocean-foreground.js" defer></script>
-<script src="/logo-intro.js" defer></script>
+<script>
+/* Hero title: split into letters, let them surface in, sweep light through them, and lift gently near the cursor. */
+(function () {
+  var h1 = document.querySelector(".sea-title"), hero = document.querySelector(".sea-hero");
+  if (!h1 || !hero) return;
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  h1.setAttribute("aria-label", [].map.call(h1.children, function (c) { return c.textContent.trim(); }).join(" "));
+  // Shadow copy behind the letters (made before splitting, so it keeps the original markup).
+  var shade = document.createElement("span"); shade.className = "title-shade"; shade.setAttribute("aria-hidden", "true");
+  shade.innerHTML = h1.innerHTML;
+  var n = 0;
+  (function split(node) {
+    [].slice.call(node.childNodes).forEach(function (c) {
+      if (c.nodeType === 3) {
+        var frag = document.createDocumentFragment();
+        c.textContent.split("").forEach(function (ch) {
+          var s = document.createElement("span"); s.className = "ch"; s.textContent = ch; s.setAttribute("aria-hidden", "true");
+          s.style.setProperty("--i", n++); frag.appendChild(s);
+        });
+        node.replaceChild(frag, c);
+      } else if (c.nodeType === 1) split(c);
+    });
+  })(h1);
+  h1.insertBefore(shade, h1.firstChild);
+  var letters = [].slice.call(h1.querySelectorAll(".ch"));
+  // Gradient slices: tell every letter where it sits inside the title so they share one continuous gradient.
+  function place() {
+    h1.style.setProperty("--tw", h1.offsetWidth + "px"); h1.style.setProperty("--th", h1.offsetHeight + "px");
+    var hr = h1.getBoundingClientRect();
+    letters.forEach(function (l) {
+      var x = 0, y = 0, el = l; while (el && el !== h1) { x += el.offsetLeft; y += el.offsetTop; el = el.offsetParent; }
+      if (el !== h1) { var r = l.getBoundingClientRect(); x = r.left - hr.left; y = r.top - hr.top; }
+      l.style.setProperty("--x", x + "px"); l.style.setProperty("--y", y + "px");
+    });
+  }
+  place(); addEventListener("resize", place); document.fonts && document.fonts.ready.then(place);
+  if (reduce) return;
+  h1.classList.add("is-split"); hero.classList.add("title-anim");
+  requestAnimationFrame(function () { requestAnimationFrame(function () {
+    h1.classList.add("is-in"); hero.classList.add("title-in");
+    setTimeout(function () { h1.classList.add("is-live"); }, 300);
+  }); });
+  // Cursor lift: letters near the pointer rise a little, like a swell passing under them.
+  if (!matchMedia("(pointer: fine)").matches) return;
+  var rects = [], raf = 0, ptr = null;
+  function measure() { rects = letters.map(function (l) { var r = l.getBoundingClientRect(); return { x: r.left + r.width / 2 + scrollX, y: r.top + r.height / 2 + scrollY }; }); }
+  function frame() {
+    raf = 0;
+    letters.forEach(function (l, i) {
+      var k = 0;
+      if (ptr) { var dx = (rects[i].x - scrollX) - ptr.x, dy = (rects[i].y - scrollY) - ptr.y; k = Math.max(0, 1 - Math.hypot(dx, dy * 1.4) / 180); k = k * k * (3 - 2 * k); }
+      l.style.setProperty("--lift", (-12 * k).toFixed(1) + "px"); l.style.setProperty("--grow", (1 + 0.06 * k).toFixed(3));
+    });
+  }
+  setTimeout(measure, 1500); addEventListener("resize", measure); document.fonts && document.fonts.ready.then(measure);
+  hero.addEventListener("pointermove", function (e) { if (!rects.length) measure(); ptr = { x: e.clientX, y: e.clientY }; if (!raf) raf = requestAnimationFrame(frame); });
+  hero.addEventListener("pointerleave", function () { ptr = null; if (!raf) raf = requestAnimationFrame(frame); });
+})();
+</script>
+<script>
+/* Hero timer: a quiet, sunset-themed display drawn from the countdown (the plain countdown stays for screen readers). */
+(function () {
+  var cd = document.getElementById("countdown"); if (!cd) return;
+  var mode = "D";
+  var box = cd.parentNode; box.classList.add("t-" + mode); cd.classList.add("cd-sr-only");
+  var view = document.createElement("div"); view.className = "tview"; view.setAttribute("aria-hidden", "true"); box.appendChild(view);
+  // D: a depth sounder. The time is the reading; a measuring tape of depth marks slides past the gold needle, one mark a second.
+  if (mode === "D") view.innerHTML = '<div class="tD-read"><b data-k="d"></b><span>days</span><b data-k="h"></b><span>h</span><b data-k="m"></b><span>m</span><b data-k="s"></b><span>s</span></div>' +
+    '<div class="tD-tape"><div class="tD-strip"></div><i class="tD-needle"></i></div><div class="tD-cap">until we dive</div>';
+  var q = function (k) { return view.querySelector('[data-k="' + k + '"]'); };
+  var prog = view.querySelector(".tC-prog"), sun = view.querySelector(".tC-sun");
+  // D gauge: three repeats of a 0-59 scale (8px a second); the needle reads the current second, rolling smoothly.
+  var strip = view.querySelector(".tD-strip"), tape = view.querySelector(".tD-tape"), cyc = 1, lastSec = null;
+  if (strip) {
+    var lab = "";
+    for (var c = 0; c < 3; c++) for (var k = 0; k < 60; k += 10) lab += '<em style="left:' + ((c * 60 + k) * 8) + 'px">' + k + '</em>';
+    strip.innerHTML = lab;
+  }
+  function gauge(sec) {
+    var half = tape.offsetWidth / 2;
+    if (lastSec === 0 && sec === 59) {   // wrapped: jump one whole scale (looks identical), then roll on
+      strip.style.transition = "none"; strip.style.transform = "translateX(" + (half - (2 * 60) * 8) + "px)"; void strip.offsetWidth;
+      strip.style.transition = "";
+    }
+    strip.style.transform = "translateX(" + (half - (cyc * 60 + sec) * 8) + "px)";
+    if (lastSec === null) { strip.style.transition = "none"; void strip.offsetWidth; strip.style.transition = ""; }
+    lastSec = sec;
+  }
+  document.addEventListener("cd-tick", function (e) {
+    var v = e.detail;
+    if (q("d")) q("d").textContent = v.d;
+    if (q("h")) q("h").textContent = v.h;
+    if (q("m")) q("m").textContent = v.m;
+    if (q("s")) q("s").textContent = v.s;
+    if (q("hms")) q("hms").textContent = v.h + ":" + v.m + ":" + v.s;
+    if (strip) gauge(v.sec);
+    if (prog) {   // the sun walks the arc once a minute
+      var f = (60 - v.sec) / 60; prog.style.strokeDasharray = (60 * f) + " 60";
+      var a = Math.PI * (1 - f); sun.setAttribute("cx", 120 + 90 * Math.cos(a)); sun.setAttribute("cy", 118 - 90 * Math.sin(a));
+    }
+  });
+})();
+</script>
+<script>
+/* Tracks: a ship's wheel. Each track rides a handle; whichever handle comes round to the top is the chosen track.
+   Grab and spin it (it keeps turning and settles on a handle), use the arrows, click a handle, or press left/right.
+   Fill in TRACKS when the tracks are announced. */
+(function () {
+  var root = document.querySelector("[data-helm]"); if (!root) return;
+  var TRACKS = [
+    { title: "To be revealed", sub: "Track partner announced soon", desc: "We're finalizing this track with our nonprofit and community partners. The challenge brief lands here soon.", prizes: ["TBA", "TBA", "TBA"] },
+    { title: "To be revealed", sub: "Track partner announced soon", desc: "A second challenge built with a community partner. Check back for the full brief and judging criteria.", prizes: ["TBA", "TBA", "TBA"] },
+    { title: "To be revealed", sub: "Track partner announced soon", desc: "The third track is still under wraps. Every track has its own prizes and its own partner.", prizes: ["TBA", "TBA", "TBA"] },
+    { title: "To be revealed", sub: "Track partner announced soon", desc: "A fourth challenge is on its way, shaped around a real problem a partner organization is facing.", prizes: ["TBA", "TBA", "TBA"] },
+    { title: "To be revealed", sub: "Track partner announced soon", desc: "The fifth track rounds out the lineup. Details, partner and prizes are coming soon.", prizes: ["TBA", "TBA", "TBA"] }
+  ];
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var svg = root.querySelector(".helm-wheel"), spin = root.querySelector(".helm-spin"), NS = "http://www.w3.org/2000/svg";
+  var n = TRACKS.length, SPOKES = n * 2, STEP = 360 / n;
+  function el(tag, attrs, parent) { var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); (parent || spin).appendChild(e); return e; }
+  // spokes and turned handles
+  var medals = [];
+  for (var i = 0; i < SPOKES; i++) {
+    var g = el("g", { transform: "rotate(" + (i * 360 / SPOKES - 90) + ")" });
+    el("rect", { x: 40, y: -6, width: 140, height: 12, rx: 6, fill: "url(#helm-wood)", stroke: "rgba(220,250,250,.5)", "stroke-width": 1 }, g);
+    el("rect", { x: 182, y: -8, width: 8, height: 16, rx: 3, fill: "url(#helm-brass)" }, g);                       // collar
+    el("path", { d: "M192 -10 C206 -14 210 -6 214 -6 C224 -6 226 6 214 6 C210 6 206 14 192 10 Z", fill: "url(#helm-wood)", stroke: "rgba(220,250,250,.5)", "stroke-width": 1 }, g);   // handle
+    if (i % 2 === 0) {   // this handle carries a track
+      var t = i / 2, m = el("g", { class: "helm-medal", "data-t": t, transform: "translate(212 0)" }, g);
+      el("circle", { r: 21, class: "helm-medal-ring" }, m);
+      var lbl = el("text", { class: "helm-medal-num", "text-anchor": "middle", dy: "0.36em" }, m); lbl.textContent = t + 1;
+      medals.push(m);
+    }
+  }
+  // rim: a thick wooden ring with brass bands, then the hub with the H4SG mark
+  el("circle", { r: 150, fill: "none", stroke: "url(#helm-wood)", "stroke-width": 28 });
+  el("circle", { r: 150, fill: "none", stroke: "rgba(220,250,250,.22)", "stroke-width": 1, "stroke-dasharray": "1 13" });
+  el("circle", { r: 164, fill: "none", stroke: "url(#helm-brass)", "stroke-width": 1.5 });
+  el("circle", { r: 136, fill: "none", stroke: "url(#helm-brass)", "stroke-width": 1.5 });
+  el("circle", { r: 54, fill: "url(#helm-wood)" });
+  el("circle", { r: 54, fill: "none", stroke: "url(#helm-brass)", "stroke-width": 1.5 });
+  el("circle", { r: 42, fill: "url(#helm-hub)" });
+  var logo = el("image", { href: "/h4sg-logo.png", x: -26, y: -30, width: 52, height: 60, class: "helm-logo" });
+
+  var f = {}; [].forEach.call(root.querySelectorAll("[data-f]"), function (e) { f[e.getAttribute("data-f")] = e; });
+  f.count.textContent = n;
+  var angle = 0, vel = 0, target = 0, mode = "spring", cur = -1;
+  function indexAt(a) { return ((Math.round(-a / STEP) % n) + n) % n; }
+  function show(k) {
+    if (k === cur) return; cur = k; var tr = TRACKS[k];
+    f.num.textContent = k + 1; f.title.textContent = tr.title; f.sub.textContent = tr.sub; f.desc.textContent = tr.desc;
+    f.p0.textContent = tr.prizes[0]; f.p1.textContent = tr.prizes[1]; f.p2.textContent = tr.prizes[2];
+    medals.forEach(function (m, i) { m.classList.toggle("is-on", i === k); });
+    var panel = root.querySelector(".helm-panel"); panel.classList.remove("swap"); void panel.offsetWidth; panel.classList.add("swap");
+  }
+  function render() {
+    spin.setAttribute("transform", "rotate(" + angle.toFixed(2) + ")");
+    medals.forEach(function (m) { var t = +m.getAttribute("data-t"), a = -(angle + t * 2 * 360 / SPOKES - 90); m.setAttribute("transform", "translate(212 0) rotate(" + a.toFixed(2) + ")"); });
+    logo.setAttribute("transform", "rotate(" + (-angle).toFixed(2) + ")");   // the mark stays upright
+    show(indexAt(angle));
+  }
+  function goTo(a) { target = a; mode = "spring"; kick(); }
+  function nearest(a) { return Math.round(a / STEP) * STEP; }
+  // animation: free spin with friction, then a spring that settles on the nearest handle
+  var raf = 0, last = 0;
+  function tick(now) {
+    var dt = Math.min(0.05, (now - last) / 1000 || 0.016); last = now;
+    if (mode === "coast") { angle += vel * dt; vel *= Math.exp(-2.2 * dt); if (Math.abs(vel) < 40) { mode = "spring"; target = nearest(angle + vel * 0.15); } }
+    if (mode === "spring") { var k = 90, c = 2 * Math.sqrt(k) * 0.82; vel += (-(angle - target) * k - vel * c) * dt; angle += vel * dt; if (Math.abs(angle - target) < 0.05 && Math.abs(vel) < 0.5) { angle = target; vel = 0; render(); raf = 0; return; } }
+    render(); raf = requestAnimationFrame(tick);
+  }
+  function kick() { if (reduce) { angle = target; vel = 0; render(); return; } if (!raf) { last = performance.now(); raf = requestAnimationFrame(tick); } }
+  function stepBy(d) { goTo(nearest(target) - d * STEP); }
+  root.querySelectorAll(".helm-btn").forEach(function (b) { b.addEventListener("click", function () { stepBy(+b.getAttribute("data-dir")); }); });
+  svg.addEventListener("keydown", function (e) { if (e.key === "ArrowRight") { stepBy(1); e.preventDefault(); } if (e.key === "ArrowLeft") { stepBy(-1); e.preventDefault(); } });
+  // drag to spin
+  var drag = null;
+  function pa(e) { var r = svg.getBoundingClientRect(); return Math.atan2(e.clientY - (r.top + r.height / 2), e.clientX - (r.left + r.width / 2)) * 180 / Math.PI; }
+  svg.addEventListener("pointerdown", function (e) {
+    drag = { a: pa(e), t: performance.now(), moved: 0, medal: e.target.closest && e.target.closest(".helm-medal") };
+    svg.setPointerCapture(e.pointerId); mode = "drag"; vel = 0; if (raf) { cancelAnimationFrame(raf); raf = 0; }
+    root.classList.add("is-dragging");
+  });
+  svg.addEventListener("pointermove", function (e) {
+    if (!drag) return; var a = pa(e), d = a - drag.a; d = ((d + 540) % 360) - 180;
+    var now = performance.now(), dt = Math.max(0.001, (now - drag.t) / 1000);
+    angle += d; drag.moved += Math.abs(d); vel = vel * 0.6 + (d / dt) * 0.4; drag.a = a; drag.t = now; render();
+  });
+  function release() {
+    if (!drag) return; root.classList.remove("is-dragging");
+    if (drag.moved < 4 && drag.medal) { var t = +drag.medal.getAttribute("data-t"), want = -t * STEP, k = Math.round((angle - want) / 360); goTo(want + k * 360); }
+    else if (reduce || Math.abs(vel) < 60) goTo(nearest(angle));
+    else { mode = "coast"; vel = Math.max(-1400, Math.min(1400, vel)); kick(); }
+    drag = null;
+  }
+  svg.addEventListener("pointerup", release); svg.addEventListener("pointercancel", release);
+  render();
+})();
+</script>
+<script>
+/* The abyss: something enormous lives beneath the page. As you sink toward the bottom, the scaled head of a sea
+   dragon rises out of the dark water, its eye opens, and it watches your cursor (the pupil narrows on links).
+   No frame: the head dissolves into the water through a noisy alpha edge, so the ocean shows around it. */
+(function () {
+  var cv = document.getElementById("abyss-eye"); if (!cv) return;
+  var gl = cv.getContext("webgl", { antialias: false, alpha: true, premultipliedAlpha: true });
+  if (!gl) { cv.remove(); return; }
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var VS = "attribute vec2 p; void main(){ gl_Position = vec4(p, 0.0, 1.0); }";
+  var FS = [
+    "precision highp float;",
+    "uniform vec2 uRes; uniform vec2 uC; uniform float uS; uniform float uTime; uniform vec2 uLook; uniform float uOpen; uniform float uSlit; uniform float uFade; uniform vec3 uDeep; uniform float uRot;",
+    "float h21(vec2 p){ p = fract(p * vec2(123.34, 456.21)); p += dot(p, p + 45.32); return fract(p.x * p.y); }",
+    "vec2 h22(vec2 p){ float n = h21(p); return vec2(n, h21(p + n)); }",
+    "float vn(vec2 p){ vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f);",
+    "  return mix(mix(h21(i), h21(i + vec2(1, 0)), f.x), mix(h21(i + vec2(0, 1)), h21(i + vec2(1, 1)), f.x), f.y); }",
+    "float fbm(vec2 p){ float a = 0.5, s = 0.0; for (int i = 0; i < 5; i++) { s += a * vn(p); p = p * 2.03 + 7.1; a *= 0.5; } return s; }",
+    "vec3 vor(vec2 p){ vec2 i = floor(p), f = fract(p); float d1 = 8.0, d2 = 8.0; float id = 0.0;",
+    "  for (int y = -1; y <= 1; y++) for (int x = -1; x <= 1; x++) { vec2 g = vec2(x, y); vec2 o = h22(i + g) * 0.85 + 0.075; vec2 r = g + o - f; float d = dot(r, r);",
+    "    if (d < d1) { d2 = d1; d1 = d; id = h21(i + g); } else if (d < d2) d2 = d; }",
+    "  return vec3(sqrt(d1), sqrt(d2) - sqrt(d1), id); }",
+    "float caustic(vec2 uv, float t){ vec2 p = mod(uv * 6.28318, 6.28318) - 250.0; vec2 i = p; float c = 1.0; float inten = 0.005;",
+    "  for (int n = 0; n < 3; n++) { float tt = t * (1.0 - (3.5 / float(n + 1))); i = p + vec2(cos(tt - i.x) + sin(tt + i.y), sin(tt - i.y) + cos(tt + i.x));",
+    "    c += 1.0 / length(vec2(p.x / (sin(i.x + tt) / inten), p.y / (cos(i.y + tt) / inten))); }",
+    "  c /= 3.0; c = 1.17 - pow(c, 1.4); return pow(abs(c), 8.0); }",
+    "void main(){",
+    "  vec2 uv = (gl_FragCoord.xy - uC) / uS;",
+    "  float cr = cos(uRot), sr = sin(uRot); uv = mat2(cr, sr, -sr, cr) * uv;",   // slow roll of the head
+    "  float t = uTime;",
+    "  uv += 0.006 * vec2(sin(uv.y * 9.0 + t * 0.9), cos(uv.x * 7.0 + t * 0.7));",                   // water refraction wobble
+    // ---- the head: a broad scaled mass around the eye that dissolves into the water ----
+    "  vec2 hp = uv * vec2(0.24, 0.62) - vec2(0.0, 0.42);",
+    "  float edge = length(hp) + (fbm(uv * 0.9 + t * 0.02) - 0.5) * 0.45;",
+    "  float body = smoothstep(1.25, 0.55, edge);",
+    "  if (body * uFade < 0.003) { gl_FragColor = vec4(0.0); return; }",
+    "  vec3 L = normalize(vec3(-0.3, 0.85, 0.45));",                                                  // light from the surface, far above
+    "  float W = 0.6, H = 0.34;",
+    "  float xn = clamp(uv.x / W, -1.0, 1.0);",
+    "  float shape = pow(max(0.0, 1.0 - xn * xn), 0.62);",
+    "  float upper = H * shape * (0.15 + 0.85 * uOpen) * 1.08 + 0.01 * xn;",
+    "  float lower = -H * shape * (0.25 + 0.75 * uOpen) * 0.82;",
+    "  float inside = smoothstep(0.014, -0.01, uv.y - upper) * smoothstep(-0.014, 0.01, uv.y - lower) * step(abs(uv.x), W);",
+    // armoured scales, finer near the lids, a heavy brow ridge above
+    "  float dE = max(0.0, length(uv / vec2(W, H * 1.3)) - 1.0);",
+    "  float sc = 22.0 - 9.0 * smoothstep(0.0, 1.4, dE);",
+    "  vec2 sp = uv * sc + 0.35 * vec2(fbm(uv * 4.0), fbm(uv * 4.0 + 3.1));",
+    "  vec3 v = vor(sp);",
+    "  float dome = 1.0 - smoothstep(0.0, 0.62, v.x);",
+    "  float groove = 1.0 - smoothstep(0.0, 0.1, v.y);",
+    "  float hx = (1.0 - smoothstep(0.0, 0.62, vor(sp + vec2(0.05, 0.0)).x)) - dome, hy = (1.0 - smoothstep(0.0, 0.62, vor(sp + vec2(0.0, 0.05)).x)) - dome;",
+    "  vec3 nS = normalize(vec3(-hx * 2.6, -hy * 2.6, 1.0));",
+    "  vec3 skin = mix(mix(vec3(0.24, 0.29, 0.34), vec3(0.36, 0.41, 0.46), v.z), vec3(0.12, 0.16, 0.22), smoothstep(0.5, 0.9, fbm(uv * 2.5 + 9.0)));",
+    "  float brow = smoothstep(0.32, 0.0, abs(uv.y - upper - 0.17 - 0.06 * (1.0 - xn * xn))) * smoothstep(1.0, 0.4, abs(uv.x));",
+    "  float diff = clamp(dot(nS, L), 0.0, 1.0);",
+    "  vec3 col = skin * (0.18 + 0.95 * diff) * (0.7 + 0.4 * dome) * (1.0 + brow * 0.35);",
+    "  col *= 1.0 - groove * 0.6;",
+    "  col += vec3(0.55, 0.9, 0.95) * pow(clamp(dot(reflect(-L, nS), vec3(0, 0, 1)), 0.0, 1.0), 24.0) * 0.32 * dome;",
+    "  col *= 1.0 - 0.55 * smoothstep(0.1, -0.5, uv.y - upper + 0.25);",                            // underside of the head falls into shadow
+    // lid rims and crease
+    "  float rim = max(smoothstep(0.045, 0.0, abs(uv.y - upper)), smoothstep(0.035, 0.0, abs(uv.y - lower))) * step(abs(uv.x), W);",
+    "  col = mix(col, col * 0.4, smoothstep(0.09, 0.03, abs(uv.y - upper - 0.07)) * step(abs(uv.x), W * 0.95) * shape * 0.6);",
+    "  col = mix(col, vec3(0.05, 0.13, 0.15) * (0.7 + 0.4 * fbm(uv * 60.0)), rim * 0.5);",
+    // ---- the eye, lit from within so it reads in the dark ----
+    // deep shadows: a dark socket hugging the eye, and the head falling off into darkness further out
+    "  col *= 1.0 - 0.62 * (1.0 - smoothstep(0.0, 0.55, dE)) * (1.0 - inside);",
+    "  col *= 0.4 + 0.6 * smoothstep(1.5, 0.35, length(uv * vec2(0.78, 1.25)));",
+    "  vec2 ic = uLook * vec2(0.1, 0.04);",
+    "  vec2 q = uv - ic; float r = length(q); float R = 0.31;",
+    "  float a2 = atan(q.y, q.x);",
+    // vivid blue iris made of fine frosty fibres: bright cyan veins radiating through deep blue, navy at the rim
+    "  float f1 = fbm(vec2(a2 * 14.0, r * 30.0) + vec2(0.0, t * 0.02));",
+    "  float f2 = fbm(vec2(a2 * 42.0, r * 80.0));",
+    "  float vein = pow(1.0 - abs(2.0 * f1 - 1.0), 6.0) * 0.7 + pow(1.0 - abs(2.0 * f2 - 1.0), 10.0) * 0.6;",
+    "  vec3 iris = mix(vec3(0.42, 0.82, 0.98), vec3(0.08, 0.5, 0.82), smoothstep(0.04, 0.16, r));",
+    "  iris = mix(iris, vec3(0.03, 0.16, 0.42), smoothstep(0.17, R, r));",
+    "  iris *= 0.7 + 0.45 * fbm(q * 9.0 + 1.0);",
+    "  iris += vec3(0.55, 0.92, 1.0) * vein * (0.75 - 0.5 * smoothstep(0.1, R, r));",
+    "  iris *= 0.78 + 0.3 * smoothstep(0.3, -0.25, q.y);",
+    "  vec3 ball = mix(iris, vec3(0.01, 0.05, 0.14), smoothstep(R - 0.035, R, r));",
+    "  ball = mix(ball, vec3(0.04, 0.1, 0.2) * (0.7 + 0.5 * fbm(uv * 30.0)), smoothstep(R, R + 0.02, r));",
+    // pointed, lens-shaped slit pupil with a deep blue glow inside
+    "  float ph = 0.28, pw = mix(0.012, 0.045, uSlit);",
+    "  float yy = clamp(abs(q.y) / ph, 0.0, 1.0);",
+    "  float sd = abs(q.x) - pw * (1.0 - yy) * (1.0 + 0.35 * (1.0 - yy));",
+    "  float slit = smoothstep(0.004, -0.004, sd) * step(abs(q.y), ph);",
+    "  ball = mix(ball, ball * 0.5, smoothstep(0.03, 0.0, sd) * step(abs(q.y), ph) * (1.0 - slit));",
+    "  vec3 pupil = mix(vec3(0.01, 0.02, 0.07), vec3(0.08, 0.22, 0.7), smoothstep(0.0, -0.025, sd) * smoothstep(ph, 0.0, abs(q.y)) * 0.6);",
+    "  ball = mix(ball, pupil, slit);",
+    "  ball *= 0.6 + 0.4 * sqrt(max(0.0, 1.0 - pow(length(uv / vec2(W, H * 1.2)), 2.0)));",
+    "  ball *= 0.42 + 0.58 * smoothstep(0.0, 0.1, upper - uv.y);",
+    // big glossy window highlight beside the pupil, plus a small sharp glint
+    "  float cz = caustic((uv + vec2(t * 0.01, 0.0)) * 1.6, t * 0.4);",
+    "  vec2 hw = (uv - ic - vec2(-0.105, 0.035)) / vec2(0.06, 0.13);",
+    "  float win = smoothstep(1.0, 0.85, length(hw));",
+    "  ball = mix(ball, vec3(0.86, 0.94, 1.0) * (0.75 + 0.25 * smoothstep(-1.0, 1.0, hw.y)) , win * (0.85 + 0.15 * cz));",
+    "  ball += vec3(1.0) * smoothstep(0.013, 0.005, length(uv - ic - vec2(-0.165, 0.07))) * 0.6;",
+    "  col = mix(col, ball, inside);",
+    // beaded gold rim lining the lids
+    "  float lidD = min(abs(uv.y - upper), abs(uv.y - lower));",
+    "  float gold = smoothstep(0.035, 0.012, lidD) * step(abs(uv.x), W * 0.97) * shape;",
+    "  vec3 gv = vor(uv * 70.0);",
+    "  vec3 goldC = vec3(0.78, 0.62, 0.32) * (0.5 + 0.8 * (1.0 - smoothstep(0.0, 0.5, gv.x)));",
+    "  col = mix(col, goldC, gold * 0.75);",
+    // a soft green glow the eye throws onto the scales around it
+    "  float glow = smoothstep(0.75, 0.0, length(uv / vec2(1.25, 0.8))) * uOpen;",
+    "  col += vec3(0.15, 0.45, 0.8) * glow * 0.14 * (1.0 - inside);",
+    // ---- sink it into the water: faint caustics, deep-water haze, drifting motes ----
+    "  float cs = caustic(uv * 0.7 + vec2(t * 0.012, -t * 0.008), t * 0.35);",
+    "  col += vec3(0.45, 0.8, 0.95) * cs * 0.1 * (1.0 - inside * 0.7) * smoothstep(-0.6, 0.6, uv.y);",
+    "  vec3 deep = uDeep * 0.85;",
+    "  float haze = 0.58 * (1.0 - inside * 0.5);",               // thicker water toward the dissolving edge
+    "  col = mix(col, deep, clamp(haze, 0.0, 0.92));",
+    "  float far = smoothstep(0.55, 1.9, length(uv * vec2(0.6, 1.0)));",                              // scales fade out with distance from the eye
+    "  col = mix(col, vec3(0.004, 0.012, 0.03), far * 0.92 * (1.0 - inside));",                          // ...into the monster's shadow
+    "  vec2 pp = uv * 9.0 + vec2(t * 0.2, t * 0.1); vec2 pc = floor(pp); vec2 pf = fract(pp) - h22(pc);",
+    "  col += vec3(0.7, 0.95, 1.0) * smoothstep(0.04, 0.0, length(pf)) * step(0.85, h21(pc + 3.0)) * 0.35;",
+    "  float a = body * uFade * smoothstep(uRes.y, uRes.y * 0.62, gl_FragCoord.y);",
+    "  gl_FragColor = vec4(col * a, a);",
+    "}"
+  ].join("\n");
+  function sh(type, src) { var s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { console.error(gl.getShaderInfoLog(s)); return null; } return s; }
+  var pr = gl.createProgram(), vs = sh(gl.VERTEX_SHADER, VS), fs = sh(gl.FRAGMENT_SHADER, FS);
+  if (!vs || !fs) { cv.remove(); return; }
+  gl.attachShader(pr, vs); gl.attachShader(pr, fs); gl.linkProgram(pr); gl.useProgram(pr);
+  var buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+  var loc = gl.getAttribLocation(pr, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+  var U = {}; ["uRes", "uC", "uS", "uTime", "uLook", "uOpen", "uSlit", "uFade", "uDeep", "uRot"].forEach(function (n) { U[n] = gl.getUniformLocation(pr, n); });
+  gl.clearColor(0, 0, 0, 0);
+
+  // Geometry in CSS px. The head sits low and right of centre on desktop (clear of the left-hand copy), centred on phones.
+  var RES = 0.75, W, H, S, cx, cy;   // render at 3/4 resolution: the water softens it anyway
+  function size() {
+    W = innerWidth; H = Math.round(innerHeight * 0.78);
+    var phone = W < 760;
+    S = phone ? W * 0.62 : Math.min(W * 0.3, innerHeight * 0.55);
+    cx = phone ? W * 0.5 : W * 0.68; cy = S * 0.42;         // cy measured up from the canvas bottom
+    cv.width = Math.round(W * RES); cv.height = Math.round(H * RES); gl.viewport(0, 0, cv.width, cv.height);
+  }
+  size(); addEventListener("resize", function () { size(); onScroll(); });
+
+  var foot = document.querySelector("footer"), lift = 0;   // the eye rides just above the footer band as it scrolls in
+  var look = { x: 0, y: 0 }, lookT = { x: 0, y: 0 }, open = 0, openT = 0, slit = 0.75, slitT = 0.75, rise = 0;
+  var nextBlink = 3, blinkAt = -9, last = performance.now(), clock = 0, idleT = 0, running = false;
+  // Rise over the last ~1.1 screens of scrolling.
+  function onScroll() {
+    var max = document.documentElement.scrollHeight - innerHeight;
+    rise = Math.max(0, Math.min(1, 1 - (max - scrollY) / (innerHeight * 1.1)));
+    lift = foot ? Math.max(0, innerHeight - foot.getBoundingClientRect().top) : 0;
+    var e = rise * rise * (3 - 2 * rise);
+    cv.style.transform = "translate3d(0," + ((1 - e) * 45).toFixed(2) + "%,0)";
+    openT = rise > 0.72 ? 1 : 0;
+    if (rise > 0 && !running && !reduce) { running = true; last = performance.now(); requestAnimationFrame(frame); }
+    if (reduce) { open = openT; draw(); }
+  }
+  addEventListener("scroll", onScroll, { passive: true });
+  addEventListener("pointermove", function (e) {
+    var r = cv.getBoundingClientRect(), ex = r.left + cx, ey = r.bottom - cy - lift;
+    lookT.x = Math.max(-1, Math.min(1, (e.clientX - ex) / (W * 0.4)));
+    lookT.y = Math.max(-1, Math.min(1, -(e.clientY - ey) / (innerHeight * 0.5)));
+    slitT = e.target.closest && e.target.closest("a, button, summary, .btn") ? 0.1 : 0.75;
+    idleT = 0;
+  }, { passive: true });
+  function draw() {
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    var fade = Math.min(1, rise * 1.6);
+    gl.uniform2f(U.uRes, cv.width, cv.height); // barely-there life: the head drifts, sways and breathes on slow, out-of-step cycles
+    var dx = (Math.sin(clock * 0.21) + 0.5 * Math.sin(clock * 0.53 + 1.3)) * S * 0.025;
+    var dy = (Math.sin(clock * 0.29 + 0.7) + 0.4 * Math.sin(clock * 0.71)) * S * 0.02;
+    var br = 1 + 0.012 * Math.sin(clock * 0.45);
+    gl.uniform2f(U.uC, (cx + dx) * RES, (cy + lift + dy) * RES); gl.uniform1f(U.uS, S * br * RES);
+    gl.uniform1f(U.uRot, 0.022 * Math.sin(clock * 0.17 + 0.4));
+    gl.uniform1f(U.uTime, clock); gl.uniform2f(U.uLook, look.x, look.y);
+    gl.uniform1f(U.uOpen, open); gl.uniform1f(U.uSlit, slit); gl.uniform1f(U.uFade, fade);
+    var w = window.__seaWater; gl.uniform3f(U.uDeep, w ? w.r : 0.012, w ? w.g : 0.05, w ? w.b : 0.1);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+  }
+  function frame(now) {
+    var dt = Math.min(0.05, (now - last) / 1000); last = now; clock += dt; idleT += dt;
+    if (idleT > 3) { lookT.x = Math.sin(clock * 0.4) * 0.5; lookT.y = Math.sin(clock * 0.27) * 0.3; }
+    if (clock > nextBlink && open > 0.9) { blinkAt = clock; nextBlink = clock + 4 + Math.random() * 5; }
+    var blink = Math.max(0, 1 - Math.abs(clock - blinkAt - 0.13) / 0.13);
+    var k = 1 - Math.exp(-6 * dt);
+    look.x += (lookT.x - look.x) * k; look.y += (lookT.y - look.y) * k;
+    open += (openT - open) * (1 - Math.exp(-(openT > open ? 1.4 : 3) * dt)); slit += (slitT - slit) * (1 - Math.exp(-5 * dt));
+    var o = open; open = o * (1 - blink); draw(); open = o;
+    if (rise > 0 || open > 0.01) requestAnimationFrame(frame);
+    else { running = false; gl.clear(gl.COLOR_BUFFER_BIT); }
+  }
+  onScroll();
+})();
+</script>
+<script>
+/* Clicking open water (not text, cards or controls) releases a few small bubbles that wobble up and pop. */
+(function () {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var layer = document.createElement("div"); layer.className = "bubble-layer"; layer.setAttribute("aria-hidden", "true");
+  document.body.appendChild(layer);
+  var rand = function (a, b) { return a + Math.random() * (b - a); };
+  var CONTENT = "a, button, input, textarea, select, label, summary, details, p, h1, h2, h3, li, img, header, footer, nav, .btn, .countdown, .tide-card, .sponsor-card, .fact, .facts, .contact, .sponsored, .gauge";
+  function bubble(x, y, size, rise) {
+    if (layer.childElementCount > 60) return;
+    var b = document.createElement("span"); b.className = "click-bubble";
+    b.style.left = x + "px"; b.style.top = y + "px"; b.style.width = b.style.height = size + "px";
+    b.style.setProperty("--rise", -rise + "px"); b.style.setProperty("--drift", rand(-14, 14) + "px");
+    b.style.setProperty("--dur", rand(0.9, 1.5).toFixed(2) + "s"); b.style.animationDelay = rand(0, 0.15).toFixed(2) + "s";
+    b.addEventListener("animationend", function () { b.remove(); });
+    layer.appendChild(b);
+  }
+  document.addEventListener("pointerdown", function (e) {
+    if (e.button !== 0 || (e.target.closest && e.target.closest(CONTENT))) return;
+    if (window.getSelection && String(window.getSelection())) return;
+    for (var i = 0, n = 4 + Math.floor(Math.random() * 3); i < n; i++) bubble(e.clientX + rand(-8, 8), e.clientY + rand(-4, 4), rand(3, 9), rand(50, 120));
+  });
+})();
+</script>
+<script src="/logo-intro.js?v=1795474119" defer></script>
 </body>
 </html>

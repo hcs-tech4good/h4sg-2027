@@ -19,7 +19,7 @@
   function onKey(e){if(e.key==='Escape')finish();}
   function onMotion(e){if(e.matches)finish();}
   function pause(ms){return new Promise(function(resolve){setTimeout(resolve,ms);});}
-  if(motion.matches||!target||!art.animate){finish();return;}
+  if(motion.matches||!target||!art.animate||!root.classList.contains('logo-intro-pending')){finish();return;}
   watchdog=setTimeout(finish,4500);
   skip.addEventListener('click',finish);document.addEventListener('keydown',onKey);motion.addEventListener('change',onMotion);
   (async function(){

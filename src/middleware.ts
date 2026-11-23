@@ -4,7 +4,7 @@ import { NextResponse, type NextRequest } from "next/server";
 export async function middleware(request: NextRequest) {
   // The marketing homepage is public and works without a Supabase session.
   // Every stylesheet/script landing.html loads must be listed here, or logged-out visitors get redirected.
-  if (["/", "/landing.html", "/ocean-zones.css", "/ocean-foreground.js", "/logo-intro.css", "/logo-intro.js", "/hero-showcase.css", "/sections.css"].includes(request.nextUrl.pathname)) {
+  if (["/", "/landing.html", "/ocean-zones.css", "/logo-intro.css", "/logo-intro.js", "/hero-showcase.css", "/sections.css", "/landing-refine.css", "/deep-sea.css", "/assets/whale.glb"].includes(request.nextUrl.pathname)) {
     return NextResponse.next();
   }
 
