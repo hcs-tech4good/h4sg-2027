@@ -1,0 +1,636 @@
+/* Deep sea / Atlantis world. One flat illustration language everywhere: scalloped reef bands,
+   flowing current ribbons, kelp, bubble rings, sparkles, flat columns. Loaded last. */
+
+:root {
+  --abyss: #0b1a38; --deep: #11305c; --tide: #1b5585; --teal: #2b8aa3; --sea: #4cb8c8; --foam: #8ff0e0;
+  --cream: #f7ead0; --cream-2: #cfe3e6; --gold: #ffcf6e; --coral: #f39a6b; --lav: #9fb4f0; --rose: #f0a3b8;
+  --serif: "Marcellus", "Cormorant Garamond", Georgia, serif;
+  --sea-ink: var(--cream); --sea-muted: var(--cream-2); --sea-accent: var(--foam);
+  color-scheme: dark;
+}
+html { scrollbar-color: #2b8aa3 #0b1a38; }
+body {
+  color: var(--cream);
+  background: var(--abyss);
+  /* plankton: two drifting sparkle layers shared by every section, so nothing sits on a flat box */
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 18%, rgba(247,234,208,.55), transparent 60%),
+    radial-gradient(1px 1px at 68% 42%, rgba(143,240,224,.6), transparent 60%),
+    radial-gradient(1.5px 1.5px at 38% 76%, rgba(255,207,110,.45), transparent 60%),
+    radial-gradient(1px 1px at 86% 88%, rgba(247,234,208,.5), transparent 60%),
+    linear-gradient(180deg, #1b5585 0%, #11305c 18%, #0b1a38 40%, #0b1a38 100%);
+  background-size: 340px 340px, 280px 280px, 420px 420px, 300px 300px, 100% 100%;
+  background-attachment: fixed;
+}
+::selection { background: var(--foam); color: var(--abyss); }
+body::before { background: rgba(11, 26, 56, .95); }
+:focus-visible { outline-color: var(--foam); }
+.depth, h2, h2 em, .section-lede { transition: none; }
+
+/* ---------- Type ---------- */
+section.zone h2, .sea-title, .tracks-copy h3 { font-family: var(--serif); font-weight: 400; }
+section.zone h2 { color: var(--cream); letter-spacing: -.01em; line-height: 1.05; }
+section.zone h2 em { font-style: normal; font-weight: 400; color: var(--foam); }
+.section-lede, #about .section-lede, .tracks-copy p, .hero .lede { color: var(--cream-2); text-shadow: none; }
+#about, #tracks, #sponsors, #faq, #register { --sea-ink: var(--cream); --sea-muted: var(--cream-2); --sea-accent: var(--foam); }
+
+/* ---------- Nav & buttons ---------- */
+header.nav { background: rgba(11, 26, 56, .55); border-bottom: 1px solid rgba(207, 227, 230, .1); }
+.brand, .nav-links a { color: var(--cream); }
+.brand { font-family: var(--serif); font-weight: 400; letter-spacing: 0; font-size: 1.2rem; }
+.brand-four { color: var(--gold); }
+@media (hover: hover) { .nav-links a:not(.btn):hover { color: var(--foam); } }
+.btn {
+  background: var(--gold); color: #2a1a00; font-family: var(--body); font-weight: 700; border-radius: 999px;
+  box-shadow: 0 10px 24px -10px rgba(0, 6, 20, .7);
+}
+.nav-links a.btn { color: #2a1a00; }
+@media (hover: hover) and (pointer: fine) { .btn:hover { transform: translateY(-2px); box-shadow: 0 16px 30px -12px rgba(0, 6, 20, .8); } }
+@media (max-width: 760px) {
+  .nav-toggle { background: rgba(247, 234, 208, .06); border-color: rgba(207, 227, 230, .22); color: var(--cream); }
+  .nav-menu { background: rgba(11, 26, 56, .97); border-color: rgba(207, 227, 230, .14); }
+  .nav-menu a { color: var(--cream); font-family: var(--serif); font-weight: 400; font-size: 1.15rem; }
+}
+
+/* ---------- Hero ---------- */
+.sea-hero {
+  position: relative; overflow: hidden; min-height: min(100svh, 980px); padding: clamp(36px, 6vw, 70px) 0 clamp(260px, 30vw, 420px);
+  background: radial-gradient(ellipse 70% 55% at 50% -8%, rgba(143, 240, 224, .32), transparent 70%);
+}
+.hero-art { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.hero-center { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.hero-logo { width: 56px; height: auto; margin-bottom: 14px; }
+.hero-credit { margin: 0; max-width: 46ch; font: 600 clamp(.74rem, 1.1vw, .86rem)/1.5 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--cream-2); }
+.sea-title {
+  margin: 14px 0 0; display: flex; flex-direction: column; align-items: center;
+  font-size: clamp(3.4rem, 9vw, 7.6rem); line-height: .95; color: var(--cream); letter-spacing: -.01em;
+}
+.sea-title em { font-style: normal; color: var(--gold); }
+.hero-dates {
+  margin: 24px 0 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px 14px;
+  font: 600 clamp(.8rem, 1.3vw, 1rem)/1.3 var(--body); letter-spacing: .16em; text-transform: uppercase; color: var(--foam);
+}
+.hero-dates i { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
+.sea-hero .countdown {
+  display: flex; gap: clamp(16px, 4vw, 38px); margin: 26px 0 0; padding: 12px 24px; border-radius: 999px;
+  background: rgba(11, 26, 56, .4); border: 1px solid rgba(207, 227, 230, .16);
+}
+.sea-hero .countdown div { display: flex; flex-direction: column; align-items: center; min-width: 3ch; }
+.sea-hero .countdown .n { font: 400 clamp(1.6rem, 3.2vw, 2.2rem)/1 var(--serif); color: var(--cream); font-variant-numeric: tabular-nums; text-shadow: none; }
+.sea-hero .countdown .u { margin-top: 5px; font: 600 .72rem/1 var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--cream-2); }
+.cd-done { font: 400 1.5rem var(--serif); color: var(--cream); margin-top: 26px; }
+.sea-hero .lede { margin: 22px auto 0; max-width: 50ch; font-size: 1.05rem; text-align: center; }
+.hero-actions { margin-top: 24px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 16px 24px; }
+.hero-actions .sponsored { margin: 0; }
+.hero-actions .sponsored-k { color: var(--cream-2); }
+.hero-actions .sponsored a { background: var(--cream); box-shadow: none; border: 0; }
+
+/* ---------- Living art ---------- */
+.ray { animation: ray-breathe 9s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: 50% 0; }
+@keyframes ray-breathe { from { opacity: .03; transform: skewX(-3deg); } to { opacity: .09; transform: skewX(3deg); } }
+.current path { stroke-dasharray: 60 22; animation: current-flow 7s linear infinite; }
+.current-r path { animation-direction: reverse; }
+@keyframes current-flow { to { stroke-dashoffset: -164; } }
+.current { animation: current-drift 12s ease-in-out infinite alternate; }
+@keyframes current-drift { from { transform: translate(0, 0); } to { transform: translate(10px, 14px); } }
+.current-r { animation-delay: -6s; }
+.kelp { animation: kelp-sway 6s ease-in-out infinite alternate; }
+.kelp:nth-of-type(2n) { animation-duration: 7.5s; animation-delay: -2s; }
+.kelp:nth-of-type(3n) { animation-duration: 5.2s; animation-delay: -3.5s; }
+@keyframes kelp-sway { from { transform: rotate(-3.5deg); } to { transform: rotate(3.5deg); } }
+.bub { animation: bub-rise linear infinite; }
+@keyframes bub-rise { 0% { transform: translateY(0); opacity: 0; } 12% { opacity: 1; } 85% { opacity: .8; } 100% { transform: translateY(-420px); opacity: 0; } }
+.spk { transform-box: fill-box; transform-origin: center; animation: twinkle 4s ease-in-out infinite; }
+.spk:nth-of-type(3n) { animation-delay: -1.3s; } .spk:nth-of-type(3n+1) { animation-delay: -2.6s; }
+@keyframes twinkle { 0%, 100% { opacity: .35; transform: scale(.75); } 50% { opacity: 1; transform: scale(1.1); } }
+.lit { animation: lit 5s ease-in-out infinite alternate; }
+@keyframes lit { from { opacity: .14; } to { opacity: .34; } }
+.layer { will-change: transform; }
+
+/* Fish school crossing above the reef */
+.school { position: absolute; inset: auto 0 clamp(150px, 19vw, 260px); height: 120px; z-index: 1; pointer-events: none; }
+.swim { position: absolute; width: 38px; height: auto; left: 0; animation: swim-across linear infinite; }
+.swim.s1 { top: 10px; color: var(--gold); animation-duration: 26s; }
+.swim.s2 { top: 34px; color: var(--coral); width: 30px; animation-duration: 30s; animation-delay: -6s; }
+.swim.s3 { top: 18px; color: var(--foam); width: 26px; animation-duration: 28s; animation-delay: -12s; }
+.swim.s4 { top: 70px; color: var(--rose); width: 34px; animation-duration: 34s; animation-delay: -20s; }
+.swim.s5 { top: 52px; color: var(--lav); width: 28px; animation-duration: 31s; animation-delay: -3s; }
+@keyframes swim-across {
+  0% { transform: translate3d(-10vw, 0, 0); }
+  50% { transform: translate3d(50vw, -14px, 0); }
+  100% { transform: translate3d(110vw, 0, 0); }
+}
+
+/* ---------- Band: rides on the reef, no hard edges ---------- */
+.sea-divider { display: none; }
+.current-band { margin-top: -2px; transform: rotate(-1.2deg) scaleX(1.05); }
+.marquee { background: var(--abyss); box-shadow: none; border-block: 1px solid rgba(247, 234, 208, .14); }
+.marquee-track span { color: var(--cream); font-family: var(--serif); font-weight: 400; font-size: 1.05rem; letter-spacing: .02em; }
+.marquee-track i { border-color: var(--gold); box-shadow: none; }
+
+/* ---------- Panels: same flat language (tint + hairline), no glass ---------- */
+#about .facts, .sponsor-ledger, .sonar-strip {
+  background: rgba(17, 48, 92, .55); border: 1px solid rgba(207, 227, 230, .14);
+  -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: none;
+}
+.fact { color: var(--cream); background: none; }
+#about .fact b { color: var(--cream); font-family: var(--serif); font-weight: 400; font-size: 1.7rem; }
+#about .fact span { color: var(--cream-2); }
+.fact:nth-child(odd), .fact:nth-child(-n+2) { border-color: rgba(207, 227, 230, .14); }
+.tracks-copy h3 { color: var(--cream); font-size: clamp(1.8rem, 3.4vw, 2.6rem); }
+.sonar-strip { background: radial-gradient(ellipse 80% 120% at 50% 100%, #1b5585, #11305c 70%); }
+.sonar-grid { opacity: .9; }
+.blip::before { background: var(--gold); }
+.sponsor-card { background: var(--cream); }
+.sponsor-card .k { color: #1b5585; }
+.sponsor-card .k b { color: var(--abyss); font-family: var(--serif); font-weight: 400; }
+#faq .q { border-color: rgba(207, 227, 230, .14); }
+.q summary { color: var(--cream); }
+.q summary > span { border-color: rgba(207, 227, 230, .3); color: var(--gold); }
+.copy { color: var(--gold); border-color: rgba(255, 207, 110, .6); }
+
+/* ---------- Floor: the sunken city, fading up into the water ---------- */
+.sea-floor { position: relative; height: clamp(300px, 36vw, 520px); margin-top: -40px; overflow: hidden; }
+.ruins-art {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 30%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 30%);
+}
+footer { background: #0a1630; border-top: 0; }
+
+/* ---------- Gauge ---------- */
+.gauge { background: rgba(11, 26, 56, .9); border-color: rgba(143, 240, 224, .4); }
+.gauge-track i { background: var(--gold); }
+
+@media (max-width: 640px) {
+  .sea-hero { padding-bottom: 230px; }
+  .sea-title { font-size: clamp(3rem, 15vw, 4.6rem); }
+  .hero-art { width: 200%; left: -50%; }
+  .school { bottom: 140px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ray, .current, .current path, .kelp, .bub, .spk, .lit, .swim { animation: none !important; }
+  .bub { opacity: .6; }
+  .swim { display: none; }
+}
+
+/* ---------- Ambient life between sections (same drawings, same palette) ---------- */
+section.zone { position: relative; }
+.drifter { position: absolute; z-index: 0; pointer-events: none; height: auto; animation: drift-bob 9s ease-in-out infinite alternate; }
+.drifter .tent, .drifter { transform-box: fill-box; }
+.jelly-a { width: 54px; right: 4%; top: 6%; }
+.jelly-b { width: 44px; left: 2%; top: 30%; opacity: .75; animation-duration: 11s; animation-delay: -4s; }
+.jelly-c { width: 30px; right: 6%; bottom: 8%; opacity: .55; animation-duration: 8s; animation-delay: -2s; }
+@keyframes drift-bob { from { transform: translateY(0) rotate(-3deg); } to { transform: translateY(-36px) rotate(3deg); } }
+.school-mid { inset: 8px 0 auto; height: 90px; opacity: .8; }
+@media (max-width: 760px) { .jelly-b { display: none; } .jelly-a { width: 38px; top: 2%; } }
+@media (prefers-reduced-motion: reduce) { .drifter { animation: none; } }
+@media (max-width: 760px) { .brand { font-size: 1rem; gap: 8px; } .brand-logo { width: 28px; height: 33px; } .nav-links { gap: 8px; } }
+@media (max-width: 380px) { .brand > span { display: none; } }
+
+/* =====================================================================
+   Anime Atlantis round: 3D water darkens with depth; drawn creatures hold content.
+   ===================================================================== */
+#ocean { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+body { background-attachment: scroll; }
+.asset svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.hero-art svg, .ruins-art svg { height: 100%; }
+
+/* ---------- Countdown: a glass panel, light drifting across it ---------- */
+.tide-timer { margin-top: 30px; }
+.sea-hero .tide-timer .countdown {
+  position: relative; overflow: hidden; isolation: isolate;
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin: 0;
+  padding: 16px 6px 14px; border-radius: 18px;
+  background: linear-gradient(180deg, rgba(10, 40, 72, .52), rgba(6, 26, 52, .62));
+  -webkit-backdrop-filter: blur(10px) saturate(1.2); backdrop-filter: blur(10px) saturate(1.2);
+  border: 1px solid rgba(207, 240, 250, .26);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18), 0 18px 40px -22px rgba(0, 8, 24, .9);
+}
+/* a slow band of surface light sliding over the glass */
+.sea-hero .tide-timer .countdown::before {
+  content: ""; position: absolute; inset: -40% -60%; z-index: -1; pointer-events: none;
+  background: linear-gradient(105deg, transparent 38%, rgba(190, 245, 255, .12) 46%, rgba(255, 255, 255, .2) 50%, rgba(190, 245, 255, .1) 54%, transparent 62%);
+  animation: glass-sheen 7s var(--ease-in-out) infinite;
+}
+@keyframes glass-sheen { from { transform: translateX(-35%); } to { transform: translateX(35%); } }
+.tide-timer .countdown > div { position: relative; padding: 0 clamp(14px, 2.6vw, 30px); min-width: 0; }
+.tide-timer .countdown > div + div::before {
+  content: ""; position: absolute; left: 0; top: 12%; bottom: 12%; width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(207, 240, 250, .35), transparent);
+}
+.tide-timer .countdown .n { font-size: clamp(2rem, 4vw, 2.9rem); line-height: 1; color: var(--cream); letter-spacing: .01em; text-shadow: 0 2px 14px rgba(0, 10, 30, .45); }
+.tide-timer .countdown .u { margin-top: 8px; font-size: .72rem; letter-spacing: .16em; color: var(--foam); }
+.countdown .n.roll { animation: digit-roll .45s var(--ease-out); }
+@keyframes digit-roll { from { transform: translateY(55%); opacity: 0; filter: blur(2px); } to { transform: none; opacity: 1; filter: none; } }
+
+/* ---------- Tracks: three cards ---------- */
+.tracks-sonar { grid-template-columns: 1fr; gap: 26px; }
+.tracks-sonar .tracks-copy { max-width: 60ch; }
+.tide-cards { list-style: none; margin: 10px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 2vw, 24px); }
+.tide-card {
+  position: relative; display: flex; flex-direction: column; gap: 8px; padding: 22px 22px 20px; border-radius: 18px;
+  background: var(--cream); color: var(--abyss); border: 3px solid #0b1a38;
+  box-shadow: 0 16px 28px -16px rgba(0, 6, 20, .85);
+  transition: transform .45s var(--ease-out), box-shadow .45s var(--ease-out);
+}
+.tide-card:nth-child(2) { margin-top: 18px; } .tide-card:nth-child(3) { margin-top: 6px; }
+@media (hover: hover) and (pointer: fine) { .tide-card:hover { transform: translateY(-6px); box-shadow: 0 24px 34px -16px rgba(0, 6, 20, .9); } }
+.hc-num { font: 700 .72rem/1 var(--body); letter-spacing: .12em; text-transform: uppercase; color: #1b5585; }
+.hc-name { font: 400 1.35rem/1.15 var(--serif); }
+.hc-prize { font: 600 .8rem/1 var(--body); color: #8a4b2a; }
+
+/* ---------- Sponsors ---------- */
+.sponsor-ledger { background: none; border: 0; }
+.sponsor-ledger .sponsor-card { position: relative; max-width: 640px; margin: 10px auto 0; border: 3px solid #0b1a38; border-radius: 18px; min-height: 0; padding: 22px 28px; grid-template-columns: 1fr 1fr; box-shadow: 0 16px 28px -16px rgba(0, 6, 20, .85); }
+.sponsor-bottom { padding: 22px 0 0; }
+.sponsored a { background: var(--cream) !important; padding: 8px 14px; }
+
+/* ---------- Scenery (assets/surface.svg, assets/seafloor.svg) ---------- */
+.floor-art {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 26%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 26%);
+}
+.hero-art svg, .floor-art svg { height: 100%; }
+.sea-floor { height: clamp(320px, 36vw, 540px); }
+.sway { transform-box: fill-box; transform-origin: 50% 100%; animation: sway 6s ease-in-out infinite alternate; }
+.sway.s2 { animation-duration: 7.4s; animation-delay: -2.2s; }
+.sway.s3 { animation-duration: 5.1s; animation-delay: -3.6s; }
+@keyframes sway { from { transform: rotate(-3deg) skewX(-2deg); } to { transform: rotate(3deg) skewX(2deg); } }
+.caustic { animation: caustic 7s ease-in-out infinite alternate; }
+.caustic.c2 { animation-duration: 9s; animation-delay: -3s; }
+@keyframes caustic { from { opacity: .15; transform: translateX(-6px); } to { opacity: .55; transform: translateX(6px); } }
+.shimmer { animation: shimmer 5s ease-in-out infinite alternate; }
+.shimmer.c2 { animation-delay: -2.5s; }
+@keyframes shimmer { from { opacity: .25; } to { opacity: .8; } }
+.glint { animation: glint 4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes glint { 0%, 70%, 100% { opacity: .2; transform: scale(.6); } 82% { opacity: 1; transform: scale(1.2); } }
+.rise { animation: rise 6s linear infinite; }
+@keyframes rise { from { transform: translateY(0); opacity: 0; } 15% { opacity: .9; } to { transform: translateY(-160px); opacity: 0; } }
+
+@media (max-width: 760px) {
+  .tide-cards { grid-template-columns: 1fr; }
+  .tide-card:nth-child(n) { margin-top: 0; }
+  .sponsor-ledger .sponsor-card { grid-template-columns: 1fr; }
+  .tide-timer .countdown > div { padding: 0 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sea-hero .tide-timer .countdown::before, .sway, .caustic, .shimmer, .glint, .rise { animation: none !important; }
+  .countdown .n.roll { animation: none; }
+}
+
+/* Hero copy sits over the bright surface light: a soft shadow keeps it legible. */
+.sea-hero .hero-credit, .sea-hero .hero-dates, .sea-hero .lede, .sponsored-k { text-shadow: 0 1px 12px rgba(4, 28, 52, .75), 0 0 2px rgba(4, 28, 52, .6); }
+.sea-hero .sea-title { text-shadow: 0 4px 30px rgba(4, 28, 52, .45); }
+.sea-floor { height: clamp(160px, 18vw, 260px); }
+
+/* Small bubbles released by a click on open water */
+.bubble-layer { position: fixed; inset: 0; pointer-events: none; z-index: 9999; overflow: hidden; }
+.click-bubble {
+  position: absolute; border-radius: 50%; translate: -50% -50%;
+  border: 1px solid rgba(245, 230, 200, .85);
+  background: radial-gradient(circle at 34% 30%, rgba(255, 255, 255, .95) 0 11%, rgba(143, 240, 224, .08) 30%, rgba(143, 240, 224, .28) 100%);
+  box-shadow: 0 0 8px rgba(143, 240, 224, .35), inset 0 -2px 4px rgba(143, 240, 224, .35);
+  animation: bubble-rise var(--dur) cubic-bezier(.2, .6, .3, 1) forwards;
+}
+@keyframes bubble-rise {
+  0% { transform: translate(0, 0) scale(.3); opacity: 0; }
+  12% { opacity: 1; transform: translate(0, -6px) scale(1); }
+  45% { transform: translate(calc(var(--drift) * -.5), calc(var(--rise) * .45)) scale(1.04, .95); }
+  75% { transform: translate(var(--drift), calc(var(--rise) * .8)) scale(.96, 1.04); opacity: .95; }
+  100% { transform: translate(calc(var(--drift) * .6), var(--rise)) scale(1.7); opacity: 0; }
+}
+
+/* =====================================================================
+   Hero title: legible over the bright surface, and alive.
+   ===================================================================== */
+/* A soft pool of deeper water behind the copy (the 3D surface stays untouched around it). */
+.sea-hero .hero-center::before {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  left: 50%; top: 4%; width: min(1100px, 120%); height: 78%; translate: -50% 0;
+  background: radial-gradient(ellipse 50% 50% at 50% 46%, rgba(3, 26, 50, .5), rgba(3, 26, 50, .26) 55%, transparent 78%);
+  filter: blur(8px);
+}
+.sea-hero .hero-credit { color: #eaf7f6; }
+.sea-hero .hero-dates { color: #a9f5e8; }
+
+.sea-hero .sea-title {
+  letter-spacing: -.02em; text-shadow: none;
+  filter: drop-shadow(0 3px 2px rgba(2, 18, 38, .35)) drop-shadow(0 10px 28px rgba(2, 18, 38, .55));
+}
+/* Letters are painted with light: a cream base and a bright band that sweeps through now and then. */
+.sea-title .ch {
+  display: inline-block; white-space: pre;
+  background: linear-gradient(100deg, #f7ead0 0%, #fff7e6 40%, #ffffff 48%, #d9fbff 52%, #fff7e6 60%, #f2e2c4 100%);
+  background-size: 300% 100%; background-position: var(--sweep, 100%) 0;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  transform: translateY(var(--lift, 0px)) scale(var(--grow, 1));
+  transition: transform .5s var(--ease-out);
+}
+.sea-title em .ch { background-image: linear-gradient(100deg, #ffc65a 0%, #ffd77d 40%, #fff3c4 48%, #ffe9a6 52%, #ffd77d 60%, #f5b545 100%); }
+.sea-title.is-live .ch { animation: title-sweep 7s var(--ease-in-out) infinite; animation-delay: calc(2.2s + var(--i) * 45ms); }
+@keyframes title-sweep { 0%, 62% { background-position: 100% 0; } 100% { background-position: 0% 0; } }
+
+/* Entrance: each letter surfaces out of the blur, one after another. */
+.sea-title.is-split .ch { opacity: 0; translate: 0 .55em; filter: blur(10px); }
+.sea-title.is-in .ch {
+  opacity: 1; translate: 0 0; filter: blur(0);
+  transition: opacity .7s var(--ease-out), translate .9s cubic-bezier(.2, .9, .25, 1.15), filter .8s var(--ease-out), transform .5s var(--ease-out);
+  transition-delay: calc(var(--i) * 42ms), calc(var(--i) * 42ms), calc(var(--i) * 42ms), 0s;
+}
+/* Supporting lines follow the title in. */
+.sea-hero.title-anim .hero-credit, .sea-hero.title-anim .hero-dates, .sea-hero.title-anim .tide-timer { opacity: 0; translate: 0 10px; transition: opacity .8s var(--ease-out), translate .8s var(--ease-out); }
+.sea-hero.title-anim .hero-credit { transition-delay: .05s; }
+.sea-hero.title-anim .hero-dates { transition-delay: .75s; }
+.sea-hero.title-anim .tide-timer { transition-delay: .9s; }
+.sea-hero.title-anim.title-in .hero-credit, .sea-hero.title-anim.title-in .hero-dates, .sea-hero.title-anim.title-in .tide-timer { opacity: 1; translate: 0 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sea-title .ch, .sea-title.is-in .ch { transition: none; animation: none !important; opacity: 1; translate: none; filter: none; transform: none; }
+}
+
+/* ---------- Title type matched to the H4SG mark: heavy geometric sans, logo greens on the 4 ---------- */
+.sea-hero .sea-title {
+  font-family: "Outfit", var(--body); font-weight: 800; text-transform: uppercase;
+  font-size: clamp(2.9rem, 8.4vw, 7rem); line-height: .9; letter-spacing: -.015em; margin-top: 18px;
+}
+.sea-title .ch {
+  background-image: linear-gradient(100deg, #ffffff 0%, #f1fbff 40%, #ffffff 46%, #bdf7e4 50%, #f1fbff 56%, #e3f4f8 100%);
+}
+.sea-title em .ch {
+  background-image: linear-gradient(100deg, #1fe09a 0%, #12c98d 40%, #c9ffe9 47%, #4ff0b8 52%, #12b48a 60%, #0d8f86 100%);
+}
+.sea-title > span:last-child { font-size: .86em; letter-spacing: .005em; }
+
+/* Bigger mark, floating gently with a faint green glow */
+.sea-hero .hero-logo {
+  width: clamp(96px, 9vw, 140px); margin-bottom: 18px;
+  filter: drop-shadow(0 0 22px rgba(31, 224, 154, .28)) drop-shadow(0 10px 18px rgba(2, 18, 38, .45));
+  animation: logo-float 6s var(--ease-in-out) infinite alternate;
+}
+@keyframes logo-float { from { transform: translateY(0) rotate(-2deg); } to { transform: translateY(-8px) rotate(2deg); } }
+@media (max-width: 640px) { .sea-hero .sea-title { font-size: clamp(2.6rem, 13.5vw, 4rem); } }
+@media (prefers-reduced-motion: reduce) { .sea-hero .hero-logo { animation: none; } }
+
+/* Gradient fill echoing the logo: white at the top melting into H4SG green, with the light band sweeping over it. */
+.sea-title .ch {
+  background-image:
+    linear-gradient(100deg, transparent 40%, rgba(255, 255, 255, .95) 49%, rgba(220, 255, 244, .6) 52%, transparent 60%),
+    linear-gradient(180deg, #ffffff 12%, #e4fff4 42%, #8ff5cc 72%, #2fdc9c 100%);
+  background-size: 300% 100%, 100% 100%;
+  background-position: var(--sweep, 100%) 0, 0 0;
+}
+.sea-title em .ch {
+  background-image:
+    linear-gradient(100deg, transparent 40%, rgba(255, 255, 255, .9) 49%, rgba(220, 255, 244, .5) 52%, transparent 60%),
+    linear-gradient(160deg, #3ff2b0 0%, #10c98a 38%, #0e9f88 70%, #0d7c80 100%);
+}
+@keyframes title-sweep { 0%, 62% { background-position: 100% 0, 0 0; } 100% { background-position: 0% 0, 0 0; } }
+.tide-timer .countdown .n { font-family: "Outfit", var(--body); font-weight: 700; letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+/* No filter on the title: drop-shadow over background-clip:text letters stops them painting on phones.
+   Legibility comes from the shaded pool behind the copy instead. */
+.sea-hero .sea-title { filter: none; }
+.sea-hero .hero-center::before { background: radial-gradient(ellipse 50% 50% at 50% 44%, rgba(3, 26, 50, .58), rgba(3, 26, 50, .3) 55%, transparent 78%); }
+
+/* ---------- Hero title, final pass ---------- */
+/* No dark patch behind the copy: the water stays clean. */
+.sea-hero .hero-center::before { content: none; }
+
+/* A shadow that follows the letter shapes themselves (a transparent copy of the title carrying the shadow). */
+.sea-hero .sea-title { position: relative; isolation: isolate; }
+.title-shade {
+  position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  display: flex; flex-direction: column; align-items: center;
+  color: transparent; user-select: none;
+  text-shadow: 0 2px 2px rgba(2, 24, 46, .32), 0 6px 18px rgba(2, 24, 46, .5), 0 0 42px rgba(2, 24, 46, .35);
+}
+.title-shade em { font-style: normal; }
+.title-shade > span:last-child { font-size: .86em; letter-spacing: .005em; }
+.sea-title.is-split .title-shade { opacity: 0; }
+.sea-title.is-in .title-shade { opacity: 1; transition: opacity 1.2s var(--ease-out) .5s; }
+
+/* Flowing gradient: white, mint and logo green drift down through every letter, offset letter by letter so it ripples across the name. */
+.sea-title .ch {
+  background-image: linear-gradient(170deg, #ffffff 0%, #d9fff1 16%, #6ef0bf 33%, #ffffff 50%, #c3f6ff 66%, #4fe3ad 83%, #ffffff 100%);
+  background-size: 100% 400%; background-position: 0 0;
+}
+.sea-title em .ch {
+  background-image: linear-gradient(170deg, #8affd2 0%, #1fe09a 20%, #0fb38a 40%, #6ff7c6 55%, #10c98a 75%, #8affd2 100%);
+}
+.sea-title.is-live .ch { animation: title-flow 6s linear infinite; animation-delay: calc(var(--i) * -.22s); }
+@keyframes title-flow { from { background-position: 0 0; } to { background-position: 0 100%; } }
+.title-shade > span { white-space: nowrap; font-kerning: none; }
+.sea-hero .hero-credit, .sea-hero .hero-dates { text-shadow: 0 1px 2px rgba(2, 24, 46, .6), 0 2px 14px rgba(2, 24, 46, .7); }
+.sea-hero .lede { text-shadow: 0 1px 2px rgba(2, 24, 46, .5), 0 2px 16px rgba(2, 24, 46, .65); }
+
+
+/* Continuous flow: one gradient spans the whole name; each letter shows its own slice of it (offset by --x/--y,
+   measured in JS), and a single drifting offset on the title slides the colours smoothly across every letter. */
+@property --flow { syntax: "<length>"; inherits: true; initial-value: 0px; }
+.sea-title .ch {
+  background-image: linear-gradient(90deg, #ffffff 0%, #d9fff1 14%, #6ef0bf 30%, #c3f6ff 46%, #ffffff 58%, #9ff5d6 74%, #4fe3ad 86%, #ffffff 100%);
+  background-size: var(--tw, 100%) var(--th, 100%);
+  background-repeat: repeat-x;
+  background-position: calc(var(--flow) - var(--x, 0px)) calc(-1 * var(--y, 0px));
+}
+.sea-title em .ch {
+  background-image: linear-gradient(90deg, #8affd2 0%, #1fe09a 22%, #0fb38a 42%, #6ff7c6 60%, #10c98a 80%, #8affd2 100%);
+}
+.sea-title.is-live .ch { animation: none; }
+.sea-title.is-live { animation: title-drift 9s linear infinite; }
+@keyframes title-drift { from { --flow: 0px; } to { --flow: var(--tw, 600px); } }
+@media (prefers-reduced-motion: reduce) { .sea-title.is-live { animation: none; } }
+/* The "4" shares the same single gradient as every other letter, so the whole name reads as one sweep of colour. */
+.sea-title em .ch {
+  background-image: linear-gradient(90deg, #ffffff 0%, #d9fff1 14%, #6ef0bf 30%, #c3f6ff 46%, #ffffff 58%, #9ff5d6 74%, #4fe3ad 86%, #ffffff 100%);
+}
+footer .foot-credit { flex-basis: 100%; font-size: .74rem; opacity: .7; }
+footer .foot-credit a { color: inherit; }
+
+/* ---------- Surface intro: the first screen sits above the water; scrolling plunges through it ---------- */
+.sea-hero { min-height: 0; padding: 0 0 clamp(120px, 14vw, 200px); background: none; }
+.hero-surface { min-height: 100svh; justify-content: center; padding-block: 72px 120px; }
+.hero-surface .hero-actions { margin-top: 28px; }
+.hero-more { padding-top: clamp(40px, 8vw, 90px); }
+.hero-more .tide-timer { margin-top: 0; }
+.dive-cue {
+  position: absolute; left: 50%; bottom: 28px; translate: -50% 0; display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: #f2fbff; text-decoration: none; font: 600 .72rem/1 var(--body); letter-spacing: .22em; text-transform: uppercase;
+  text-shadow: 0 1px 10px rgba(4, 28, 52, .7); opacity: .85; transition: opacity .3s;
+}
+.dive-cue:hover { opacity: 1; }
+.dive-cue i { width: 1px; height: 38px; background: linear-gradient(#f2fbff, transparent); animation: dive-cue 2.2s cubic-bezier(.6, 0, .4, 1) infinite; transform-origin: top; }
+@keyframes dive-cue { 0% { transform: scaleY(0); opacity: 1; } 60% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1) translateY(10px); opacity: 0; } }
+html.is-dived .dive-cue { opacity: 0; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .dive-cue i { animation: none; } }
+@media (max-width: 640px) { .sea-hero { padding-bottom: 110px; } .hero-surface { padding-block: 64px 110px; } }
+/* Brief burst of foam and bubbles as the camera breaks the surface */
+#dive-veil {
+  position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0;
+  background:
+    radial-gradient(circle at 18% 70%, rgba(255,255,255,.55) 0 3px, transparent 4px),
+    radial-gradient(circle at 34% 82%, rgba(255,255,255,.45) 0 5px, transparent 6px),
+    radial-gradient(circle at 52% 64%, rgba(255,255,255,.5) 0 2px, transparent 3px),
+    radial-gradient(circle at 67% 78%, rgba(255,255,255,.45) 0 6px, transparent 7px),
+    radial-gradient(circle at 81% 60%, rgba(255,255,255,.5) 0 3px, transparent 4px),
+    radial-gradient(circle at 44% 90%, rgba(255,255,255,.4) 0 8px, transparent 9px),
+    radial-gradient(circle at 90% 88%, rgba(255,255,255,.4) 0 4px, transparent 5px),
+    radial-gradient(circle at 8% 52%, rgba(255,255,255,.4) 0 5px, transparent 6px),
+    linear-gradient(180deg, rgba(225, 248, 255, .55), rgba(120, 205, 230, .35) 50%, rgba(40, 130, 170, .25));
+  backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+}
+/* Timer sits right under the title; the blurb and sponsor live in About */
+.hero-surface .tide-timer { margin-top: clamp(16px, 2.4vw, 26px); }
+.hero-surface .hero-dates { margin-top: 22px; }
+.about-more { margin-top: 14px; }
+.about-sponsor { margin-top: 22px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.about-sponsor .sponsored-k { color: var(--cream-2); text-shadow: none; }
+
+/* ---------- Hero timer: depth sounder ---------- */
+.cd-sr-only { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.tview { color: #fff6ea; text-shadow: 0 1px 10px rgba(40, 24, 64, .45); }
+/* D: depth sounder: a reading above a sliding tape of depth marks (minor mark each second, major every ten) */
+.t-D .tview { display: flex; flex-direction: column; align-items: center; }
+.tD-read { display: flex; align-items: baseline; gap: 4px; font: 600 clamp(1.9rem, 3.6vw, 2.6rem)/1 "Outfit", var(--body); font-variant-numeric: tabular-nums; }
+.tD-read span { margin: 0 12px 0 3px; font: 500 .8rem/1 var(--body); letter-spacing: .12em; text-transform: uppercase; opacity: .85; }
+.tD-read span:last-child { margin-right: 0; }
+.tD-tape { position: relative; width: min(480px, 84vw); height: 34px; margin-top: 12px; overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent); mask-image: linear-gradient(90deg, transparent, #000 22%, #000 78%, transparent); }
+.tD-strip { position: absolute; left: 0; top: 0; bottom: 0; width: 1440px; transition: transform .95s cubic-bezier(.4, 0, .2, 1);
+  background:
+    linear-gradient(rgba(255, 240, 222, .85), rgba(255, 240, 222, .85)) 0 100% / 100% 1px no-repeat,
+    repeating-linear-gradient(90deg, rgba(255, 244, 228, .95) 0 1.5px, transparent 1.5px 80px) 0 100% / 100% 14px no-repeat,
+    repeating-linear-gradient(90deg, rgba(255, 240, 222, .6) 0 1px, transparent 1px 8px) 0 100% / 100% 7px no-repeat; }
+.tD-strip em { position: absolute; top: 0; translate: -50% 0; font: 500 .74rem/1 var(--body); font-style: normal; letter-spacing: .04em; color: #fff4e4; opacity: .85; }
+.tD-needle { position: absolute; left: 50%; top: 14px; bottom: 0; width: 2px; translate: -50% 0; border-radius: 2px; background: #ffd18a; }
+.tD-needle::before { content: ""; position: absolute; left: 50%; top: -6px; translate: -50% 0; border: 5px solid transparent; border-top-color: #ffd18a; border-bottom: 0; }
+.tD-cap { margin-top: 8px; font: 500 .76rem/1 var(--body); letter-spacing: .24em; text-transform: uppercase; opacity: .85; }
+@media (prefers-reduced-motion: reduce) { .tD-strip { transition: none; } }
+
+/* More breathing room: between page sections, and between the pieces of the opening screen */
+section.zone { padding-block: clamp(72px, 11vw, 140px) 0; }
+.sea-hero .hero-logo { margin-bottom: 26px; }
+.sea-hero .sea-title { margin-top: 26px; }
+.hero-surface .tide-timer { margin-top: clamp(30px, 4vw, 44px); }
+.hero-surface .hero-dates { margin-top: 30px; }
+.hero-surface .hero-actions { margin-top: 36px; }
+/* Thicker depth tape */
+.tD-tape { height: 48px; width: min(520px, 86vw); }
+.tD-strip { background:
+    linear-gradient(rgba(255, 240, 222, .9), rgba(255, 240, 222, .9)) 0 100% / 100% 2px no-repeat,
+    repeating-linear-gradient(90deg, rgba(255, 244, 228, .95) 0 2.5px, transparent 2.5px 80px) 0 100% / 100% 24px no-repeat,
+    repeating-linear-gradient(90deg, rgba(255, 240, 222, .7) 0 1.5px, transparent 1.5px 8px) 0 100% / 100% 13px no-repeat; }
+.tD-strip em { font-size: .82rem; }
+.tD-needle { top: 18px; width: 3px; }
+.tD-needle::before { top: -8px; border-width: 7px; border-bottom: 0; }
+/* keep the whole opening (logo to Apply) on one screen */
+.hero-surface { padding-block: 44px 92px; }
+.sea-hero .hero-logo { width: clamp(84px, 7.6vw, 118px); margin-bottom: 22px; }
+.sea-hero .sea-title { margin-top: 22px; }
+.hero-surface .tide-timer { margin-top: clamp(26px, 3.4vw, 38px); }
+.hero-surface .hero-dates { margin-top: 26px; }
+.hero-surface .hero-actions { margin-top: 30px; }
+
+/* ---------- Section legibility, lightly: a soft dark halo hugging the letters, and brighter body copy ---------- */
+section.zone h2, section.zone h3 { text-shadow: 0 2px 3px rgba(2, 14, 30, .45), 0 4px 22px rgba(2, 14, 30, .55); }
+section.zone .section-lede, section.zone .tracks-copy p, section.zone .about-more, section.zone summary,
+section.zone .faq p, section.zone .reef-heading p, section.zone .contact, section.zone .sponsored-k {
+  color: #f3f8f8; text-shadow: 0 1px 2px rgba(2, 14, 30, .6), 0 2px 14px rgba(2, 14, 30, .6);
+}
+section.zone .section-lede, section.zone .about-more, section.zone .tracks-copy p { font-size: clamp(1.05rem, 1.25vw, 1.16rem); line-height: 1.7; }
+
+/* the opening copy fades out as the page dives (driven by scroll) */
+.hero-surface { opacity: var(--hero-fade, 1); }
+
+/* ---------- Tight handoff from the opening to About ---------- */
+.sea-hero { padding-bottom: 0; }
+.hero-surface { padding-bottom: 72px; }
+#about { padding-top: clamp(24px, 4vw, 56px); }
+
+
+/* ---------- Sponsors: heading flush left, sponsor cards side by side ---------- */
+.sponsor-heading { display: block; text-align: left; }
+.sponsor-heading h2 { margin: 0; }
+.sponsor-heading .section-lede { margin: 14px 0 0; max-width: 52ch; }
+.sponsor-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(14px, 2vw, 24px); margin-top: 28px; }
+.sponsor-ledger .sponsor-cards .sponsor-card { max-width: none; margin: 0; grid-template-columns: 1fr; gap: 18px; align-content: start; }
+.sponsor-cards .sponsor-card img { justify-self: start; width: auto; max-width: 100%; height: 56px; object-fit: contain; }
+.sponsor-cards .sponsor-card img.logo-stripe { height: 46px; }
+@media (max-width: 640px) { .sponsor-cards { grid-template-columns: 1fr; } }
+/* Impiricus credit at the top of the opening screen */
+.hero-sponsor { display: flex; align-items: center; gap: 12px; margin: 0 0 22px; }
+.hero-sponsor .sponsored-k { font: 600 .74rem/1 var(--body); letter-spacing: .18em; text-transform: uppercase; color: #fff6ea; text-shadow: 0 1px 8px rgba(40, 24, 64, .55); }
+.hero-sponsor a { display: inline-flex; padding: 6px 12px; border-radius: 999px; background: var(--cream); }
+.hero-sponsor img { height: 22px; width: auto; display: block; }
+/* keep logo-to-Apply on one screen with the sponsor line added */
+.hero-surface { padding-block: 26px 80px; }
+.hero-sponsor { margin-bottom: 16px; }
+.sea-hero .hero-logo { width: clamp(76px, 6.8vw, 106px); margin-bottom: 18px; }
+.sea-hero .sea-title { margin-top: 18px; }
+.hero-surface .tide-timer { margin-top: clamp(22px, 3vw, 32px); }
+.hero-surface .hero-dates { margin-top: 22px; }
+.hero-surface .hero-actions { margin-top: 26px; }
+
+/* ---------- Sea-glass cards: tracks and sponsors trade the beige for frosted deep-water glass ---------- */
+.tide-card, .sponsor-ledger .sponsor-cards .sponsor-card {
+  background: linear-gradient(160deg, rgba(150, 225, 235, .16), rgba(40, 110, 150, .12) 55%, rgba(10, 40, 80, .2));
+  -webkit-backdrop-filter: blur(10px) saturate(1.2); backdrop-filter: blur(10px) saturate(1.2);
+  border: 1px solid rgba(190, 240, 245, .28); color: #f2f8f8;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), 0 18px 30px -18px rgba(0, 6, 20, .8);
+}
+.tide-card .hc-num { color: #8ff0c8; }
+.tide-card .hc-name { color: #f7f3ea; }
+.tide-card .hc-prize { color: #ffd18a; }
+.sponsor-cards .sponsor-card .k { color: #8ff0c8; }
+.sponsor-cards .sponsor-card .k b { color: #f7f3ea; }
+/* logos in white so they sit cleanly on the glass */
+.sponsor-cards .sponsor-card img { filter: brightness(0) invert(1); opacity: .92; transition: opacity .2s; }
+.sponsor-cards .sponsor-card a:hover img { opacity: 1; }
+@media (hover: hover) and (pointer: fine) { .tide-card:hover { border-color: rgba(190, 240, 245, .5); } }
+
+/* ---------- Tracks: the ship's wheel and its detail panel ---------- */
+.helm { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(24px, 5vw, 72px); align-items: center; margin-top: clamp(18px, 3vw, 36px); }
+.helm-stage { position: relative; width: min(100%, 460px); justify-self: center; }
+.helm-wheel { display: block; width: 100%; height: auto; overflow: visible; cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; filter: drop-shadow(0 18px 24px rgba(0, 6, 20, .6)); }
+.helm.is-dragging .helm-wheel { cursor: grabbing; }
+.helm-wheel:focus-visible { outline: 2px solid #8ff0c8; outline-offset: 8px; border-radius: 50%; }
+.helm-pointer { position: absolute; left: 50%; top: -14px; translate: -50% 0; border: 9px solid transparent; border-top: 12px solid #ffd18a; border-bottom: 0; }
+.helm-medal { cursor: pointer; }
+.helm-medal-ring { fill: #123446; stroke: url(#helm-brass); stroke-width: 3; transition: fill .3s; }
+.helm-medal-num { font: 700 18px "Outfit", sans-serif; fill: #f2e6cc; pointer-events: none; }
+.helm-medal.is-on .helm-medal-ring { fill: #ffd18a; }
+.helm-medal.is-on .helm-medal-num { fill: #2a1a0c; }
+.helm-panel { color: #f2f8f8; }
+.helm-panel.swap > * { animation: helm-in .5s cubic-bezier(.2, .8, .2, 1) both; }
+.helm-panel.swap > *:nth-child(2) { animation-delay: .04s; } .helm-panel.swap > *:nth-child(3) { animation-delay: .08s; } .helm-panel.swap > *:nth-child(4) { animation-delay: .12s; } .helm-panel.swap > *:nth-child(5) { animation-delay: .16s; }
+@keyframes helm-in { from { opacity: 0; translate: 0 10px; } to { opacity: 1; translate: 0 0; } }
+.helm-kicker { margin: 0; font: 600 .78rem/1 var(--body); letter-spacing: .2em; text-transform: uppercase; color: #8ff0c8; }
+.helm-title { margin: 12px 0 0; font: 400 clamp(2.2rem, 4vw, 3.4rem)/1.05 var(--serif); color: #ffd18a; }
+.helm-sub { margin: 10px 0 0; font: italic 400 1.15rem/1.4 var(--body); color: #f7f3ea; }
+.helm-desc { margin: 18px 0 0; max-width: 52ch; line-height: 1.7; color: #dbe9ec; }
+.helm-prizes { margin: 22px 0 0; border-top: 1px solid rgba(190, 240, 245, .22); }
+.helm-prizes > div { display: grid; grid-template-columns: 9.5em 1fr; gap: 12px; padding: 13px 0; border-bottom: 1px solid rgba(190, 240, 245, .22); }
+.helm-prizes dt { font: 600 .78rem/1.5 var(--body); letter-spacing: .18em; text-transform: uppercase; color: #8ff0c8; }
+.helm-prizes dd { margin: 0; color: #f7f3ea; }
+.helm-nav { display: flex; align-items: center; gap: 12px; margin-top: 26px; }
+.helm-btn { width: 48px; height: 48px; border-radius: 12px; border: 1.5px solid #ffd18a; background: rgba(10, 30, 50, .35); color: #ffd18a; font-size: 1.2rem; cursor: pointer; transition: background .2s, transform .2s; }
+.helm-btn:hover { background: rgba(255, 209, 138, .14); }
+.helm-btn:active { transform: scale(.95); }
+.helm-btn:focus-visible { outline: 2px solid #8ff0c8; outline-offset: 3px; }
+.helm-hint { margin-left: 6px; font-size: .85rem; color: #a9c3c9; }
+@media (max-width: 860px) { .helm { grid-template-columns: 1fr; } .helm-stage { width: min(84vw, 380px); } }
+@media (prefers-reduced-motion: reduce) { .helm-panel.swap > * { animation: none; } }
+/* wheel: no outline on mouse click (keyboard focus still shows a ring); sea-glass styling */
+.helm-wheel:focus { outline: none; }
+.helm-wheel:focus-visible { outline: none; }
+.helm-wheel:focus-visible .helm-spin { filter: drop-shadow(0 0 0 transparent); }
+.helm-stage:has(.helm-wheel:focus-visible)::after { content: ""; position: absolute; inset: -6%; border-radius: 50%; border: 2px solid rgba(143, 240, 200, .7); pointer-events: none; }
+.helm-wheel { filter: drop-shadow(0 18px 26px rgba(0, 6, 20, .45)); -webkit-tap-highlight-color: transparent; }
+.helm-medal-ring { fill: rgba(13, 44, 68, .75); stroke: rgba(190, 240, 245, .6); stroke-width: 1.5; }
+.helm-medal-num { fill: #e9fffb; }
+.helm-medal.is-on .helm-medal-ring { fill: #ffd18a; stroke: #ffe6b8; }
+.helm-pointer { border-top-color: #8ff0c8; }
+
+/* ---------- The abyss: a sea dragon's eye that rises out of the deep water at the bottom of the page ---------- */
+#abyss-eye { position: fixed; left: 0; bottom: 0; width: 100%; height: 78vh; z-index: 0; pointer-events: none; transform: translate3d(0, 45%, 0); will-change: transform; }

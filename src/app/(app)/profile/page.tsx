@@ -1,7 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
+import { CheckCircle2, AlertCircle } from "lucide-react";
 import { createClient } from "@/lib/supabase-browser";
+import { friendlyAuthError, normalizeEmail } from "@/lib/auth-errors";
 import { deleteUserAccount } from "@/lib/actions/auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,8 +12,24 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 
+type Section = "hhid" | "name" | "email" | "password" | "delete";
+type Status = { kind: "saving" | "success" | "error"; message: string };
+
+// Result message shown right beside the button that triggered it.
+function InlineStatus({ status }: { status?: Status }) {
+  if (!status || status.kind === "saving") return null;
+  const ok = status.kind === "success";
+  return (
+    <p role={ok ? "status" : "alert"} className={`flex items-start gap-1.5 text-sm ${ok ? "text-green-700" : "text-red-700"}`}>
+      {ok ? <CheckCircle2 size={16} className="mt-0.5 shrink-0" /> : <AlertCircle size={16} className="mt-0.5 shrink-0" />}
+      {status.message}
+    </p>
+  );
+}
+
 export default function ProfilePage() {
   const supabase = createClient();
+  const router = useRouter();
   const [profile, setProfile] = useState<{
     first_name: string;
     last_name: string;
@@ -19,9 +38,23 @@ export default function ProfilePage() {
   const [email, setEmail] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const [statuses, setStatuses] = useState<Partial<Record<Section, Status>>>({});
   const [loading, setLoading] = useState(true);
+  const clearTimers = useRef<Partial<Record<Section, ReturnType<typeof setTimeout>>>>({});
+
+  function setStatus(section: Section, kind: Status["kind"], message = "") {
+    clearTimeout(clearTimers.current[section]);
+    setStatuses((all) => ({ ...all, [section]: { kind, message } }));
+    // Success messages fade after a few seconds; errors stay until the next attempt.
+    if (kind === "success") {
+      clearTimers.current[section] = setTimeout(
+        () => setStatuses((all) => ({ ...all, [section]: undefined })),
+        6000,
+      );
+    }
+  }
+  const busy = (section: Section) => statuses[section]?.kind === "saving";
+  const SESSION_EXPIRED = "Your session has expired. Please refresh the page and sign in again.";
 
   useEffect(() => {
     async function load() {
@@ -42,78 +75,76 @@ export default function ProfilePage() {
   async function handleUpdateName(e: React.FormEvent) {
     e.preventDefault();
     if (!profile) return;
-    setError("");
-    setSuccess("");
+    const first = profile.first_name.trim(), last = profile.last_name.trim();
+    if (!first || !last) return setStatus("name", "error", "Please enter both a first and last name.");
+    setStatus("name", "saving");
 
     const { data: { user } } = await supabase.auth.getUser();
-    if (!user) return;
+    if (!user) return setStatus("name", "error", SESSION_EXPIRED);
 
-    const { error } = await supabase
+    // .select() returns the updated row, so a silently blocked update (0 rows) is caught.
+    const { data, error } = await supabase
       .from("profiles")
-      .update({ first_name: profile.first_name, last_name: profile.last_name })
-      .eq("id", user.id);
+      .update({ first_name: first, last_name: last })
+      .eq("id", user.id)
+      .select("id");
 
-    if (error) setError("Failed to update name");
-    else setSuccess("Name updated successfully");
+    if (error || !data?.length) return setStatus("name", "error", "Couldn't update your name. Please try again.");
+    setProfile((p) => (p ? { ...p, first_name: first, last_name: last } : p));
+    setStatus("name", "success", "Name updated.");
+    router.refresh();
   }
 
   async function handleUpdateEmail(e: React.FormEvent) {
     e.preventDefault();
-    setError("");
-    setSuccess("");
+    const target = normalizeEmail(newEmail);
+    if (!target) return setStatus("email", "error", "Enter a new email address.");
+    if (target === normalizeEmail(email)) return setStatus("email", "error", "That's already your current email.");
+    setStatus("email", "saving");
 
-    if (!newEmail || newEmail === email) {
-      setError("Enter a new email address");
-      return;
+    const { error } = await supabase.auth.updateUser({ email: target });
+    if (error) {
+      const taken = error.code === "email_exists" || error.code === "user_already_exists";
+      return setStatus("email", "error", taken ? "Another account already uses this email." : friendlyAuthError(error));
     }
-
-    const { error } = await supabase.auth.updateUser({ email: newEmail });
-    if (error) setError(error.message);
-    else {
-      setSuccess(
-        "A confirmation link has been sent to your new email. The change takes effect once confirmed."
-      );
-      setNewEmail("");
-    }
+    setStatus("email", "success", `Confirmation link sent to ${target}. Your email changes once you click it.`);
+    setNewEmail("");
   }
 
   async function handleUpdatePassword(e: React.FormEvent) {
     e.preventDefault();
-    setError("");
-    setSuccess("");
-
-    if (newPassword.length < 6) {
-      setError("Password must be at least 6 characters");
-      return;
-    }
+    if (newPassword.length < 6) return setStatus("password", "error", "Password must be at least 6 characters.");
+    setStatus("password", "saving");
 
     const { error } = await supabase.auth.updateUser({ password: newPassword });
-    if (error) setError(error.message);
-    else {
-      setSuccess("Password updated successfully");
-      setNewPassword("");
-    }
+    if (error) return setStatus("password", "error", friendlyAuthError(error));
+    setStatus("password", "success", "Password updated.");
+    setNewPassword("");
   }
 
   async function handleDeleteAccount() {
     if (!confirm("Are you sure? This action cannot be undone.")) return;
 
+    setStatus("delete", "saving");
     const { data: { user } } = await supabase.auth.getUser();
-    if (!user) return;
+    if (!user) return setStatus("delete", "error", SESSION_EXPIRED);
 
     try {
       await deleteUserAccount(user.id);
       await supabase.auth.signOut();
       window.location.href = "/signin";
     } catch {
-      setError("Failed to delete account. Please contact support.");
+      setStatus("delete", "error", "Failed to delete account. Please contact operations@t4sg.dev.");
     }
   }
 
-  function copyHackerId() {
-    if (profile?.hhid) {
-      navigator.clipboard.writeText(profile.hhid);
-      setSuccess("Hacker ID copied to clipboard");
+  async function copyHackerId() {
+    if (!profile?.hhid) return;
+    try {
+      await navigator.clipboard.writeText(profile.hhid);
+      setStatus("hhid", "success", "Copied to clipboard.");
+    } catch {
+      setStatus("hhid", "error", "Couldn't copy automatically. Select the ID and copy it manually.");
     }
   }
 
@@ -132,13 +163,6 @@ export default function ProfilePage() {
         <p className="text-gray-500 mt-1">Manage your account settings</p>
       </div>
 
-      {error && (
-        <div className="rounded-md bg-red-50 p-3 text-sm text-red-700">{error}</div>
-      )}
-      {success && (
-        <div className="rounded-md bg-green-50 p-3 text-sm text-green-700">{success}</div>
-      )}
-
       <Card>
         <CardHeader>
           <CardTitle>Your Hacker ID</CardTitle>
@@ -147,9 +171,12 @@ export default function ProfilePage() {
           <div>
             <p className="font-mono text-xl font-bold">{profile?.hhid}</p>
             <p className="text-sm text-gray-500 mt-1">Your unique Hack 4 Social Good identifier</p>
-            <Button variant="outline" size="sm" className="mt-3" onClick={copyHackerId}>
-              Copy Hacker ID
-            </Button>
+            <div className="mt-3 flex flex-wrap items-center gap-3">
+              <Button variant="outline" size="sm" onClick={copyHackerId}>
+                Copy Hacker ID
+              </Button>
+              <InlineStatus status={statuses.hhid} />
+            </div>
           </div>
           {qrUrl && (
             <img
@@ -187,7 +214,10 @@ export default function ProfilePage() {
                 />
               </div>
             </div>
-            <Button type="submit">Update Name</Button>
+            <div className="flex flex-wrap items-center gap-3">
+              <Button type="submit" disabled={busy("name")}>{busy("name") ? "Saving…" : "Update Name"}</Button>
+              <InlineStatus status={statuses.name} />
+            </div>
           </form>
         </CardContent>
       </Card>
@@ -208,7 +238,10 @@ export default function ProfilePage() {
                 placeholder="new@example.com"
               />
             </div>
-            <Button type="submit">Change Email</Button>
+            <div className="flex flex-wrap items-center gap-3">
+              <Button type="submit" disabled={busy("email")}>{busy("email") ? "Sending…" : "Change Email"}</Button>
+              <InlineStatus status={statuses.email} />
+            </div>
           </form>
         </CardContent>
       </Card>
@@ -228,7 +261,10 @@ export default function ProfilePage() {
                 placeholder="At least 6 characters"
               />
             </div>
-            <Button type="submit">Update Password</Button>
+            <div className="flex flex-wrap items-center gap-3">
+              <Button type="submit" disabled={busy("password")}>{busy("password") ? "Saving…" : "Update Password"}</Button>
+              <InlineStatus status={statuses.password} />
+            </div>
           </form>
         </CardContent>
       </Card>
@@ -243,9 +279,12 @@ export default function ProfilePage() {
           <p className="text-sm text-gray-600 mb-4">
             Permanently delete your account and all associated data.
           </p>
-          <Button variant="destructive" onClick={handleDeleteAccount}>
-            Delete Account
-          </Button>
+          <div className="flex flex-wrap items-center gap-3">
+            <Button variant="destructive" onClick={handleDeleteAccount} disabled={busy("delete")}>
+              {busy("delete") ? "Deleting…" : "Delete Account"}
+            </Button>
+            <InlineStatus status={statuses.delete} />
+          </div>
         </CardContent>
       </Card>
     </div>

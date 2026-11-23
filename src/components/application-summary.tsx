@@ -133,8 +133,7 @@ export function ApplicationSummary({ application, resumeUrl }: ApplicationSummar
       <Card>
         <CardHeader><CardTitle>Agreements</CardTitle></CardHeader>
         <CardContent className="divide-y">
-          <Field label="MLH Code of Conduct" value={application.code_of_conduct ? "Agreed" : "No"} />
-          <Field label="MLH Data Sharing" value={application.data_sharing ? "Agreed" : "No"} />
+          <Field label="Code of Conduct" value={application.code_of_conduct ? "Agreed" : "No"} />
           <Field label="MLH Marketing Emails" value={application.mlh_emails ? "Opted in" : "No"} />
         </CardContent>
       </Card>
